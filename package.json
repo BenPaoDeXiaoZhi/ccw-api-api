@@ -1,23 +1,32 @@
 {
   "name": "@ccw-api/api",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "ccw api collections",
   "license": "MIT",
   "author": "Meng Fuzi",
   "type": "module",
-  "main": "dist/node/index.ts",
-  "module": "dist/esm/index.ts",
+  "main": "dist/node/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/node/index.js"
+    }
+  },
   "scripts": {
-    "prepublishOnly": "npm run build & npm test",
+    "prepublishOnly": "npm run build && npm test",
     "test": "jest",
-    "build": "tsc --project tsconfig.node.json & tsc --project tsconfig.esm.json"
+    "build": "tsc --project tsconfig.node.json && tsc --project tsconfig.esm.json && tsc --project tsconfig.types.json"
   },
   "dependencies": {
-    "@ccw-api/axios": "^1.2.1"
+    "@ccw-api/axios": "^2.1.0"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
+    "@types/node": "^26.0.1",
     "jest": "^30.4.2",
-    "ts-jest": "^29.4.11"
+    "ts-jest": "^29.1.2"
   }
 }

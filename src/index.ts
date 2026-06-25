@@ -1,4 +1,4 @@
-import { sso } from "./sso";
+import { sso } from "./sso/index";
 export type * from "./types";
 
 export { sso };
