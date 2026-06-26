@@ -3,7 +3,9 @@ permissions:
   pages:
     write
   contents: 
-    read
+    write
+  id-token: 
+    write
 
 on:
   push:
