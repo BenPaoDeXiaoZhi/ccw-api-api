@@ -1,14 +1,14 @@
-import { MongoDBId, CachedOssUrl } from "types/api";
+import { MongoDBId, CNameOssUrl } from "types/api";
 import { ApprovalTag } from "types/approval";
 import { AccountTypes } from "types/account";
 
 export interface BaseUser {
   approvedContent: null | string;
   approvedType: null | string;
-  avatar: CachedOssUrl;
+  avatar: CNameOssUrl;
   name: string;
-  picUrl: CachedOssUrl;
-  virtualValue: CachedOssUrl;
+  picUrl: CNameOssUrl;
+  virtualValue: CNameOssUrl;
 }
 
 export interface StudentSimple extends BaseUser {
@@ -40,5 +40,5 @@ export interface OtherUser extends BaseUser {
   id: number;
   status: "NORMAL";
   updatedAt: number;
-  virtualValue: CachedOssUrl;
+  virtualValue: CNameOssUrl;
 }

@@ -1,6 +1,6 @@
 import ccwAxios from "@ccw-api/axios";
 import { AccountTypes } from "types/account";
-import { ApiResponse, CachedOssUrl, MongoDBId } from "types/api";
+import { ApiResponse, CNameOssUrl, MongoDBId } from "types/api";
 import { ApprovalTag } from "types/approval";
 
 export type Req = {
@@ -13,7 +13,7 @@ export type Res<Tid extends number, Tn extends string> = ApprovalStatus<
 >[];
 export type ApprovalStatus<Tid extends number, Tn extends string> = {
   adorned: boolean;
-  approvalIconLink: CachedOssUrl;
+  approvalIconLink: CNameOssUrl;
   approvalTag: ApprovalTag<Tid, Tn>;
   approvalTagId: Tid;
   approvalTagName: Tn;

@@ -1,10 +1,10 @@
-import { MongoDBId, CachedOssUrl } from "types/api";
-import { Student, StudentSimple } from "types/userData";
+import { MongoDBId, CNameOssUrl } from "types/api";
+import { OtherUser, Student, StudentSimple } from "types/userData";
 
 export interface CreationRelease {
   checked: boolean;
-  coverGifLink: CachedOssUrl;
-  coverLink: CachedOssUrl;
+  coverGifLink: CNameOssUrl;
+  coverLink: CNameOssUrl;
   createdAt: number;
   customVersion: string;
   description: string;
@@ -149,3 +149,36 @@ export type LikeActions =
   | "SMILE"
   | "FLOWER"
   | "WATERMELON";
+
+export interface DonatedRecord {
+  bucks: number;
+  createdAt: number;
+  creationOid: MongoDBId;
+  donatorAvatar: CNameOssUrl;
+  donatorName: string;
+  donatorOid: MongoDBId;
+  donatorType: "STUDENT";
+  id: number;
+  updatedAt: number;
+}
+
+export interface CreationScreenshot {
+  commenter: OtherUser;
+  commenterId: number;
+  createdAt: number;
+  creationScreenshot: CNameOssUrl;
+  ext: {};
+  id: number;
+  msg: string;
+  status: null;
+  topicId: number;
+  updatedAt: number;
+  weight: number;
+}
+
+export interface FavoriteDetail {
+  creationOid: MongoDBId;
+  favoritedAt: number;
+  studentOid: MongoDBId;
+  updatedAt: number;
+}

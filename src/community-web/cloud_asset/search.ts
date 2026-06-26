@@ -1,6 +1,6 @@
 import { ccwAxios } from "@ccw-api/axios";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
-import { ApiResponse, CachedOssUrl, MongoDBId } from "types/api";
+import { ApiResponse, CNameOssUrl, MongoDBId } from "types/api";
 import { PagesRes, PageArgs } from "types/pages";
 
 export const url = "https://community-web.ccw.site/cloud_asset/search";
@@ -32,7 +32,7 @@ export interface CloudAsset {
    * @example "/23azZqHBnqj/2BzzTdi5I5C/2BzzTdi5I5w"
    */
   path: string;
-  previewImages: [CachedOssUrl];
+  previewImages: [CNameOssUrl];
   size: number;
   tags: [];
   type: CloudAssetType;
@@ -40,7 +40,7 @@ export interface CloudAsset {
   /**
    * 素材直链
    */
-  uri: CachedOssUrl;
+  uri: CNameOssUrl;
 }
 export type CloudAssetType = "COSTUME" | "FOLDER" | "VIDEO" | "AUDIO";
 

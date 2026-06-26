@@ -1,4 +1,4 @@
-import { CachedOssUrl } from "./api";
+import { CNameOssUrl } from "./api";
 
 export interface ApprovalTag<Tid = number, Tn = string> {
   bizId: null;
@@ -7,12 +7,12 @@ export interface ApprovalTag<Tid = number, Tn = string> {
   /**
    * 有时会包含tag的名称，如"Gandi开发者"
    */
-  iconLink: CachedOssUrl;
+  iconLink: CNameOssUrl;
   id: Tid;
   /**
    * 浮于iconLink之上的icon
    */
-  mediumImage: CachedOssUrl;
+  mediumImage: CNameOssUrl;
   name: Tn;
   prerequisite: string;
   tag: null;

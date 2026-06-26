@@ -19,4 +19,4 @@ export type ApiResponse<T> = {
 };
 
 export type CCWdomain = "xiguacity.cn" | "ccw.site";
-export type CachedOssUrl = `https://m.${CCWdomain}/${string}`;
+export type CNameOssUrl = `https://m.${CCWdomain}/${string}`;

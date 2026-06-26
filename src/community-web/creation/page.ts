@@ -23,12 +23,12 @@ export type Res = PagesRes<CreationSimple>;
 
 /**
  * 根据原作品id获取改编作品分页列表
- * @param {MongoDBId[]} remixCreationOids 原作品id列表
+ * @param {MongoDBId[]} originCreationOids 原作品id列表
  * @param {Partial<PageArgs<SortField>>} pageArgs_ 分页参数
  * @returns {Promise<CreationSimple[]>} 改编作品列表
  */
-export async function getCreationPage(
-  remixCreationOids: MongoDBId[],
+export async function getRemixedCreationPage(
+  originCreationOids: MongoDBId[],
   pageArgs_: Partial<PageArgs<SortField>> = {},
 ): Promise<CreationSimple[]> {
   const pageArgs = {
@@ -36,7 +36,7 @@ export async function getCreationPage(
     ...pageArgs_,
   };
   const queryUrl = queryPage(url, pageArgs);
-  const req: Req = { remixCreationOids };
+  const req: Req = { remixCreationOids: originCreationOids };
   return await ccwAxios
     .post<ApiResponse<Res>>(queryUrl, req)
     .then((res) => res.data.body.data);

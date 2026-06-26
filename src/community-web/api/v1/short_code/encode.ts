@@ -1,6 +1,6 @@
 import { ccwAxios } from "@ccw-api/axios";
 import { AccountTypes } from "types/account";
-import { ApiResponse, CachedOssUrl, MongoDBId } from "types/api";
+import { ApiResponse, CNameOssUrl, MongoDBId } from "types/api";
 
 export const url = "https://community-web.ccw.site/api/v1/short_code/encode";
 
@@ -10,7 +10,7 @@ export type Req = {
     inviterType: AccountTypes;
     entrance: "create_detail";
     inviterName: string;
-    inviterAvatar: CachedOssUrl;
+    inviterAvatar: CNameOssUrl;
     creationOid: MongoDBId;
   };
 };
@@ -38,14 +38,14 @@ export type Res = {
 /**
  * 生成作品邀请码
  * @param {MongoDBId} inviterId 邀请人id
- * @param {CachedOssUrl} inviterAvatar 邀请人头像
+ * @param {CNameOssUrl} inviterAvatar 邀请人头像
  * @param {string} inviterName 邀请人用户名
  * @param {MongoDBId} creationOid 作品id
  * @returns {Promise<Res>}
  */
 export async function encodeShortCode(
   inviterId: MongoDBId,
-  inviterAvatar: CachedOssUrl,
+  inviterAvatar: CNameOssUrl,
   inviterName: string,
   creationOid: MongoDBId,
 ): Promise<Res> {
