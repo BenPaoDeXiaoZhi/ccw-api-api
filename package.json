@@ -18,6 +18,8 @@
   "scripts": {
     "prepublishOnly": "npm run build && npm test",
     "test": "jest",
+    "doc": "typedoc",
+    "doc:dev": "typedoc --watch",
     "build": "tsc --project tsconfig.node.json && tsc --project tsconfig.esm.json && tsc --project tsconfig.types.json"
   },
   "dependencies": {
@@ -27,6 +29,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^26.0.1",
     "jest": "^30.4.2",
-    "ts-jest": "^29.1.2"
+    "ts-jest": "^29.4.11",
+    "typedoc": "^0.28.19"
   }
 }

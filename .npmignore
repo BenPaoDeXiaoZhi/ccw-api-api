@@ -1,0 +1,8 @@
+.github
+.vscode
+docs
+jest.config.ts
+tsconfig.tsbuildinfo
+typedoc.json
+src
+types

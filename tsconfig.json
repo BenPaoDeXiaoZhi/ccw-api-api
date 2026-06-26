@@ -6,7 +6,9 @@
     "types": ["jest", "node"],
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "target": "esnext",
+    "baseUrl": "."
   },
-  "include": ["src"]
+  "include": ["src", "types/global.d.ts", "types/**/*.d.ts"]
 }

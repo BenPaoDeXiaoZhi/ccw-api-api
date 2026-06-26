@@ -1,0 +1,38 @@
+import { ccwAxios } from "@ccw-api/axios";
+import { ApiResponse } from "types/api";
+import { PagesRes, PageArgs } from "types/pages";
+import { CreationSimple } from "types/creation";
+import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
+
+export const url = "https://community-web.ccw.site/creation/recommend";
+export type SortField = "createdAt" | "likeCount" | "viewCount";
+const dpa: PageArgs<SortField> = {
+  ...DEFAULT_PAGE_ARGS,
+  sortField: "createdAt",
+};
+
+export type Req = {
+  num: number;
+  subjectType: "POTENTIAL";
+};
+export type Res = PagesRes<CreationSimple>;
+
+/**
+ * 获取推荐作品列表
+ * @param {Partial<PageArgs<SortField>>} pageArgs_ 分页参数
+ * @returns {Promise<CreationSimple[]>} 作品列表
+ */
+export async function getRecommendCreations(
+  num: number,
+  pageArgs_: Partial<PageArgs<SortField>> = {},
+): Promise<CreationSimple[]> {
+  const pageArgs = {
+    ...dpa,
+    ...pageArgs_,
+  };
+  const queryUrl = queryPage(url, pageArgs);
+  const req: Req = { num, subjectType: "POTENTIAL" };
+  return await ccwAxios
+    .post<ApiResponse<Res>>(queryUrl, req)
+    .then((res) => res.data.body.data);
+}

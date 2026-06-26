@@ -4,6 +4,7 @@
  */
 export type HexSecTimeStamp = string;
 /**
+ * MongoDB ObjectID
  * @example
  * const t = id.subString(0,8);
  * const date = new Date(Number.parseInt(t, 16) * 1000);
@@ -16,3 +17,6 @@ export type ApiResponse<T> = {
   msg: string;
   status: number;
 };
+
+export type CCWdomain = "xiguacity.cn" | "ccw.site";
+export type CachedOssUrl = `https://m.${CCWdomain}/${string}`;
