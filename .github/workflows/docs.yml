@@ -2,6 +2,8 @@ name: Deploy Docs
 permissions: 
   pages:
     write
+  contents: 
+    read
 
 on:
   push:
