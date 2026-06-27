@@ -17,7 +17,9 @@ export interface DailyRecord {
   bucks: number;
   isCheckIn: boolean;
 }
-
+/**
+ * 获取本月签到记录
+ */
 export async function getCheckInRecords() {
   const req: Req = { scene: "HOMEPAGE" };
   return await ccwAxios
