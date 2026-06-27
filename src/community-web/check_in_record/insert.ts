@@ -10,7 +10,7 @@ export type Req = {
 export type Res = boolean;
 
 /**
- * 插入签到记录
+ * 插入签到记录（相当于签到）
  * @returns {Promise<boolean>} 是否成功
  */
 export async function insertCheckInRecord(): Promise<Res> {
