@@ -35,6 +35,7 @@ import { viewCreationStats } from "./creation_stats/view";
 import { getNotifyDeleteReasons } from "./notify_message/show";
 import { getPostDetail } from "./post/detail";
 import { getSearchHotWords } from "./search/hot_words";
+import { getStudentBlockRecordDetail } from "./student/block_record/detail";
 import { getStudentBlockRecordList } from "./student/block_record/list";
 import { getStudentBlockStatus } from "./student/block_record/status";
 import { getCreatorScore } from "./students/creator_score";
@@ -54,8 +55,20 @@ import { acceptAward } from "./task/award";
 import { getMyTasks } from "./task/mine";
 import { getUserCardDetail } from "./user-card/detail";
 import { getUserLabelList } from "./user_label/list";
+import { getPersonalCurrencyAccount } from "./currency/account/personal";
+import { getAllEmojis } from "./emoji/all";
+import { getEmojiCategoryList } from "./emoji/category/list";
+import { getEmojiPage } from "./emoji/page";
+import { sendEvent } from "./event";
+import { healthCheck } from "./health/check";
+import { getLeafletsItemList } from "./leaflets/item/list";
+import { getLockedUserDetail } from "./locked_user/detail";
+import { getMutedUserDetail } from "./muted_user/detail";
+import { getNotificationPage } from "./notification/page";
+import { getNotificationStats } from "./notification/stats/v2";
 
 export const communityWeb = {
+  acceptAward,
   encodeShortCode,
   createShortUrl,
   getApprovalTags,
@@ -67,31 +80,40 @@ export const communityWeb = {
   getCreationDetail,
   getCreationFavoriteDetail,
   getCreationIntroduction,
-  getRemixedCreationPage,
   getCreationRecommendPositionList,
   getCreationScreenshotPage,
   getCreationStudentDetail,
   getCreationTags,
-  getPlanetsOfCreation,
-  getMyHashTagCreations,
-  getHashTagDetail,
-  getHashTagFavoriteDetail,
-  getManagedHashTags,
-  getCreationsByStudent,
   getCreatorScore,
   getDonatedRecordRanking,
   getExcellentCreations,
+  getEmojiCategoryList,
+  getEmojiPage,
+  getAllEmojis,
+  getHashTagDetail,
+  getHashTagFavoriteDetail,
+  getManagedHashTags,
+  getHealthCheck: healthCheck,
+  getLeafletsItemList,
   getLikeDetail,
   getLoadingTips,
-  acceptAward,
+  getLockedUserDetail,
+  getMutedUserDetail,
+  getMyHashTagCreations,
   getMyTasks,
   getNotifyDeleteReasons,
+  getNotificationPage,
+  getNotificationStats,
+  getPersonalCurrencyAccount,
+  getPlanetsOfCreation,
   getPostDetail,
   getPotentialCreations,
   getRecommendCreations,
+  getRemixedCreationPage,
   getReputationScoreLogPage: getReputationScoreLog,
   getSearchHotWords,
   getSpreadFeedUnreadCount,
+  getStudentBlockRecordDetail,
   getStudentBlockRecordList,
   getStudentBlockStatus,
   getStudentLastActiveAt,
@@ -103,13 +125,15 @@ export const communityWeb = {
   getStudyCommunityMemberDetail,
   getSubjectAreaPage,
   getSubjectAreaPageByChannel,
+  getTime,
   getUserAssetStorageSize,
   getUserCardDetail,
   getUserLabelList,
+  getCreationsByStudent,
   insertCheckInRecord,
   searchCloudAssets,
   searchCreationsByTag,
-  getTime,
+  sendEvent,
   updateStudent,
   viewCreationStats,
 };

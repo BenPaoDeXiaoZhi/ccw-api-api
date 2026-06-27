@@ -6,3 +6,4 @@ tsconfig.tsbuildinfo
 typedoc.json
 src
 types
+coverage

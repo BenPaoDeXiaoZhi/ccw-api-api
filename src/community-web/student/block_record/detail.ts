@@ -39,7 +39,7 @@ export type Res = BlockActionRecord | null;
  * @param {MongoDBId} studentOid 学生id
  * @returns {Promise<Res>} 封禁状态
  */
-export async function getStudentBlockStatus(
+export async function getStudentBlockRecordDetail(
   studentOid: MongoDBId,
 ): Promise<Res> {
   const req: Req = { studentOid };
