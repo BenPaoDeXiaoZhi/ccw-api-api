@@ -1,0 +1,100 @@
+import { ccwAxios } from "@ccw-api/axios";
+import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
+import { ApiResponse, MongoDBId, CNameOssUrl } from "types/api";
+import { PagesRes, PageArgs } from "types/pages";
+
+export const url =
+  "https://community-web.ccw.site/subject_area/page_by_channel";
+
+export type SubjectAreaModuleComponent = {
+  data: {
+    hover?: boolean;
+    targetLink?: string;
+    origin: string;
+    targetType?: string;
+    bgImage?: CNameOssUrl;
+    col?: number;
+    overflow?: string;
+    display?: string;
+    row?: string;
+    creationOids?: MongoDBId[];
+    bgColor?: string;
+  };
+  type: string;
+};
+
+export type SubjectAreaModule = {
+  components: SubjectAreaModuleComponent[];
+  filled: boolean;
+  gutter: number;
+  subtitle: string;
+  subtitleColor: string;
+  title: string;
+  titleColor: string;
+  type: string;
+};
+
+export type SubjectAreaGroup = {
+  bgAtmosphere: null | string;
+  bgColor: string;
+  bgImage: CNameOssUrl;
+  id: number;
+  lottieJsonUrl: null | CNameOssUrl;
+  modules: SubjectAreaModule[];
+  moreLink: null | string;
+  moreLinkText: null | string;
+  subjectAreaId: number;
+  subtitle: string;
+  subtitleColor: string;
+  title: string;
+  titleColor: string;
+  verticalPadding: number;
+};
+
+export type SubjectAreaScene = "CUSTOM_PAGE";
+export type SubjectAreaChannel = "tags" | 'mmo'| 'adventure';
+
+export type SubjectAreaItem = {
+  creationOids: MongoDBId[];
+  enabled: boolean;
+  iconLink: null | CNameOssUrl;
+  id: number;
+  location: null | string;
+  platform: string;
+  priority: number;
+  subjectAreaGroup: SubjectAreaGroup;
+  subtitle: null | string;
+  targetLink: null | string;
+  title: string;
+  visibleFor: string[];
+};
+
+export type Req = {
+  channel: SubjectAreaChannel;
+  scene: SubjectAreaScene;
+};
+
+export type Res = PagesRes<SubjectAreaItem>;
+
+/**
+ * 按频道分页获取分区列表(用于上方nav bar的"热门分类" "联机" "联名挑战赛")
+ * @param {SubjectAreaChannel} channel 频道
+ * @param {Partial<PageArgs>} pageArgs_ 分页参数
+ * @returns {Promise<Res>} 学科区分页数据
+ */
+export async function getSubjectAreaPageByChannel(
+  channel: SubjectAreaChannel,
+  pageArgs_: Partial<PageArgs> = {
+    sortField: "campaignResourceId"
+  },
+): Promise<Res> {
+  const pageArgs = {
+    ...DEFAULT_PAGE_ARGS,
+    ...pageArgs_,
+  };
+  const queryUrl = queryPage(url, pageArgs);
+  const req: Req = { channel, scene: 'CUSTOM_PAGE' };
+  return await ccwAxios
+    .post<ApiResponse<Res>>(queryUrl, req)
+    .then((res) => res.data.body);
+}

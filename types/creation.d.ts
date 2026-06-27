@@ -1,5 +1,9 @@
 import { MongoDBId, CNameOssUrl } from "types/api";
-import { OtherUser, Student, StudentSimple } from "types/userData";
+import {
+  OtherUser,
+  StudentOverview,
+} from "types/userData";
+import { AccountTypes } from "./account";
 
 export interface CreationRelease {
   checked: boolean;
@@ -48,11 +52,9 @@ export interface ExtensionStats {
   reviewTags: string[];
 }
 
-export interface CreationSimple {
+export interface CreationSimple extends CreationMinimal {
   artifactType: string;
-  commentCount: number;
   createdAt: number;
-  creationRelease: CreationRelease;
   currentReleaseOid: MongoDBId;
   description: string;
   ext: {
@@ -60,7 +62,6 @@ export interface CreationSimple {
     requireLogin: boolean;
     SUBMIT_HASH_TAGS: string[];
   };
-  favoriteCount: number;
   featuredCoverLink: string;
   forEveryone: boolean;
   hashTags: string[];
@@ -68,25 +69,19 @@ export interface CreationSimple {
   isTeamwork: boolean;
   keyboardLayout: string;
   lastPassedAt: number;
-  latestCoverLink: string;
   latestProjectLink: string;
-  likeCount: number;
-  oid: MongoDBId;
   operatedAt: number;
   rank: string;
-  remixedCount: number;
   requireLogin: boolean;
   screenMode: string;
   sourceOpenLevel: string;
   status: string;
-  student: StudentSimple;
+  student: StudentOverview;
   studentOid: MongoDBId;
   tags: string[];
   teamMemberRespList: TeamMemberResp[];
-  title: string;
   type: string;
   updatedAt: number;
-  viewCount: number;
   visibleScope: string;
 }
 
@@ -101,7 +96,7 @@ export interface Creation extends CreationSimple {
   remixedCreation: null | object;
   repostedSource: null | object;
   stats: null | ExtensionStats;
-  student: Student;
+  student: StudentOverview;
   teamworkStatus: null | TeamworkStatus;
   typicalProjectId: null | string;
 }
@@ -157,7 +152,7 @@ export interface DonatedRecord {
   donatorAvatar: CNameOssUrl;
   donatorName: string;
   donatorOid: MongoDBId;
-  donatorType: "STUDENT";
+  donatorType: AccountTypes;
   id: number;
   updatedAt: number;
 }
@@ -180,5 +175,97 @@ export interface FavoriteDetail {
   creationOid: MongoDBId;
   favoritedAt: number;
   studentOid: MongoDBId;
+  updatedAt: number;
+}
+
+export interface CreationMinimal {
+  commentCount: number;
+  creationRelease: CreationRelease;
+  favoriteCount: number;
+  latestCoverLink: string;
+  likeCount: number;
+  oid: MongoDBId;
+  remixedCount: number;
+  title: string;
+  viewCount: number;
+}
+
+export type HashTagCreationRank = "ORDINARY";
+export type HashTagCreationStatus = "PUBLISHED" | string;
+
+export interface HashTagCreationRelation {
+  blurb: null | string;
+  canAudit: boolean;
+  createdAt: number;
+  creationOid: MongoDBId;
+  hashTagId: number;
+  hashTagIdentifier: string;
+  id: number;
+  lastPublishedAt: number;
+  lastSubmittedAt: number;
+  projectLastModifiedAt: null | number;
+  rank: HashTagCreationRank;
+  status: HashTagCreationStatus;
+  /**
+   * 作品作者id,不是星球管理id
+   */
+  studentOid: MongoDBId;
+  updatedAt: number;
+}
+
+export type HashTagFollowingStatus =
+  | "UNFOLLOWED"
+  | "FOLLOWED"
+  | "BOTH_FOLLOWED"
+  | null;
+
+export interface HashTagMemberSimple {
+  avatar: CNameOssUrl;
+  followingStatus: HashTagFollowingStatus;
+  name: string;
+  oid: MongoDBId;
+}
+
+export type HashTagStatus = "ENABLED" | string;
+export type HashTagType = "ORDINARY" | string;
+
+export interface HashTag {
+  bulletin: string | null;
+  bulletinOperatedAt: number | null;
+  bulletinOperator: HashTagMemberSimple | null;
+  bulletinOperatorOid: MongoDBId | null;
+  commentCount: number | null;
+  coverLink: CNameOssUrl;
+  createdAt: number;
+  creationCount: number;
+  description: string | null;
+  enableApplyManager: boolean | null;
+  enableBatchAudit: boolean | null;
+  favoriteStatus: unknown | null;
+  favoritedStudentCount: number;
+  hashTagScoreStatsResp: unknown | null;
+  id: number;
+  identifier: string;
+  latestFavoritedStudents: HashTagMemberSimple[];
+  managerIds: MongoDBId[];
+  managers: HashTagMemberSimple[];
+  memberCount: number;
+  ownerType: unknown | null;
+  priority: number;
+  recommended: boolean;
+  relatedStarNum: number | null;
+  status: HashTagStatus;
+  type: HashTagType;
+  updatedAt: number;
+}
+
+export interface HashTagFavorite {
+  createdAt: number;
+  ext: object;
+  hashTagId: number;
+  id: number;
+  lastFavoritedAt: number;
+  studentOid: MongoDBId;
+  unfavoritedAt: number | null;
   updatedAt: number;
 }

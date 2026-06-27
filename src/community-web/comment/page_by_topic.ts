@@ -24,14 +24,14 @@ export type Res = PagesRes<Comment>;
  * @param {SubjectType} subjectType 主题类型 (如: "POST")
  * @param {string} sectionType 区块类型 (如: "COMMENT")
  * @param {Partial<PageArgs<SortField>>} pageArgs_ 分页参数
- * @returns {Promise<Comment[]>} 评论列表
+ * @returns {Promise<Res>} 评论分页结果
  */
 export async function getCommentsByTopic(
   subjectOid: string,
   subjectType: SubjectType,
   sectionType: SectionType,
   pageArgs_: Partial<PageArgs<SortField>> = {},
-): Promise<Comment[]> {
+): Promise<Res> {
   const pageArgs = {
     ...dpa,
     ...pageArgs_,
@@ -40,5 +40,5 @@ export async function getCommentsByTopic(
   const req: Req = { subjectOid, subjectType, sectionType };
   return await ccwAxios
     .post<ApiResponse<Res>>(queryUrl, req)
-    .then((res) => res.data.body.data);
+    .then((res) => res.data.body);
 }

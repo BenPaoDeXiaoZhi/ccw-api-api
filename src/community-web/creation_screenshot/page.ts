@@ -15,12 +15,12 @@ export type Res = PagesRes<CreationScreenshot>;
  * 获取作品截图分页
  * @param {MongoDBId} subjectOid 作品id
  * @param {Partial<PageArgs>} pageArgs_ 分页参数
- * @returns {Promise<CreationScreenshot[]>} 截图列表
+ * @returns {Promise<Res>} 分页截图列表
  */
 export async function getCreationScreenshotPage(
   subjectOid: MongoDBId,
   pageArgs_: Partial<PageArgs> = {},
-): Promise<CreationScreenshot[]> {
+): Promise<Res> {
   const pageArgs = {
     ...DEFAULT_PAGE_ARGS,
     ...pageArgs_,
@@ -29,5 +29,5 @@ export async function getCreationScreenshotPage(
   const req: Req = { subjectOid };
   return await ccwAxios
     .post<ApiResponse<Res>>(queryUrl, req)
-    .then((res) => res.data.body.data);
+    .then((res) => res.data.body);
 }

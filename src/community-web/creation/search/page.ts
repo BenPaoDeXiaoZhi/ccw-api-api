@@ -17,15 +17,15 @@ export type Req = {
 export type Res = PagesRes<CreationSimple>;
 
 /**
- * 按标签搜索作品
- * @param {string} tag 标签 例如:游戏 动画故事 角色扮演
+ * 按名称搜索作品
+ * @param {string} tag 标签 例如:游戏 动画故事 角色扮演 kukeChat
  * @param {Partial<PageArgs<SortField>>} pageArgs_ 分页参数
- * @returns {Promise<CreationSimple[]>} 作品列表
+ * @returns {Promise<Res>} 作品分页结果
  */
 export async function searchCreationsByTag(
   tag: string,
   pageArgs_: Partial<PageArgs<SortField>> = {},
-): Promise<CreationSimple[]> {
+): Promise<Res> {
   const pageArgs = {
     ...dpa,
     ...pageArgs_,
@@ -34,5 +34,5 @@ export async function searchCreationsByTag(
   const req: Req = { tag };
   return await ccwAxios
     .post<ApiResponse<Res>>(queryUrl, req)
-    .then((res) => res.data.body.data);
+    .then((res) => res.data.body);
 }

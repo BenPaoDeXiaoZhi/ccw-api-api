@@ -1,2 +1,1 @@
-export type AccountTypes = Student;
-export type Student = "STUDENT";
+export type AccountTypes = "STUDENT";

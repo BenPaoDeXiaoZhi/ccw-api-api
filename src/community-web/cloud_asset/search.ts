@@ -49,13 +49,13 @@ export type CloudAssetType = "COSTUME" | "FOLDER" | "VIDEO" | "AUDIO";
  * @param {MongoDBId} creatorOid 用户id
  * @param {string} path 目录(例如'/23azZqHBnqj/2BzzTdi5I5C/')
  * @param {Partial<PageArgs>} pageArgs_ 分页参数
- * @returns {Promise<CloudAsset[]>} 目录内的素材
+ * @returns {Promise<Res>} 目录内的素材分页结果
  */
 export async function searchCloudAssets(
   creatorOid: MongoDBId,
   path: string = "/",
   pageArgs_: Partial<PageArgs<SortField>> = {},
-): Promise<CloudAsset[]> {
+): Promise<Res> {
   const pageArgs = {
     ...dpa,
     ...pageArgs_,
@@ -64,5 +64,5 @@ export async function searchCloudAssets(
   const req: Req = { creatorOid, path };
   return await ccwAxios
     .post<ApiResponse<Res>>(queryUrl, req)
-    .then((res) => res.data.body.data);
+    .then((res) => res.data.body);
 }

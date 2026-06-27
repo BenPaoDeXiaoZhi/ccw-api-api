@@ -7,8 +7,8 @@ test("get comments by topic should return data", async () => {
   const sectionType = "COMMENT";
   const res = await getCommentsByTopic(subjectOid, subjectType, sectionType);
 
-  expect(Array.isArray(res)).toBe(true);
-  res.forEach((comment) => {
+  expect(Array.isArray(res.data)).toBe(true);
+  res.data.forEach((comment) => {
     expect(comment.id).toBeDefined();
     expect(comment.content).toBeDefined();
     expect(["PUBLISHED", "FOLDED"]).toContain(comment.status);

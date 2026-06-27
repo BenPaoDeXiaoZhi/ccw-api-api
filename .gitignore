@@ -4,4 +4,4 @@ dist
 tsconfig.tsbuildinfo
 docs
 coverage
-.tmp
+# .tmp

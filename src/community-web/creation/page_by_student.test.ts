@@ -15,8 +15,8 @@ test("get creations by student should return data", async () => {
     return;
   }
   const res = await getCreationsByStudent([sampleStudentOid]);
-  expect(Array.isArray(res)).toBe(true);
-  res.forEach((c) => {
+  expect(Array.isArray(res.data)).toBe(true);
+  res.data.forEach((c) => {
     expect(c.oid).toBeDefined();
     expect(c.studentOid).toBeDefined();
   });

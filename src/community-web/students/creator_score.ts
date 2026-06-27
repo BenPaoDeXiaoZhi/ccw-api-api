@@ -1,0 +1,20 @@
+import { ccwAxios } from "@ccw-api/axios";
+import { ApiResponse } from "types/api";
+import { CreatorScore } from "types/userData";
+
+export const url = "https://community-web.ccw.site/students/creator_score";
+
+export type Req = undefined;
+
+export type Res = CreatorScore;
+
+/**
+ * 获取当前学生创作分
+ * @returns {Promise<Res>} 创作分信息
+ */
+export async function getCreatorScore(): Promise<Res> {
+  const req = undefined;
+  return await ccwAxios
+    .post<ApiResponse<Res>>(url, req)
+    .then((res) => res.data.body);
+}

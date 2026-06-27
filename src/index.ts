@@ -1,4 +1,3 @@
-/// <reference path="../types/types.d.ts">
 import { sso } from "./sso/index";
 import { communityWeb } from "./community-web";
 
@@ -8,3 +7,5 @@ export default {
   sso,
   communityWeb,
 };
+
+export type * from "types";

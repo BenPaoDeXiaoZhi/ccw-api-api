@@ -22,11 +22,38 @@ import { searchCreationsByTag } from "./creation/search/page";
 import { getCreationStudentDetail } from "./creation/student/detail";
 import { getCreationTags } from "./creation/tag/list";
 import { createShortUrl } from "./short_url/create";
+import { getPlanetsOfCreation } from "./hash_tag_creation/list_relation";
+import { getMyHashTagCreations } from "./hash_tag_creation/mine";
+import { getHashTagDetail } from "./hash_tag/detail";
+import { getManagedHashTags } from "./hash_tag/managed/list";
+import { getHashTagFavoriteDetail } from "./hash_tag_favorite/detail";
 import { getDonatedRecordRanking } from "./creation_donated_record/ranking_list";
 import { getCreationFavoriteDetail } from "./creation_favorite/detail";
 import { getCreationRecommendPositionList } from "./creation_recommend_position/list";
 import { getCreationScreenshotPage } from "./creation_screenshot/page";
 import { viewCreationStats } from "./creation_stats/view";
+import { getNotifyDeleteReasons } from "./notify_message/show";
+import { getPostDetail } from "./post/detail";
+import { getSearchHotWords } from "./search/hot_words";
+import { getStudentBlockRecordList } from "./student/block_record/list";
+import { getStudentBlockStatus } from "./student/block_record/status";
+import { getCreatorScore } from "./students/creator_score";
+import { getStudentLastActiveAt } from "./students/last_active_at";
+import { getStudentsList } from "./students/list";
+import { getStudentSessions } from "./students/list_sessions";
+import { getStudentProfile } from "./students/profile";
+import { getReputationScoreLog } from "./students/reputation_score_log/page";
+import { getStudentSelfDetail } from "./students/self/detail";
+import { getStudentStats } from "./students/stats";
+import { updateStudent } from "./students/update";
+import { getStudyCommunityMemberDetail } from "./study-community/member/detail";
+import { getSpreadFeedUnreadCount } from "./study-community/spread_feed/unread/count";
+import { getSubjectAreaPage } from "./subject_area/page";
+import { getSubjectAreaPageByChannel } from "./subject_area/page_by_channel";
+import { acceptAward } from "./task/award";
+import { getMyTasks } from "./task/mine";
+import { getUserCardDetail } from "./user-card/detail";
+import { getUserLabelList } from "./user_label/list";
 
 export const communityWeb = {
   encodeShortCode,
@@ -40,22 +67,49 @@ export const communityWeb = {
   getCreationDetail,
   getCreationFavoriteDetail,
   getCreationIntroduction,
-  getCreationPage: getRemixedCreationPage,
+  getRemixedCreationPage,
   getCreationRecommendPositionList,
   getCreationScreenshotPage,
   getCreationStudentDetail,
   getCreationTags,
+  getPlanetsOfCreation,
+  getMyHashTagCreations,
+  getHashTagDetail,
+  getHashTagFavoriteDetail,
+  getManagedHashTags,
   getCreationsByStudent,
+  getCreatorScore,
   getDonatedRecordRanking,
   getExcellentCreations,
   getLikeDetail,
   getLoadingTips,
+  acceptAward,
+  getMyTasks,
+  getNotifyDeleteReasons,
+  getPostDetail,
   getPotentialCreations,
   getRecommendCreations,
+  getReputationScoreLogPage: getReputationScoreLog,
+  getSearchHotWords,
+  getSpreadFeedUnreadCount,
+  getStudentBlockRecordList,
+  getStudentBlockStatus,
+  getStudentLastActiveAt,
+  getStudentProfile,
+  getStudentSelfDetail,
+  getStudentSessions,
+  getStudentsList,
+  getStudentStats,
+  getStudyCommunityMemberDetail,
+  getSubjectAreaPage,
+  getSubjectAreaPageByChannel,
   getUserAssetStorageSize,
+  getUserCardDetail,
+  getUserLabelList,
   insertCheckInRecord,
   searchCloudAssets,
   searchCreationsByTag,
   getTime,
+  updateStudent,
   viewCreationStats,
 };

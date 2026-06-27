@@ -24,14 +24,14 @@ export type Res = PagesRes<Comment>;
  * @param {number} parentId 父评论id
  * @param {("PUBLISHED" | "FOLDED")[]} statuses 状态过滤
  * @param {Partial<PageArgs<SortField>>} pageArgs_ 分页参数
- * @returns {Promise<Comment[]>} 评论列表
+ * @returns {Promise<Res>} 评论分页结果
  */
 export async function getCommentReplies(
   topicId: number,
   parentId: number,
   statuses: ("PUBLISHED" | "FOLDED")[] = ["PUBLISHED", "FOLDED"],
   pageArgs_: Partial<PageArgs<SortField>> = {},
-): Promise<Comment[]> {
+): Promise<Res> {
   const pageArgs = {
     ...dpa,
     ...pageArgs_,
@@ -40,5 +40,5 @@ export async function getCommentReplies(
   const req: Req = { topicId, parentId, statuses };
   return await ccwAxios
     .post<ApiResponse<Res>>(queryUrl, req)
-    .then((res) => res.data.body.data);
+    .then((res) => res.data.body);
 }

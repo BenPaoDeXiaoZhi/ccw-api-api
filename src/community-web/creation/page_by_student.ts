@@ -20,12 +20,12 @@ export type Res = PagesRes<Creation>;
  * 获取学生的作品列表
  * @param {MongoDBId[]} studentOids 学生id列表
  * @param {Partial<PageArgs<SortField>>} pageArgs_ 分页参数
- * @returns {Promise<Creation[]>} 作品列表
+ * @returns {Promise<Res>} 作品分页结果
  */
 export async function getCreationsByStudent(
   studentOids: MongoDBId[],
   pageArgs_: Partial<PageArgs<SortField>> = {},
-): Promise<Creation[]> {
+): Promise<Res> {
   const pageArgs = {
     ...dpa,
     ...pageArgs_,
@@ -34,5 +34,5 @@ export async function getCreationsByStudent(
   const req: Req = { studentOids };
   return await ccwAxios
     .post<ApiResponse<Res>>(queryUrl, req)
-    .then((res) => res.data.body.data);
+    .then((res) => res.data.body);
 }

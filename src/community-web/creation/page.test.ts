@@ -15,5 +15,5 @@ test("get creation page should return data", async () => {
     return;
   }
   const res = await getRemixedCreationPage([sampleCreationOid]);
-  expect(Array.isArray(res)).toBe(true);
+  expect(Array.isArray(res.data)).toBe(true);
 });

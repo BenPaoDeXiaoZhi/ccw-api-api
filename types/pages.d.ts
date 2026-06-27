@@ -1,5 +1,3 @@
-import { ApiResponse } from "./api";
-
 export type SortType = "ASC" | "DESC";
 /**
  * 分页参数

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "dist",
     "types": ["jest", "node"],
     "esModuleInterop": true,
@@ -10,5 +10,5 @@
     "target": "esnext",
     "baseUrl": "."
   },
-  "include": ["src", "types/global.d.ts", "types/**/*.d.ts"]
+  "include": ["src", "types"]
 }

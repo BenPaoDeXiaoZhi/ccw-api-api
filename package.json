@@ -19,6 +19,7 @@
   "scripts": {
     "prepublishOnly": "npm run build && npm test",
     "test": "jest",
+    "test:dev": "jest --watch",
     "doc": "typedoc",
     "doc:dev": "typedoc --watch",
     "build": "tsc --project tsconfig.node.json && tsc --project tsconfig.esm.json && tsc --project tsconfig.types.json"

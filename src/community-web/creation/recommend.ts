@@ -20,12 +20,12 @@ export type Res = PagesRes<CreationSimple>;
 /**
  * 获取推荐作品列表
  * @param {Partial<PageArgs<SortField>>} pageArgs_ 分页参数
- * @returns {Promise<CreationSimple[]>} 作品列表
+ * @returns {Promise<Res>} 作品分页结果
  */
 export async function getRecommendCreations(
   num: number,
   pageArgs_: Partial<PageArgs<SortField>> = {},
-): Promise<CreationSimple[]> {
+): Promise<Res> {
   const pageArgs = {
     ...dpa,
     ...pageArgs_,
@@ -34,5 +34,5 @@ export async function getRecommendCreations(
   const req: Req = { num, subjectType: "POTENTIAL" };
   return await ccwAxios
     .post<ApiResponse<Res>>(queryUrl, req)
-    .then((res) => res.data.body.data);
+    .then((res) => res.data.body);
 }

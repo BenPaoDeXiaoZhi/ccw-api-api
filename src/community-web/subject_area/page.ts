@@ -1,0 +1,95 @@
+import { ccwAxios } from "@ccw-api/axios";
+import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
+import { ApiResponse, MongoDBId, CNameOssUrl } from "types/api";
+import { PagesRes, PageArgs } from "types/pages";
+
+export const url = "https://community-web.ccw.site/subject_area/page";
+
+export type SubjectAreaModuleComponent = {
+  data: {
+    hover?: boolean;
+    targetLink?: string;
+    origin: string;
+    targetType?: string;
+    bgImage?: CNameOssUrl;
+    col?: number;
+    overflow?: string;
+    display?: string;
+    row?: string;
+    creationOids?: MongoDBId[];
+    bgColor?: string;
+  };
+  type: string;
+};
+
+export type SubjectAreaModule = {
+  components: SubjectAreaModuleComponent[];
+  filled: boolean;
+  gutter: number;
+  subtitle: string;
+  subtitleColor: string;
+  title: string;
+  titleColor: string;
+  type: string;
+};
+
+export type SubjectAreaGroup = {
+  bgAtmosphere: null | string;
+  bgColor: string;
+  bgImage: CNameOssUrl;
+  id: number;
+  lottieJsonUrl: null | CNameOssUrl;
+  modules: SubjectAreaModule[];
+  moreLink: null | string;
+  moreLinkText: null | string;
+  subjectAreaId: number;
+  subtitle: string;
+  subtitleColor: string;
+  title: string;
+  titleColor: string;
+  verticalPadding: number;
+};
+
+export type SubjectAreaScene = "HOMEPAGE";
+
+export type SubjectAreaItem = {
+  creationOids: MongoDBId[];
+  enabled: boolean;
+  iconLink: null | CNameOssUrl;
+  id: number;
+  location: null | string;
+  platform: "WEB";
+  priority: number;
+  subjectAreaGroup: SubjectAreaGroup;
+  subtitle: null | string;
+  targetLink: null | string;
+  title: string;
+  visibleFor: string[];
+};
+
+export type Req = {
+  scene: SubjectAreaScene;
+};
+
+export type Res = PagesRes<SubjectAreaItem>;
+
+/**
+ * 分页获取主页推荐列表
+ * @param {SubjectAreaScene} scene 场景
+ * @param {Partial<PageArgs>} pageArgs_ 分页参数
+ * @returns {Promise<Res>} 主页推荐分页数据
+ */
+export async function getSubjectAreaPage(
+  scene: SubjectAreaScene,
+  pageArgs_: Partial<PageArgs> = {},
+): Promise<Res> {
+  const pageArgs = {
+    ...DEFAULT_PAGE_ARGS,
+    ...pageArgs_,
+  };
+  const queryUrl = queryPage(url, pageArgs);
+  const req: Req = { scene };
+  return await ccwAxios
+    .post<ApiResponse<Res>>(queryUrl, req)
+    .then((res) => res.data.body);
+}

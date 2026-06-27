@@ -6,8 +6,8 @@ test("get comment replies should return data", async () => {
   const statuses: ("PUBLISHED" | "FOLDED")[] = ["PUBLISHED", "FOLDED"];
   const res = await getCommentReplies(topicId, parentId, statuses);
 
-  expect(Array.isArray(res)).toBe(true);
-  res.forEach((comment) => {
+  expect(Array.isArray(res.data)).toBe(true);
+  res.data.forEach((comment) => {
     expect(comment.id).toBeDefined();
     expect(comment.topicId).toBe(topicId);
     expect(comment.parentId).toBe(parentId);

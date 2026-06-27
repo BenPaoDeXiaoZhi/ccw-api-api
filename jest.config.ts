@@ -3,10 +3,7 @@ const config: Config = {
   preset: "ts-jest",
   testEnvironment: "node",
   moduleFileExtensions: ["ts", "js", "json"],
-  collectCoverageFrom: [
-    "src/**/*.ts",
-    "!src/**/*.d.ts",
-  ],
+  collectCoverageFrom: ["src/**/*.ts", "!src/**/*.d.ts"],
   testMatch: ["**/src/**/*.test.ts"],
   transformIgnorePatterns: [],
   moduleNameMapper: {
