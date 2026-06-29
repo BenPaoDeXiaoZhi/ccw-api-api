@@ -1,7 +1,8 @@
 # @ccw-api/api
 
-CCW（创作社区）前后端接口 SDK，整合 `sso.ccw.site` 与 `community-web.ccw.site`
-两大服务的常用 API，提供完整的 TypeScript 类型与开箱即用的分页封装。
+CCW（创作社区）前后端接口 SDK，整合 `sso.ccw.site`、`community-web.ccw.site`、
+`gandi-main.ccw.site`、`bfs-web.ccw.site`、`community-web-cloud-database.ccw.site`
+五大服务的常用 API，提供完整的 TypeScript 类型与开箱即用的分页封装。
 
 - 包格式：**ESM + CJS + .d.ts 三产物**同时产出
 - 类型：所有请求 / 响应字段**强类型**，后端 key 固定约束（如 `MongoDBId`、`CNameOssUrl`、`UUID`）
@@ -40,9 +41,15 @@ setToken("abcdefgfoo");
 ### 2. 调用方式
 
 ```ts
-import { sso, communityWeb, gandiMain, bfsWeb } from "@ccw-api/api"; // ✅ 推荐：具名导入
+import {
+  sso,
+  communityWeb,
+  gandiMain,
+  bfsWeb,
+  communityWebCloudDatabase,
+} from "@ccw-api/api"; // ✅ 推荐：具名导入
 // 或
-import api from "@ccw-api/api"; // ✅ default 导入：api.sso / api.communityWeb / api.gandiMain / api.bfsWeb
+import api from "@ccw-api/api"; // ✅ default 导入：api.sso / api.communityWeb / api.gandiMain / api.bfsWeb / api.communityWebCloudDatabase
 ```
 
 ---
@@ -71,7 +78,7 @@ await logoutBySession("64...session_oid");
 
 ## 模块二：Community-Web（community-web.ccw.site）
 
-覆盖作品 / 学生 / 星球 / 评论 / 通知 / 任务 / 表情 / 签到 / 云资产 / 学科专区 等业务领域，共 **95 个 API**。
+覆盖作品 / 学生 / 星球 / 评论 / 通知 / 任务 / 表情 / 签到 / 云资产 / 学科专区 / 打赏 等业务领域，共 **96 个 API**。
 下面是常用场景示例。
 
 ### 学生与作品
@@ -178,6 +185,10 @@ const [allEmoji, emojiPage, categories] = await Promise.all([
 // 签到
 await communityWeb.insertCheckInRecord(); // 今日打卡
 const history = await communityWeb.getCheckInRecords();
+
+// 作品 / 评论 打赏（需要token，消耗账户金币）
+// 给某个作品打赏 1 金币（objectType 默认 "CREATION"）
+await communityWeb.donateTrade(1, "68ce4849811b737483bf7027", "CREATION");
 ```
 
 ### 黑名单、封禁、禁言查询
@@ -204,10 +215,16 @@ const muted = await communityWeb.getMutedUserDetail("244373873");
 
 ## 模块三：Gandi-Main（gandi-main.ccw.site）
 
-公告与服务器时间相关，共 **3 个 API**：
+公告、服务器时间与作品排行榜相关，共 **5 个 API**：
 
 ```ts
-const { getCurrentTimestamp, getBulletinsPage, getBulletinDetail } = gandiMain;
+const {
+  getCurrentTimestamp,
+  getBulletinsPage,
+  getBulletinDetail,
+  submitLeaderboardRecord,
+  getLeaderboardRecords,
+} = gandiMain;
 
 // 服务端当前毫秒级时间戳（比客户端时间更可靠，可用于签到、排行榜等需要严格时间判断的场景）
 const ts = await gandiMain.getCurrentTimestamp();
@@ -221,16 +238,37 @@ const bulletins = await gandiMain.getBulletinsPage("PUBLISHED", {
 
 // 某条公告详情
 const detail = await gandiMain.getBulletinDetail(123);
+
+// ====== 作品排行榜 ======
+
+// 获取排行榜记录（含榜单配置、当前用户排名、完整记录分页列表）
+const board = await gandiMain.getLeaderboardRecords("65a2314daa96bd09b5beae5a");
+console.log(board.title); // "总收益"
+console.log(board.scoreUnit); // "币"
+console.log(board.sortType); // "DESC"
+console.log(board.leaderboardRecordTotalNum); // 834
+console.log(board.curUserLeaderboardRecord?.ranking); // 139
+console.log(board.leaderboardRecords[0].ranking); // 1
+console.log(board.leaderboardRecords[0].score); // 排行榜最高分
+console.log(board.leaderboardRecords[0].user?.nickname); // 榜首昵称
+
+// 向排行榜提交分数记录（需要token：userOid必须对应当前登录用户）
+await gandiMain.submitLeaderboardRecord(
+  "65a2314daa96bd09b5beae5a", // 排行榜oid
+  1500, // 分数
+  "6a42413ccc79993c436d04b6", // 用户oid
+  "", // 扩展信息（可选）
+);
 ```
 
 ---
 
 ## 模块四：BFS-Web（bfs-web.ccw.site）
 
-用户扩展（extension）管理，共 **1 个 API**：
+用户扩展（extension）管理与扩展打赏，共 **2 个 API**：
 
 ```ts
-const { getUserExtensions } = bfsWeb;
+const { getUserExtensions, donateExtension } = bfsWeb;
 
 // 分页查询某用户上传/使用过的扩展列表（默认按 updatedAt 倒序）
 const exts = await bfsWeb.getUserExtensions("63c2807d669fa967f17f5559", {
@@ -238,6 +276,40 @@ const exts = await bfsWeb.getUserExtensions("63c2807d669fa967f17f5559", {
   perPage: 20,
 });
 // exts: PagesRes<Extension>
+
+// 给某个扩展打赏（需要token，消耗账户金币）
+await bfsWeb.donateExtension(
+  "spineAnimation", // 扩展id（eid）
+  5, // 打赏金币数量
+);
+```
+
+---
+
+## 模块五：Community-Web-Cloud-Database（community-web-cloud-database.ccw.site）
+
+作品 / 用户的云变量（键值对存储）管理，共 **2 个 API**：
+
+```ts
+const { saveProjectCloudVariable, saveUserCloudVariable } =
+  communityWebCloudDatabase;
+
+// 保存作品云变量（无需token，主键是作品id；value结构任意，泛型自动推导返回）
+const saved1 = await communityWebCloudDatabase.saveProjectCloudVariable(
+  "651c9a5142f8fb5ada70fad2",
+  "backup_65d31eaeb2ce1b785ebea87b_云时间",
+  { v: "2025-07-05T17:40:53.057+0800" },
+);
+// saved1: { v: string }
+//   ^? 泛型自动匹配 value 传入的结构
+
+// 保存用户云变量（需要token，主键内部自动为 userId 拼接 "-u" 后缀）
+const saved2 = await communityWebCloudDatabase.saveUserCloudVariable(
+  "68dddc63d28b025cb53fae25",
+  "256053228",
+  { key2: "0" },
+);
+// saved2: { key2: string }
 ```
 
 ---
@@ -336,7 +408,7 @@ const p: PagesRes<Creation.Creation> = {
 # 三产物构建（node / esm / .d.ts）
 npm run build
 
-# 跑测试（Jest 30 + ts-jest，101 suites / 106 tests）
+# 跑测试（Jest 30 + ts-jest，105 suites / 112 tests）
 npm test
 npm run test:dev       # watch 模式
 

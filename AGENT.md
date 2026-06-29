@@ -6,16 +6,18 @@ API 文件应按照后端服务域名进行分组，文件路径与 API URL 路�
 
 ```
 src/
-├── sso/                    # sso.ccw.site 服务
-│   └── index.ts            # 导出该服务的所有 API
-├── community-web/          # community-web.ccw.site 服务
+├── sso/                          # sso.ccw.site 服务
+│   └── index.ts                  # 导出该服务的所有 API
+├── community-web/                # community-web.ccw.site 服务
 │   └── index.ts
-├── gandi-main/             # gandi-main.ccw.site 服务
+├── gandi-main/                   # gandi-main.ccw.site 服务
 │   └── index.ts
-├── bfs-web/                # bfs-web.ccw.site 服务
+├── bfs-web/                      # bfs-web.ccw.site 服务
 │   └── index.ts
-├── index.ts                # 根导出
-└── types/                  # 公共类型定义
+├── community-web-cloud-database/ # community-web-cloud-database.ccw.site 服务
+│   └── index.ts
+├── index.ts                      # 根导出
+└── types/                        # 公共类型定义
 ```
 
 ## 文件命名规范
@@ -31,7 +33,7 @@ src/
 ```typescript
 // 1. 导入依赖
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse, MongoDBId } from "types/api";
+import { ApiResponse, MongoDBId } from "src/types/api";
 
 // 2. 导出 URL（用于调试和测试）
 export const url = "https://domain.ccw.site/path/to/api";

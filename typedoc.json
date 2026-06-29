@@ -1,7 +1,7 @@
 {
   "$schema": "https://typedoc.org/schema.json",
   "entryPointStrategy": "expand",
-  "entryPoints": ["src", "types"],
+  "entryPoints": ["src"],
   "exclude": ["**/*.test.ts"],
   "out": "docs",
   "jsDocCompatibility": true

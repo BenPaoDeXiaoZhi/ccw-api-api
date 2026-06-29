@@ -8,7 +8,7 @@ const config: Config = {
   transformIgnorePatterns: [],
   moduleNameMapper: {
     "^src/(.*)$": "<rootDir>/src/$1",
-    "^types/(.*)$": "<rootDir>/types/$1",
+    "^types/(.*)$": "<rootDir>/src/types/$1",
   },
 };
 export default config;

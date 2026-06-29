@@ -9,8 +9,7 @@
     "moduleResolution": "bundler",
     "target": "esnext",
     "paths": {
-      "src*": ["./src*"],
-      "types*": ["./src/types*"]
+      "src*": ["./src*"]
     },
     "baseUrl": "."
   },
