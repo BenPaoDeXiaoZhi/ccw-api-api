@@ -1,7 +1,7 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse } from "types/api";
-import { PagesRes, PageArgs } from "types/pages";
-import { CreationSimple } from "types/creation";
+import { ApiResponse } from "src/types/api";
+import { PagesRes, PageArgs } from "src/types/pages";
+import { CreationSimple } from "src/types/creation";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
 
 export const url = "https://community-web.ccw.site/creation/recommend";

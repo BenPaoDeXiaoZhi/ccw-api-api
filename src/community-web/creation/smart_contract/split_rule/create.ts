@@ -1,5 +1,5 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse, MongoDBId } from "types/api";
+import { ApiResponse, MongoDBId } from "src/types/api";
 
 export const url =
   "https://community-web.ccw.site/creation/smart_contract/split_rule/create";
@@ -10,10 +10,10 @@ export type MemberSplitDetail = {
    * 没有的话我也不知道咋整()
    */
   creationTeamMemberId?: number;
-  role: string;
-  rate: number;
-  userOid: MongoDBId;
   profile: string;
+  rate: number;
+  role: string;
+  userOid: MongoDBId;
 };
 
 export type Req = {

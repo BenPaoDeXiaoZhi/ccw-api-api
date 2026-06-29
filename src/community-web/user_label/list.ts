@@ -1,6 +1,6 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse } from "types/api";
-import { UserLabels } from "types/userData";
+import { ApiResponse } from "src/types/api";
+import { UserLabels } from "src/types/userData";
 
 export const url = "https://community-web.ccw.site/user_label/list";
 

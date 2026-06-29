@@ -1,4 +1,4 @@
-import { SectionType } from "types/comment";
+import { SectionType } from "src/types/comment";
 import { getCommentsByTopic } from "./page_by_topic";
 
 test("get comments by topic should return data", async () => {

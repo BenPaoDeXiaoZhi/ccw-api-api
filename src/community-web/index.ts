@@ -92,9 +92,11 @@ import { deleteComment } from "./study-community/comment/delete";
 import { createComment } from "./comment/create";
 import { likeComment } from "./comment/like_record/create";
 import { getStudentFollowingPage } from "./student/following/page";
+import { donateTrade } from "./study-trade/trade/donate";
 
 export const communityWeb = {
   acceptAward,
+  donateTrade,
   encodeShortCode,
   createCloudVariable,
   createComment,

@@ -1,16 +1,16 @@
 import { ccwAxios } from "@ccw-api/axios";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
-import { ApiResponse, MongoDBId } from "types/api";
-import { PagesRes, PageArgs } from "types/pages";
+import { ApiResponse, MongoDBId } from "src/types/api";
+import { PagesRes, PageArgs } from "src/types/pages";
 
 export const url = "https://community-web.ccw.site/student/block_record/list";
 
 export type BlockRecord = {
-  id: number;
-  studentOid: MongoDBId;
-  reason: string;
   createdAt: number;
   expireAt: number;
+  id: number;
+  reason: string;
+  studentOid: MongoDBId;
 };
 
 export type Req = {};

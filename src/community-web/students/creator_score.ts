@@ -1,6 +1,6 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse } from "types/api";
-import { CreatorScore } from "types/userData";
+import { ApiResponse } from "src/types/api";
+import { CreatorScore } from "src/types/userData";
 
 export const url = "https://community-web.ccw.site/students/creator_score";
 

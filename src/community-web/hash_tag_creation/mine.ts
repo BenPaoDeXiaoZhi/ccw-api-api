@@ -1,16 +1,12 @@
 import { ccwAxios } from "@ccw-api/axios";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
-import { ApiResponse } from "types/api";
-import { PagesRes, PageArgs } from "types/pages";
-import { Creation } from "types/creation";
+import { ApiResponse } from "src/types/api";
+import { PagesRes, PageArgs } from "src/types/pages";
+import { Creation } from "src/types/creation";
 
 export const url = "https://community-web.ccw.site/hash_tag_creation/mine";
 export type SortField =
-  | "createdAt"
-  | "lastPassedAt"
-  | "lastSubmittedAt"
-  | "lastPublishedAt"
-  | string;
+  "createdAt" | "lastPassedAt" | "lastSubmittedAt" | "lastPublishedAt" | string;
 const dpa: PageArgs<SortField> = {
   ...DEFAULT_PAGE_ARGS,
   sortField: "lastPassedAt",

@@ -1,12 +1,12 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse, MongoDBId } from "types/api";
-import { Creation } from "types/creation";
+import { ApiResponse, MongoDBId } from "src/types/api";
+import { Creation } from "src/types/creation";
 
 export const url = "https://community-web.ccw.site/creation/detail";
 
 export type Req = {
-  oid: MongoDBId;
   accessKey: string;
+  oid: MongoDBId;
 };
 export type Res = Creation;
 

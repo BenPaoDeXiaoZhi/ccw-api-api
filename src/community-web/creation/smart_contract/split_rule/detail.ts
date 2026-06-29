@@ -1,6 +1,6 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse, MongoDBId } from "types/api";
-import { TeamMemberAuthority } from "types/teamwork";
+import { ApiResponse, MongoDBId } from "src/types/api";
+import { TeamMemberAuthority } from "src/types/teamwork";
 
 export const url =
   "https://community-web.ccw.site/creation/smart_contract/split_rule/detail";

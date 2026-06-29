@@ -1,5 +1,5 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse } from "types/api";
+import { ApiResponse } from "src/types/api";
 import {
   ProfileExtraInfo,
   ParentInfo,
@@ -7,16 +7,16 @@ import {
   InfoModifyDate,
   StudentSelfDetailFields,
   StudentSelfDetail,
-} from "types/userData";
+} from "src/types/userData";
 
 export const url = "https://community-web.ccw.site/students/self/detail";
 
 export type StudentExtraInfo = ProfileExtraInfo;
 
 export type Req = {
-  needGrade: boolean;
-  needExtraInfo: boolean;
   fields: StudentSelfDetailFields[];
+  needExtraInfo: boolean;
+  needGrade: boolean;
 };
 
 export type Res = StudentSelfDetail;

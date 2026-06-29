@@ -1,6 +1,6 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse, MongoDBId } from "types/api";
-import { FavoriteDetail } from "types/creation";
+import { ApiResponse, MongoDBId } from "src/types/api";
+import { FavoriteDetail } from "src/types/creation";
 
 export const url = "https://community-web.ccw.site/creation_favorite/detail";
 

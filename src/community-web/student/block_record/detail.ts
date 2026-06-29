@@ -1,6 +1,6 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { AccountTypes } from "types/account";
-import { ApiResponse, MongoDBId } from "types/api";
+import { AccountTypes } from "src/types/account";
+import { ApiResponse, MongoDBId } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/student/block_record/detail";
 

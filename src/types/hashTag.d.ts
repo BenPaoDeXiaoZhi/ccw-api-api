@@ -1,4 +1,4 @@
-import { MongoDBId, CNameOssUrl } from "types/api";
+import { MongoDBId, CNameOssUrl } from "src/types/api";
 import { CreationStatus } from "./creation";
 
 export type HashTagCreationRank = "ORDINARY";

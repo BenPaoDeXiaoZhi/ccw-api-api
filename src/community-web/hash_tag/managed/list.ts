@@ -1,8 +1,8 @@
 import { ccwAxios } from "@ccw-api/axios";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
-import { ApiResponse, MongoDBId } from "types/api";
-import { PagesRes, PageArgs } from "types/pages";
-import { HashTag } from "types/hashTag";
+import { ApiResponse, MongoDBId } from "src/types/api";
+import { PagesRes, PageArgs } from "src/types/pages";
+import { HashTag } from "src/types/hashTag";
 
 export const url = "https://community-web.ccw.site/hash_tag/managed/list";
 export type SortField = "createdAt" | "priority" | string;

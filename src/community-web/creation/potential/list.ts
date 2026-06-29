@@ -1,6 +1,6 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse } from "types/api";
-import { CreationSimple } from "types/creation";
+import { ApiResponse } from "src/types/api";
+import { CreationSimple } from "src/types/creation";
 
 export const url = "https://community-web.ccw.site/creation/potential/list";
 

@@ -1,5 +1,5 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse } from "types/api";
+import { ApiResponse } from "src/types/api";
 
 export const url = "https://sso.ccw.site/web/auth/logout_by_session";
 

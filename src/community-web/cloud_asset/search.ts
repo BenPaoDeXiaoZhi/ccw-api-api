@@ -1,7 +1,7 @@
 import { ccwAxios } from "@ccw-api/axios";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
-import { ApiResponse, CNameOssUrl, MongoDBId } from "types/api";
-import { PagesRes, PageArgs } from "types/pages";
+import { ApiResponse, CNameOssUrl, MongoDBId } from "src/types/api";
+import { PagesRes, PageArgs } from "src/types/pages";
 
 export const url = "https://community-web.ccw.site/cloud_asset/search";
 export type SortField = "type" | "createdAt";

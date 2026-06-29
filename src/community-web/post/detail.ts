@@ -1,5 +1,5 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse, MongoDBId, CNameOssUrl } from "types/api";
+import { ApiResponse, MongoDBId, CNameOssUrl } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/post/detail";
 

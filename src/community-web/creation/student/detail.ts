@@ -1,6 +1,6 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse, MongoDBId } from "types/api";
-import { Student } from "types/userData";
+import { ApiResponse, MongoDBId } from "src/types/api";
+import { Student } from "src/types/userData";
 
 export const url = "https://community-web.ccw.site/creation/student/detail";
 

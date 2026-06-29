@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "rootDir": ".",
+    "rootDir": "./src",
     "outDir": "dist",
     "types": ["jest", "node"],
     "esModuleInterop": true,
@@ -10,8 +10,9 @@
     "target": "esnext",
     "paths": {
       "src*": ["./src*"],
-      "types*": ["./types*"]
-    }
+      "types*": ["./src/types*"]
+    },
+    "baseUrl": "."
   },
-  "include": ["src", "types"]
+  "include": ["src", "src/types"]
 }

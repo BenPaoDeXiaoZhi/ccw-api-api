@@ -1,8 +1,8 @@
 import { ccwAxios } from "@ccw-api/axios";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
-import { ApiResponse, MongoDBId } from "types/api";
-import { PagesRes, PageArgs } from "types/pages";
-import { CreationRelease } from "types/creation";
+import { ApiResponse, MongoDBId } from "src/types/api";
+import { PagesRes, PageArgs } from "src/types/pages";
+import { CreationRelease } from "src/types/creation";
 
 export const url = "https://community-web.ccw.site/creation_release/page";
 

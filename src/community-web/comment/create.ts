@@ -1,12 +1,12 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse, CNameOssUrl, MongoDBId } from "types/api";
-import { AccountTypes } from "types/account";
+import { ApiResponse, CNameOssUrl, MongoDBId } from "src/types/api";
+import { AccountTypes } from "src/types/account";
 import {
   MinimalTopicInfo,
   SectionType,
   SubjectType,
   TopicInfo,
-} from "types/comment";
+} from "src/types/comment";
 
 export const url = "https://community-web.ccw.site/comment/create";
 

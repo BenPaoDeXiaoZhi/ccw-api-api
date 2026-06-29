@@ -1,17 +1,17 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { AccountTypes } from "types/account";
-import { ApiResponse, CNameOssUrl, MongoDBId } from "types/api";
+import { AccountTypes } from "src/types/account";
+import { ApiResponse, CNameOssUrl, MongoDBId } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/api/v1/short_code/encode";
 
 export type Req = {
   origin: {
-    inviterId: MongoDBId;
-    inviterType: AccountTypes;
-    entrance: "create_detail";
-    inviterName: string;
-    inviterAvatar: CNameOssUrl;
     creationOid: MongoDBId;
+    entrance: "create_detail";
+    inviterAvatar: CNameOssUrl;
+    inviterId: MongoDBId;
+    inviterName: string;
+    inviterType: AccountTypes;
   };
 };
 export type Res = {
@@ -23,10 +23,10 @@ export type Res = {
   ext: null;
   id: number;
   origin: {
+    creationOid: MongoDBId;
+    entrance: "create_detail";
     inviterAvatar: string;
     inviterId: MongoDBId;
-    entrance: "create_detail";
-    creationOid: MongoDBId;
     inviterName: string;
     inviterType: AccountTypes;
   };

@@ -1,5 +1,5 @@
-import { MongoDBId, CNameOssUrl } from "types/api";
-import { OtherUser, StudentOverview } from "types/userData";
+import { MongoDBId, CNameOssUrl } from "src/types/api";
+import { OtherUser, StudentOverview } from "src/types/userData";
 import { AccountTypes } from "./account";
 import { ExtensionStats } from "./extensions";
 

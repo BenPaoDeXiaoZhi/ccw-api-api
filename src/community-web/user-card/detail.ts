@@ -1,14 +1,14 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse, MongoDBId, CNameOssUrl } from "types/api";
-import { CreationMinimal } from "types/creation";
+import { ApiResponse, MongoDBId, CNameOssUrl } from "src/types/api";
+import { CreationMinimal } from "src/types/creation";
 
 export const url = "https://community-web.ccw.site/user-card/detail";
 
 export type UserCardApprovalTag = {
-  id: number;
-  name: string;
   iconLink: CNameOssUrl;
+  id: number;
   mediumImage: CNameOssUrl;
+  name: string;
 };
 
 export type UserCardUser = {

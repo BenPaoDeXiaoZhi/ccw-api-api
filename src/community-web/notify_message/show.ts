@@ -1,5 +1,5 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse } from "types/api";
+import { ApiResponse } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/notify_message/show";
 
@@ -10,10 +10,10 @@ export type Req = {
 };
 
 export type NotifyMessage = {
-  /** @example title = '广告或垃圾信息' */
-  title: string;
   /** @example message = '由于包含广告或垃圾信息，已被管理员删除！' */
   message: string;
+  /** @example title = '广告或垃圾信息' */
+  title: string;
 };
 
 export type Res = NotifyMessage[];

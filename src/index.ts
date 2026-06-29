@@ -12,4 +12,4 @@ export default {
   bfsWeb,
 };
 
-export type * from "../types";
+export type * from "./types";

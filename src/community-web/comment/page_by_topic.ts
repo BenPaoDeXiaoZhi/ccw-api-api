@@ -1,8 +1,8 @@
 import { ccwAxios } from "@ccw-api/axios";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
-import { ApiResponse } from "types/api";
-import { PagesRes, PageArgs } from "types/pages";
-import { Comment, SectionType, SubjectType } from "types/comment";
+import { ApiResponse } from "src/types/api";
+import { PagesRes, PageArgs } from "src/types/pages";
+import { Comment, SectionType, SubjectType } from "src/types/comment";
 
 export const url = "https://community-web.ccw.site/comment/page_by_topic";
 export type SortField = "createdAt" | "likes";
@@ -12,9 +12,9 @@ const dpa: PageArgs<SortField> = {
 };
 
 export type Req = {
+  sectionType: SectionType;
   subjectOid: string;
   subjectType: string;
-  sectionType: SectionType;
 };
 export type Res = PagesRes<Comment>;
 

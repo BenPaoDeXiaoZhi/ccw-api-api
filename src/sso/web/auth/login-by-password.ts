@@ -1,13 +1,13 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { AccountTypes } from "types/account";
-import { ApiResponse, MongoDBId } from "types/api";
+import { AccountTypes } from "src/types/account";
+import { ApiResponse, MongoDBId } from "src/types/api";
 export const url = "https://sso.ccw.site/web/auth/login-by-password";
 
 export type Req = {
-  loginKey: string;
   clientCode: "STUDY_COMMUNITY";
-  password: string;
   extra: string;
+  loginKey: string;
+  password: string;
 };
 export type Res<Extra = string> = {
   accountId: -1;
@@ -28,11 +28,11 @@ export type Res<Extra = string> = {
 };
 
 export type Extra = {
-  loginType: "BY_PASSWORD";
   browser: string;
+  device: string;
   ip: string;
   loginParentOid: MongoDBId;
-  device: string;
+  loginType: "BY_PASSWORD";
   orgId: "";
 };
 
@@ -41,8 +41,8 @@ export type Extra = {
  * @prop {string} browser 浏览器名(chrome)
  */
 export interface ReqExtra {
-  device: string;
   browser: string;
+  device: string;
 }
 
 /**

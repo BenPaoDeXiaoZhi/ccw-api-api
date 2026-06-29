@@ -1,7 +1,7 @@
 import { ccwAxios } from "@ccw-api/axios";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
-import { ApiResponse, CNameOssUrl, MongoDBId } from "types/api";
-import { PagesRes, PageArgs } from "types/pages";
+import { ApiResponse, CNameOssUrl, MongoDBId } from "src/types/api";
+import { PagesRes, PageArgs } from "src/types/pages";
 
 export const url = "https://community-web.ccw.site/creation/teamwork_log/page";
 
@@ -32,23 +32,19 @@ export type TeamworkLogContent = {
     | "usedProjectHistoryVersion"
     | "addedSprite"
     | `created${"Global" | "Private"}${"Variable" | "List"}`;
-  params: any;
   operator: {
     avatar: CNameOssUrl;
+    clientId: string;
     name: string;
     oid: MongoDBId;
-    clientId: string;
   };
+  params: any;
 };
 
 export type SortField = "createdAt";
 
 export type OperateTargets =
-  | "VARIABLE"
-  | "BLOCK"
-  | "SPRITE"
-  | "PROJECT"
-  | "TEAMWORK";
+  "VARIABLE" | "BLOCK" | "SPRITE" | "PROJECT" | "TEAMWORK";
 
 export type Req = {
   creationId: MongoDBId;

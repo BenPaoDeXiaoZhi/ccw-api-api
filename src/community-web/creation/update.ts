@@ -4,8 +4,8 @@ import {
   CNameOssUrl,
   LatestCNameOssUrl,
   MongoDBId,
-} from "types/api";
-import { CreationScreenMode } from "types/creation";
+} from "src/types/api";
+import { CreationScreenMode } from "src/types/creation";
 
 export const url = "https://community-web.ccw.site/creation/update";
 

@@ -1,6 +1,6 @@
-import { MongoDBId, CNameOssUrl } from "types/api";
-import { ApprovalTag } from "types/approval";
-import { AccountTypes } from "types/account";
+import { MongoDBId, CNameOssUrl } from "src/types/api";
+import { ApprovalTag } from "src/types/approval";
+import { AccountTypes } from "src/types/account";
 
 export interface BaseUser {
   avatar: CNameOssUrl;

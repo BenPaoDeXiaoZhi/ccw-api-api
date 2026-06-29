@@ -1,16 +1,12 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse, MongoDBId } from "types/api";
-import { PagesRes, PageArgs } from "types/pages";
-import { CreationSimple } from "types/creation";
+import { ApiResponse, MongoDBId } from "src/types/api";
+import { PagesRes, PageArgs } from "src/types/pages";
+import { CreationSimple } from "src/types/creation";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
 
 export const url = "https://community-web.ccw.site/creation/page";
 export type SortField =
-  | "createdAt"
-  | "likeCount"
-  | "viewCount"
-  | "updatedAt"
-  | "commentCount";
+  "createdAt" | "likeCount" | "viewCount" | "updatedAt" | "commentCount";
 const dpa: PageArgs<SortField> = {
   ...DEFAULT_PAGE_ARGS,
   sortField: "createdAt",

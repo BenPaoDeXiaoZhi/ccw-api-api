@@ -1,4 +1,4 @@
-import { OtherUser } from "types/userData";
+import { OtherUser } from "src/types/userData";
 
 export interface Comment {
   commenter: OtherUser;

@@ -1,4 +1,4 @@
-import { PageArgs } from "types/pages";
+import { PageArgs } from "src/types/pages";
 
 /**
  * 生成ccw分页查询url

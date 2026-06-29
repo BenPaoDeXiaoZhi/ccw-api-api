@@ -1,6 +1,6 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { HashTag } from "types/hashTag";
-import { ApiResponse } from "types/api";
+import { HashTag } from "src/types/hashTag";
+import { ApiResponse } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/hash_tag/recommend/list";
 

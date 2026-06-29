@@ -1,6 +1,6 @@
 {
   "name": "@ccw-api/api",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "description": "ccw api collections",
   "license": "MIT",
   "author": "Meng Fuzi",
@@ -8,10 +8,10 @@
   "type": "module",
   "main": "dist/node/index.js",
   "module": "dist/esm/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/esm/index.js",
       "require": "./dist/node/index.js"
     }

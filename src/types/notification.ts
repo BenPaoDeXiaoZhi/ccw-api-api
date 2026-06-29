@@ -1,10 +1,10 @@
-import { CNameOssUrl, MongoDBId } from "types/api";
-import { CreationMinimal } from "types/creation";
+import { CNameOssUrl, MongoDBId } from "src/types/api";
+import { CreationMinimal } from "src/types/creation";
 import {
   NotificationContent,
   ContentCategory,
   SubjectType,
-} from "types/notificationContent";
+} from "src/types/notificationContent";
 
 export enum NotificationGroup {
   CreationInteraction = "CREATION_INTERACTION",
@@ -64,12 +64,12 @@ export interface Notification {
 }
 
 export interface NotificationStats {
-  CREATION_INTERACTION: number;
   ACTIVITY_ASSISTANT: number;
-  JUDGEMENT: number;
-  FRIEND_SHARE: number;
   COMMENT_TO_ME: number;
-  FOLLOW_ME: number;
-  WEB_SYSTEM: number;
+  CREATION_INTERACTION: number;
   CREATION_STATUS: number;
+  FOLLOW_ME: number;
+  FRIEND_SHARE: number;
+  JUDGEMENT: number;
+  WEB_SYSTEM: number;
 }

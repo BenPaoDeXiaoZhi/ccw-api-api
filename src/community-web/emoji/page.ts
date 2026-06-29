@@ -1,6 +1,6 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse } from "types/api";
-import { PagesRes, PageArgs } from "types/pages";
+import { ApiResponse } from "src/types/api";
+import { PagesRes, PageArgs } from "src/types/pages";
 import { queryPage, DEFAULT_PAGE_ARGS } from "src/queryPages";
 import { Emoji } from "./all";
 
