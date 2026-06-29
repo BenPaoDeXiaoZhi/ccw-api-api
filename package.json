@@ -1,6 +1,6 @@
 {
   "name": "@ccw-api/api",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "ccw api collections",
   "license": "MIT",
   "author": "Meng Fuzi",
@@ -16,6 +16,10 @@
       "require": "./dist/node/index.js"
     }
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "prepublishOnly": "npm run build && npm test",
     "test": "jest",
@@ -31,6 +35,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^26.0.1",
     "jest": "^30.4.2",
+    "prettier-plugin-sort-members": "^0.2.4",
     "ts-jest": "^29.4.11",
     "typedoc": "^0.28.19"
   }

@@ -40,9 +40,9 @@ setToken("abcdefgfoo");
 ### 2. 调用方式
 
 ```ts
-import { sso, communityWeb } from "@ccw-api/api"; // ✅ 推荐：具名导入
+import { sso, communityWeb, gandiMain, bfsWeb } from "@ccw-api/api"; // ✅ 推荐：具名导入
 // 或
-import api from "@ccw-api/api"; // ✅ default 导入：api.sso / api.communityWeb
+import api from "@ccw-api/api"; // ✅ default 导入：api.sso / api.communityWeb / api.gandiMain / api.bfsWeb
 ```
 
 ---
@@ -71,7 +71,7 @@ await logoutBySession("64...session_oid");
 
 ## 模块二：Community-Web（community-web.ccw.site）
 
-覆盖作品 / 学生 / 星球 / 评论 / 通知 / 任务 / 表情 / 签到 / 云资产 / 学科专区 等业务领域，共 **68 个 API**。
+覆盖作品 / 学生 / 星球 / 评论 / 通知 / 任务 / 表情 / 签到 / 云资产 / 学科专区 等业务领域，共 **95 个 API**。
 下面是常用场景示例。
 
 ### 学生与作品
@@ -200,6 +200,48 @@ const locked = await communityWeb.getLockedUserDetail<true>(
 const muted = await communityWeb.getMutedUserDetail("244373873");
 ```
 
+---
+
+## 模块三：Gandi-Main（gandi-main.ccw.site）
+
+公告与服务器时间相关，共 **3 个 API**：
+
+```ts
+const { getCurrentTimestamp, getBulletinsPage, getBulletinDetail } = gandiMain;
+
+// 服务端当前毫秒级时间戳（比客户端时间更可靠，可用于签到、排行榜等需要严格时间判断的场景）
+const ts = await gandiMain.getCurrentTimestamp();
+
+// 分页拉取公告列表（默认按 publishedAt 倒序，过滤已发布）
+const bulletins = await gandiMain.getBulletinsPage("PUBLISHED", {
+  page: 1,
+  perPage: 10,
+});
+// bulletins.data[0].title / id / publishedAt
+
+// 某条公告详情
+const detail = await gandiMain.getBulletinDetail(123);
+```
+
+---
+
+## 模块四：BFS-Web（bfs-web.ccw.site）
+
+用户扩展（extension）管理，共 **1 个 API**：
+
+```ts
+const { getUserExtensions } = bfsWeb;
+
+// 分页查询某用户上传/使用过的扩展列表（默认按 updatedAt 倒序）
+const exts = await bfsWeb.getUserExtensions("63c2807d669fa967f17f5559", {
+  page: 1,
+  perPage: 20,
+});
+// exts: PagesRes<Extension>
+```
+
+---
+
 ### 通用工具型 API
 
 ```ts
@@ -271,7 +313,8 @@ type PlanetRank = Creation.HashTagCreationRank; // "ORDINARY"
 ```ts
 import type { PageArgs, PagesRes } from "@ccw-api/api";
 
-// 入参 Partial<PageArgs<SortField>>，默认 { page:1, perPage:20, sortType:"DESC" }
+// 入参 T extends string
+// Partial<PageArgs<SortField|T>>，默认 { page:1, perPage:20, sortType:"DESC" }
 // 出参 PagesRes<T> 完整结构：
 const p: PagesRes<Creation.Creation> = {
   data: [], // 当前页数据
@@ -293,7 +336,7 @@ const p: PagesRes<Creation.Creation> = {
 # 三产物构建（node / esm / .d.ts）
 npm run build
 
-# 跑测试（Jest 30 + ts-jest，67 suites / 72 tests）
+# 跑测试（Jest 30 + ts-jest，101 suites / 106 tests）
 npm test
 npm run test:dev       # watch 模式
 
@@ -310,7 +353,7 @@ npm run doc:dev
 
 所有 API 文件严格遵循 `AGENT.md` 规范：
 
-- **按域名分组**：`src/sso` / `src/community-web`，内部子目录对应 URL 路径
+- **按域名分组**：`src/sso` / `src/community-web` / `src/gandi-main` / `src/bfs-web`，内部子目录对应 URL 路径
 - **单文件单接口**：文件名 `kebab-case`，对应 endpoint 最后一段
 - **7 段式模板**（每个 API 文件内部固定顺序）：
   1. `import`
@@ -321,4 +364,4 @@ npm run doc:dev
   6. JSDoc（`@param` / `@returns`）
   7. `export async function xxx(): Promise<Res>`
 
-新增 API 时，**最后记得在 `src/community-web/index.ts` 里 `import + 对象字面量聚合导出`**，否则外部访问不到。
+新增 API 时，**最后记得在对应服务的 `index.ts`（如 `src/community-web/index.ts`、`src/gandi-main/index.ts` 等）里 `import + 对象字面量聚合导出`**，否则外部访问不到。

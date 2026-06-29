@@ -1,7 +1,8 @@
 import { ccwAxios } from "@ccw-api/axios";
 import { ApiResponse, MongoDBId } from "types/api";
 
-export const url = "https://community-web.ccw.site/creation_recommend_position/list";
+export const url =
+  "https://community-web.ccw.site/creation_recommend_position/list";
 
 export type Req = {
   creationOid: MongoDBId;

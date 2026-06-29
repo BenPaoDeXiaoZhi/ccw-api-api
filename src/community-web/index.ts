@@ -66,21 +66,58 @@ import { getLockedUserDetail } from "./locked_user/detail";
 import { getMutedUserDetail } from "./muted_user/detail";
 import { getNotificationPage } from "./notification/page";
 import { getNotificationStats } from "./notification/stats/v2";
+import { getTypicalProjectPage } from "./typical_project/page";
+import { getTypicalProjectUnreadCount } from "./typical_project/student/unread_count";
+import { getOwnCreationPage } from "./creation/own/page";
+import { produceTeamMemberTicket } from "./creation/team_member/produce_ticket";
+import { getTeamMemberList } from "./creation/team_member/list";
+import { getTeamworkLogPage } from "./creation/teamwork_log/page";
+import { updateCreation } from "./creation/update";
+import { submitCreation } from "./creation/submit";
+import { getSplitRuleDetail } from "./creation/smart_contract/split_rule/detail";
+import { createSplitRule } from "./creation/smart_contract/split_rule/create";
+import { getCreationAttributeDetail } from "./creation_attribute/detail";
+import { getCreationActivityStatsList } from "./creation_activity_stats/list";
+import { getCreationReleasePage } from "./creation_release/page";
+import { getCodeProfilingDetail } from "./creation_release/code_profiling/detail";
+import { getHistoricalTeamMemberPage } from "./historical_team_member/page";
+import { decompressShortUrl } from "./short_url/decompress";
+import { getRecommendHashTags } from "./hash_tag/recommend/list";
+import { getCCWMainStatus } from "./ccw-main/status";
+import { createCloudVariable } from "./study-community/cloud_variable/create";
+import { topComment } from "./study-community/comment/top";
+import { foldComment } from "./study-community/comment/fold";
+import { resetCommentWeight } from "./study-community/comment/reset_weight";
+import { deleteComment } from "./study-community/comment/delete";
+import { createComment } from "./comment/create";
+import { likeComment } from "./comment/like_record/create";
+import { getStudentFollowingPage } from "./student/following/page";
 
 export const communityWeb = {
   acceptAward,
   encodeShortCode,
+  createCloudVariable,
+  createComment,
   createShortUrl,
+  createSplitRule,
+  decompressShortUrl,
+  deleteComment,
+  foldComment,
   getApprovalTags,
   getCampaignResources,
+  getCcwMainStatus: getCCWMainStatus,
   getCheckInRecords,
+  getCodeProfilingDetail,
   getCommentReplies,
   getCommentsByTopic,
   getConfigDetail,
+  getCreationActivityStatsList,
+  getCreationAttributeDetail,
   getCreationDetail,
   getCreationFavoriteDetail,
   getCreationIntroduction,
   getCreationRecommendPositionList,
+  getCreationReleasePage,
   getCreationScreenshotPage,
   getCreationStudentDetail,
   getCreationTags,
@@ -92,6 +129,7 @@ export const communityWeb = {
   getAllEmojis,
   getHashTagDetail,
   getHashTagFavoriteDetail,
+  getHistoricalTeamMemberPage,
   getManagedHashTags,
   getHealthCheck: healthCheck,
   getLeafletsItemList,
@@ -104,18 +142,22 @@ export const communityWeb = {
   getNotifyDeleteReasons,
   getNotificationPage,
   getNotificationStats,
+  getOwnCreationPage,
   getPersonalCurrencyAccount,
   getPlanetsOfCreation,
   getPostDetail,
   getPotentialCreations,
   getRecommendCreations,
+  getRecommendHashTags,
   getRemixedCreationPage,
   getReputationScoreLogPage: getReputationScoreLog,
   getSearchHotWords,
+  getSplitRuleDetail,
   getSpreadFeedUnreadCount,
   getStudentBlockRecordDetail,
   getStudentBlockRecordList,
   getStudentBlockStatus,
+  getStudentFollowingPage,
   getStudentLastActiveAt,
   getStudentProfile,
   getStudentSelfDetail,
@@ -125,15 +167,25 @@ export const communityWeb = {
   getStudyCommunityMemberDetail,
   getSubjectAreaPage,
   getSubjectAreaPageByChannel,
+  getTeamMemberList,
+  getTeamworkLogPage,
   getTime,
+  getTypicalProjectPage,
+  getTypicalProjectUnreadCount,
   getUserAssetStorageSize,
   getUserCardDetail,
   getUserLabelList,
   getCreationsByStudent,
   insertCheckInRecord,
+  likeComment,
+  produceTeamMemberTicket,
+  resetCommentWeight,
   searchCloudAssets,
   searchCreationsByTag,
   sendEvent,
+  submitCreation,
+  topComment,
+  updateCreation,
   updateStudent,
   viewCreationStats,
 };

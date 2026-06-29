@@ -12,11 +12,11 @@ export type Res = PagesRes<StudentSession>;
 
 /**
  * 获取学生登录会话列表
- * @param {Partial<PageArgs>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<"createdAt" | T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 会话列表分页数据
  */
-export async function getStudentSessions(
-  pageArgs_: Partial<PageArgs> = {
+export async function getStudentSessions<T extends string>(
+  pageArgs_: Partial<PageArgs<"createdAt" | T>> = {
     sortField: "createdAt",
   },
 ): Promise<Res> {

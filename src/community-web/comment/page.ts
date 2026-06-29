@@ -5,16 +5,12 @@ import { PagesRes, PageArgs } from "types/pages";
 import { Comment } from "types/comment";
 
 export const url = "https://community-web.ccw.site/comment/page";
-export type SortField = null;
-const dpa: PageArgs<SortField> = {
-  ...DEFAULT_PAGE_ARGS,
-  sortField: null,
-};
+export type SortField = "createdAt";
 
 export type Req = {
-  topicId: number;
   parentId: number;
   statuses: ("PUBLISHED" | "FOLDED")[];
+  topicId: number;
 };
 export type Res = PagesRes<Comment>;
 
@@ -23,17 +19,19 @@ export type Res = PagesRes<Comment>;
  * @param {number} topicId 话题id
  * @param {number} parentId 父评论id
  * @param {("PUBLISHED" | "FOLDED")[]} statuses 状态过滤
- * @param {Partial<PageArgs<SortField>>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<SortField|T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 评论分页结果
  */
-export async function getCommentReplies(
+export async function getCommentReplies<T extends string>(
   topicId: number,
   parentId: number,
   statuses: ("PUBLISHED" | "FOLDED")[] = ["PUBLISHED", "FOLDED"],
-  pageArgs_: Partial<PageArgs<SortField>> = {},
+  pageArgs_: Partial<PageArgs<SortField | T>> = {
+    sortField: "createdAt",
+  },
 ): Promise<Res> {
   const pageArgs = {
-    ...dpa,
+    ...DEFAULT_PAGE_ARGS,
     ...pageArgs_,
   };
   const queryUrl = queryPage(url, pageArgs);

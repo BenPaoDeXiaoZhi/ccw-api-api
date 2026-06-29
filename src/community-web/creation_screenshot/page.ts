@@ -14,12 +14,12 @@ export type Res = PagesRes<CreationScreenshot>;
 /**
  * 获取作品截图分页
  * @param {MongoDBId} subjectOid 作品id
- * @param {Partial<PageArgs>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<"createdAt" | T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 分页截图列表
  */
-export async function getCreationScreenshotPage(
+export async function getCreationScreenshotPage<T extends string>(
   subjectOid: MongoDBId,
-  pageArgs_: Partial<PageArgs> = {},
+  pageArgs_: Partial<PageArgs<"createdAt" | T>> = {},
 ): Promise<Res> {
   const pageArgs = {
     ...DEFAULT_PAGE_ARGS,

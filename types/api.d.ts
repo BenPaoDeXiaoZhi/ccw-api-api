@@ -21,6 +21,7 @@ export type ApiResponse<T> = {
 
 export type CCWdomain = "xiguacity.cn" | "ccw.site";
 export type CNameOssUrl = `https://m.${CCWdomain}/${string}`;
+export type LatestCNameOssUrl = `https://m.${CCWdomain}/${string}?t=${number}`;
 export type OriginOssUrl =
   `https://zhishi.oss-cn-beijing.aliyuncs.com/${string}`;
 

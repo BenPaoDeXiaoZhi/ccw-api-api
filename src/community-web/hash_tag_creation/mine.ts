@@ -27,13 +27,13 @@ export type Res = PagesRes<Creation, SortField>;
  * 获取当前用户提交到星球的作品列表
  * @param {string} [excludeHashTag] 排除的星球标识符（名称）
  * @param {HashTagCreationStatus[]} [statuses] 作品状态筛选，例如 ["PUBLISHED"]
- * @param {Partial<PageArgs<SortField>>} [pageArgs_] 分页参数
+ * @param {Partial<PageArgs<SortField | T>>} [pageArgs_] 分页参数
  * @returns {Promise<Res>} 星球作品分页结果
  */
-export async function getMyHashTagCreations(
+export async function getMyHashTagCreations<T extends string>(
   excludeHashTag?: string,
   statuses?: HashTagCreationStatus[],
-  pageArgs_: Partial<PageArgs<SortField>> = {},
+  pageArgs_: Partial<PageArgs<SortField | T>> = {},
 ): Promise<Res> {
   const pageArgs = {
     ...dpa,

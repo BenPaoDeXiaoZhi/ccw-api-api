@@ -2,7 +2,7 @@ export type SortType = "ASC" | "DESC";
 /**
  * 分页参数
  */
-export interface PageArgs<SortField = string> {
+export interface PageArgs<SortField extends string> {
   /**
    * 当前页码
    */
@@ -13,6 +13,8 @@ export interface PageArgs<SortField = string> {
   perPage: number;
   /**
    * 排序依据
+   *
+   * 这个实际上可以根据返回值的任何键排序
    */
   sortField: SortField;
   /**

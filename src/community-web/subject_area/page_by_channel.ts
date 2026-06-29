@@ -8,17 +8,17 @@ export const url =
 
 export type SubjectAreaModuleComponent = {
   data: {
-    hover?: boolean;
-    targetLink?: string;
-    origin: string;
-    targetType?: string;
+    bgColor?: string;
     bgImage?: CNameOssUrl;
     col?: number;
-    overflow?: string;
-    display?: string;
-    row?: string;
     creationOids?: MongoDBId[];
-    bgColor?: string;
+    display?: string;
+    hover?: boolean;
+    origin: string;
+    overflow?: string;
+    row?: string;
+    targetLink?: string;
+    targetType?: string;
   };
   type: string;
 };
@@ -52,7 +52,7 @@ export type SubjectAreaGroup = {
 };
 
 export type SubjectAreaScene = "CUSTOM_PAGE";
-export type SubjectAreaChannel = "tags" | 'mmo'| 'adventure';
+export type SubjectAreaChannel = "tags" | "mmo" | "adventure";
 
 export type SubjectAreaItem = {
   creationOids: MongoDBId[];
@@ -79,13 +79,13 @@ export type Res = PagesRes<SubjectAreaItem>;
 /**
  * 按频道分页获取分区列表(用于上方nav bar的"热门分类" "联机" "联名挑战赛")
  * @param {SubjectAreaChannel} channel 频道
- * @param {Partial<PageArgs>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<"campaignResourceId" | T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 学科区分页数据
  */
-export async function getSubjectAreaPageByChannel(
+export async function getSubjectAreaPageByChannel<T extends string>(
   channel: SubjectAreaChannel,
-  pageArgs_: Partial<PageArgs> = {
-    sortField: "campaignResourceId"
+  pageArgs_: Partial<PageArgs<"campaignResourceId" | T>> = {
+    sortField: "campaignResourceId",
   },
 ): Promise<Res> {
   const pageArgs = {
@@ -93,7 +93,7 @@ export async function getSubjectAreaPageByChannel(
     ...pageArgs_,
   };
   const queryUrl = queryPage(url, pageArgs);
-  const req: Req = { channel, scene: 'CUSTOM_PAGE' };
+  const req: Req = { channel, scene: "CUSTOM_PAGE" };
   return await ccwAxios
     .post<ApiResponse<Res>>(queryUrl, req)
     .then((res) => res.data.body);

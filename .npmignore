@@ -7,3 +7,4 @@ typedoc.json
 src
 types
 coverage
+.tmp

@@ -23,14 +23,16 @@ export type Res = PagesRes<Comment>;
  * @param {string} subjectOid 主题oid
  * @param {SubjectType} subjectType 主题类型 (如: "POST")
  * @param {string} sectionType 区块类型 (如: "COMMENT")
- * @param {Partial<PageArgs<SortField>>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<SortField| T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 评论分页结果
  */
-export async function getCommentsByTopic(
+export async function getCommentsByTopic<T extends string>(
   subjectOid: string,
   subjectType: SubjectType,
   sectionType: SectionType,
-  pageArgs_: Partial<PageArgs<SortField>> = {},
+  pageArgs_: Partial<PageArgs<SortField | T>> = {
+    sortField: "createdAt",
+  },
 ): Promise<Res> {
   const pageArgs = {
     ...dpa,

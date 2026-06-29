@@ -19,12 +19,12 @@ export type Res = PagesRes<CreationSimple>;
 
 /**
  * 获取推荐作品列表
- * @param {Partial<PageArgs<SortField>>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<SortField | T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 作品分页结果
  */
-export async function getRecommendCreations(
+export async function getRecommendCreations<T extends string>(
   num: number,
-  pageArgs_: Partial<PageArgs<SortField>> = {},
+  pageArgs_: Partial<PageArgs<SortField | T>> = {},
 ): Promise<Res> {
   const pageArgs = {
     ...dpa,

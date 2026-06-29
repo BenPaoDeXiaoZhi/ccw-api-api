@@ -8,7 +8,10 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "target": "esnext",
-    "baseUrl": "."
+    "paths": {
+      "src*": ["./src*"],
+      "types*": ["./types*"]
+    }
   },
   "include": ["src", "types"]
 }

@@ -13,11 +13,11 @@ export type Res = PagesRes<ReputationScoreLog>;
 
 /**
  * 获取学生信誉分记录
- * @param {Partial<PageArgs>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<"createdAt" | T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 信誉分记录分页数据
  */
-export async function getReputationScoreLog(
-  pageArgs_: Partial<PageArgs> = {
+export async function getReputationScoreLog<T extends string>(
+  pageArgs_: Partial<PageArgs<"createdAt" | T>> = {
     sortField: "createdAt",
   },
 ): Promise<Res> {

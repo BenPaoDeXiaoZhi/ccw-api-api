@@ -27,16 +27,16 @@ export interface Comment {
   sectionType: "COMMENT";
   status: "PUBLISHED" | "FOLDED";
   subComments: [];
+  topic: TopicInfo;
   /**
    * 回复的文章/扩展id
    */
   topicId: number;
-  topic: TopicInfo;
   updatedAt: number;
   weight: number;
 }
 
-export interface TopicInfo {
+export interface TopicInfo extends MinimalTopicInfo {
   createdAt: number;
   ext: {
     /**
@@ -46,13 +46,20 @@ export interface TopicInfo {
   };
   id: number;
   /**
-   * 文章名称/扩展名称
+   * 文章名称/扩展名称/作品名称
    */
-  outline: string;
-  subjectOid: string;
-  subjectType: SubjectType;
+
   updatedAt: number;
 }
 
-export type SubjectType = "EXTENSION" | "POST";
+export type MinimalTopicInfo = {
+  /**
+   * 和响应无关,但至少要传一个字符进去
+   */
+  outline?: string;
+  subjectOid: string;
+  subjectType: SubjectType;
+};
+
+export type SubjectType = "EXTENSION" | "POST" | "CREATION";
 export type SectionType = "REVIEW" | "COMMENT";

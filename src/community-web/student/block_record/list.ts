@@ -19,11 +19,13 @@ export type Res = PagesRes<BlockRecord>;
 
 /**
  * 获取学生封禁记录列表
- * @param {Partial<PageArgs>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<"createdAt" | T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 封禁记录分页数据
  */
-export async function getStudentBlockRecordList(
-  pageArgs_: Partial<PageArgs> = {},
+export async function getStudentBlockRecordList<T extends string>(
+  pageArgs_: Partial<PageArgs<"createdAt" | T>> = {
+    sortField: "createdAt",
+  },
 ): Promise<Res> {
   const pageArgs = {
     ...DEFAULT_PAGE_ARGS,

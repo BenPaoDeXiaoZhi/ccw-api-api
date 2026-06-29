@@ -1,0 +1,5 @@
+{
+  "sortMembersAlphabetically": true,
+  "plugins": ["prettier-plugin-sort-members"],
+  "endOfLine": "lf"
+}

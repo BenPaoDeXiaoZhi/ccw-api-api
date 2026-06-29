@@ -10,6 +10,10 @@ src/
 │   └── index.ts            # 导出该服务的所有 API
 ├── community-web/          # community-web.ccw.site 服务
 │   └── index.ts
+├── gandi-main/             # gandi-main.ccw.site 服务
+│   └── index.ts
+├── bfs-web/                # bfs-web.ccw.site 服务
+│   └── index.ts
 ├── index.ts                # 根导出
 └── types/                  # 公共类型定义
 ```
@@ -165,13 +169,13 @@ export async function loginByPassword(
 ```typescript
 export type ApprovalStatus<Tid extends number, Tn extends string> = {
   /**
-   * 浮于iconLink之上的icon
-   */
-  mediumImage: CachedOssUrl;
-  /**
    * 有时会包含tag的名称，如"Gandi开发者"
    */
   iconLink: CachedOssUrl;
+  /**
+   * 浮于iconLink之上的icon
+   */
+  mediumImage: CachedOssUrl;
 };
 ```
 
@@ -188,6 +192,11 @@ export type ApprovalStatus<Tid extends number, Tn extends string> = {
 - 正常流程返回值验证
 - 异常情况错误信息验证
 - 参数边界情况
+
+**重要**：
+
+- 如果 API 不需要 token 也能使用，测试应验证返回值的形状/类型，而不是期望抛出 token 相关异常
+- 仅当 API 确实需要鉴权时，才使用 "should fail without token" 类测试
 
 ```typescript
 import { getApprovalTags } from "./list";

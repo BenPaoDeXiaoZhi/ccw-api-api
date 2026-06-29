@@ -9,7 +9,7 @@ export const url = "https://community-web.ccw.site/task/mine";
  * AWARDED: 已领取
  */
 export type TaskStatus = "PENDING" | "PREPARED" | "AWARDED";
-export type TaskType = 'CYCLE';
+export type TaskType = "CYCLE";
 
 export type TaskExt = {
   pic: OriginOssUrl;
@@ -25,7 +25,7 @@ export type TaskItem = {
 };
 
 export type Req = {
-  scene: 'checkIn';
+  scene: "checkIn";
 };
 
 export type Res = TaskItem[];
@@ -35,7 +35,7 @@ export type Res = TaskItem[];
  * @returns {Promise<Res>} 任务列表
  */
 export async function getMyTasks(): Promise<Res> {
-  const req: Req = { scene: 'checkIn' };
+  const req: Req = { scene: "checkIn" };
   return await ccwAxios
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);

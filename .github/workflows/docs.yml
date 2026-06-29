@@ -1,11 +1,8 @@
 name: Deploy Docs
-permissions: 
-  pages:
-    write
-  contents: 
-    write
-  id-token: 
-    write
+permissions:
+  pages: write
+  contents: write
+  id-token: write
 
 on:
   push:

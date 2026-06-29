@@ -7,17 +7,17 @@ export const url = "https://community-web.ccw.site/subject_area/page";
 
 export type SubjectAreaModuleComponent = {
   data: {
-    hover?: boolean;
-    targetLink?: string;
-    origin: string;
-    targetType?: string;
+    bgColor?: string;
     bgImage?: CNameOssUrl;
     col?: number;
-    overflow?: string;
-    display?: string;
-    row?: string;
     creationOids?: MongoDBId[];
-    bgColor?: string;
+    display?: string;
+    hover?: boolean;
+    origin: string;
+    overflow?: string;
+    row?: string;
+    targetLink?: string;
+    targetType?: string;
   };
   type: string;
 };
@@ -76,12 +76,14 @@ export type Res = PagesRes<SubjectAreaItem>;
 /**
  * 分页获取主页推荐列表
  * @param {SubjectAreaScene} scene 场景
- * @param {Partial<PageArgs>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<"createdAt" | T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 主页推荐分页数据
  */
-export async function getSubjectAreaPage(
+export async function getSubjectAreaPage<T extends string>(
   scene: SubjectAreaScene,
-  pageArgs_: Partial<PageArgs> = {},
+  pageArgs_: Partial<PageArgs<"createdAt" | T>> = {
+    sortField: "createdAt",
+  },
 ): Promise<Res> {
   const pageArgs = {
     ...DEFAULT_PAGE_ARGS,

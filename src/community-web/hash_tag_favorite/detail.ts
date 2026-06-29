@@ -1,6 +1,6 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { ApiResponse, MongoDBId } from "types/api";
-import { HashTagFavorite } from "types/creation";
+import { ApiResponse } from "types/api";
+import { HashTagFavorite } from "types/hashTag";
 
 export const url = "https://community-web.ccw.site/hash_tag_favorite/detail";
 

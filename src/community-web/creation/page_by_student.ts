@@ -19,12 +19,12 @@ export type Res = PagesRes<Creation>;
 /**
  * 获取学生的作品列表
  * @param {MongoDBId[]} studentOids 学生id列表
- * @param {Partial<PageArgs<SortField>>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<SortField|T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 作品分页结果
  */
-export async function getCreationsByStudent(
+export async function getCreationsByStudent<T extends string>(
   studentOids: MongoDBId[],
-  pageArgs_: Partial<PageArgs<SortField>> = {},
+  pageArgs_: Partial<PageArgs<SortField | T>> = {},
 ): Promise<Res> {
   const pageArgs = {
     ...dpa,

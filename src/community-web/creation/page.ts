@@ -24,12 +24,12 @@ export type Res = PagesRes<CreationSimple>;
 /**
  * 根据原作品id获取改编作品分页列表
  * @param {MongoDBId[]} originCreationOids 原作品id列表
- * @param {Partial<PageArgs<SortField>>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<SortField | T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 改编作品分页结果
  */
-export async function getRemixedCreationPage(
+export async function getRemixedCreationPage<T extends string>(
   originCreationOids: MongoDBId[],
-  pageArgs_: Partial<PageArgs<SortField>> = {},
+  pageArgs_: Partial<PageArgs<SortField | T>> = {},
 ): Promise<Res> {
   const pageArgs = {
     ...dpa,

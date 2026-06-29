@@ -19,12 +19,14 @@ export type Res = {
 /**
  * 获取作品投币排行
  * @param {MongoDBId} creationOid 作品id
- * @param {Partial<PageArgs>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<"createdAt" | T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 投币排行数据
  */
-export async function getDonatedRecordRanking(
+export async function getDonatedRecordRanking<T extends string>(
   creationOid: MongoDBId,
-  pageArgs_: Partial<PageArgs> = {},
+  pageArgs_: Partial<PageArgs<"createdAt" | T>> = {
+    sortField: "createdAt",
+  },
 ): Promise<Res> {
   const pageArgs = {
     ...DEFAULT_PAGE_ARGS,

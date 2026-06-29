@@ -3,8 +3,6 @@ import { ApprovalTag } from "types/approval";
 import { AccountTypes } from "types/account";
 
 export interface BaseUser {
-  approvedContent: null | string;
-  approvedType: null | string;
   avatar: CNameOssUrl;
   name: string;
   picUrl: CNameOssUrl;
@@ -17,6 +15,8 @@ export interface StudentSimple extends BaseUser {
 }
 
 export interface Student extends StudentSimple {
+  approvedContent: null | string;
+  approvedType: null | string;
   commentCount: number;
   creationCount: number;
   favoriteCount: number;
@@ -407,13 +407,13 @@ export interface StudentFollowerStats {
 }
 
 export interface StudentUpdateReq {
+  birthday: number;
+  fullName: string;
   gender: string;
   hideGender: boolean;
-  fullName: string;
-  birthday: number;
-  programmingCapability: string;
-  school: string;
-  qq: string;
   hobbies: string;
   learnedProgrammingLanguages: string;
+  programmingCapability: string;
+  qq: string;
+  school: string;
 }

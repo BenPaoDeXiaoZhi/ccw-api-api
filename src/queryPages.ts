@@ -3,7 +3,7 @@ import { PageArgs } from "types/pages";
 /**
  * 生成ccw分页查询url
  * @param url_ 分页查询api
- * @param {PageArgs} pageArgs 分页参数
+ * @param {PageArgs<SortField>} pageArgs 分页参数
  * @returns 生成的实际查询url
  */
 

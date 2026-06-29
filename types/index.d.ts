@@ -3,6 +3,7 @@ export type * as Api from "./api";
 export type * as Approval from "./approval";
 export type * as Comment from "./comment";
 export type * as Creation from "./creation";
+export type * as HashTag from "./hashTag";
 export type * as Notification from "./notification";
 export type * as NotificationContent from "./notificationContent";
 export type * as Pages from "./pages";

@@ -1,9 +1,7 @@
 import { MongoDBId, CNameOssUrl } from "types/api";
-import {
-  OtherUser,
-  StudentOverview,
-} from "types/userData";
+import { OtherUser, StudentOverview } from "types/userData";
 import { AccountTypes } from "./account";
+import { ExtensionStats } from "./extensions";
 
 export interface CreationRelease {
   checked: boolean;
@@ -14,12 +12,12 @@ export interface CreationRelease {
   description: string;
   extensions: string[];
   hasCloudVariables: boolean;
-  keyboardLayout: string;
+  keyboardLayout: KBDLayout;
   oid: MongoDBId;
   operatingInstruction: string;
   profiling: null | string;
   projectLink: string;
-  status: string;
+  status: CreationStatus;
   submittedAt: number;
   tags: string[];
   updatedAt: number;
@@ -45,44 +43,41 @@ export interface TeamworkStatus {
   online: boolean;
 }
 
-export interface ExtensionStats {
-  averageRating: number;
-  mostApprovedReviewIds: string[];
-  reviewCount: number;
-  reviewTags: string[];
-}
-
 export interface CreationSimple extends CreationMinimal {
   artifactType: string;
   createdAt: number;
   currentReleaseOid: MongoDBId;
   description: string;
   ext: {
-    keyboardLayout: string;
-    requireLogin: boolean;
     SUBMIT_HASH_TAGS: string[];
+    keyboardLayout: KBDLayout;
+    requireLogin: boolean;
   };
   featuredCoverLink: string;
   forEveryone: boolean;
   hashTags: string[];
   isOpenSource: boolean;
   isTeamwork: boolean;
-  keyboardLayout: string;
+  keyboardLayout: KBDLayout;
   lastPassedAt: number;
   latestProjectLink: string;
   operatedAt: number;
   rank: string;
   requireLogin: boolean;
-  screenMode: string;
-  sourceOpenLevel: string;
-  status: string;
+  screenMode: CreationScreenMode;
+  sourceOpenLevel: SourceOpenLevel;
+  status: CreationStatus;
   student: StudentOverview;
   studentOid: MongoDBId;
   tags: string[];
   teamMemberRespList: TeamMemberResp[];
   type: string;
   updatedAt: number;
-  visibleScope: string;
+  /**
+   * ALL: 所有人可见
+   * PRIVATE: 仅自己可见
+   */
+  visibleScope: "PRIVATE" | "ALL";
 }
 
 export interface Creation extends CreationSimple {
@@ -102,20 +97,20 @@ export interface Creation extends CreationSimple {
 }
 
 export interface CreationTag {
-  createdAt: number;
   code: string;
-  visibility: "PUBLIC";
+  createdAt: number;
   id: number;
   priority: number;
   title: string;
   updatedAt: number;
+  visibility: "PUBLIC";
 }
 
 export interface LoadingTip {
-  小八: string[];
-  胖达: string[];
   妮可: string[];
   孙小弟: string[];
+  小八: string[];
+  胖达: string[];
 }
 
 export interface UserLikeDetail {
@@ -137,13 +132,7 @@ export interface UserLikeDetail {
 }
 
 export type LikeActions =
-  | "SIX"
-  | "HEART"
-  | "HANDSHAKE"
-  | "LIKE"
-  | "SMILE"
-  | "FLOWER"
-  | "WATERMELON";
+  "SIX" | "HEART" | "HANDSHAKE" | "LIKE" | "SMILE" | "FLOWER" | "WATERMELON";
 
 export interface DonatedRecord {
   bucks: number;
@@ -190,82 +179,8 @@ export interface CreationMinimal {
   viewCount: number;
 }
 
-export type HashTagCreationRank = "ORDINARY";
-export type HashTagCreationStatus = "PUBLISHED" | string;
-
-export interface HashTagCreationRelation {
-  blurb: null | string;
-  canAudit: boolean;
-  createdAt: number;
-  creationOid: MongoDBId;
-  hashTagId: number;
-  hashTagIdentifier: string;
-  id: number;
-  lastPublishedAt: number;
-  lastSubmittedAt: number;
-  projectLastModifiedAt: null | number;
-  rank: HashTagCreationRank;
-  status: HashTagCreationStatus;
-  /**
-   * 作品作者id,不是星球管理id
-   */
-  studentOid: MongoDBId;
-  updatedAt: number;
-}
-
-export type HashTagFollowingStatus =
-  | "UNFOLLOWED"
-  | "FOLLOWED"
-  | "BOTH_FOLLOWED"
-  | null;
-
-export interface HashTagMemberSimple {
-  avatar: CNameOssUrl;
-  followingStatus: HashTagFollowingStatus;
-  name: string;
-  oid: MongoDBId;
-}
-
-export type HashTagStatus = "ENABLED" | string;
-export type HashTagType = "ORDINARY" | string;
-
-export interface HashTag {
-  bulletin: string | null;
-  bulletinOperatedAt: number | null;
-  bulletinOperator: HashTagMemberSimple | null;
-  bulletinOperatorOid: MongoDBId | null;
-  commentCount: number | null;
-  coverLink: CNameOssUrl;
-  createdAt: number;
-  creationCount: number;
-  description: string | null;
-  enableApplyManager: boolean | null;
-  enableBatchAudit: boolean | null;
-  favoriteStatus: unknown | null;
-  favoritedStudentCount: number;
-  hashTagScoreStatsResp: unknown | null;
-  id: number;
-  identifier: string;
-  latestFavoritedStudents: HashTagMemberSimple[];
-  managerIds: MongoDBId[];
-  managers: HashTagMemberSimple[];
-  memberCount: number;
-  ownerType: unknown | null;
-  priority: number;
-  recommended: boolean;
-  relatedStarNum: number | null;
-  status: HashTagStatus;
-  type: HashTagType;
-  updatedAt: number;
-}
-
-export interface HashTagFavorite {
-  createdAt: number;
-  ext: object;
-  hashTagId: number;
-  id: number;
-  lastFavoritedAt: number;
-  studentOid: MongoDBId;
-  unfavoritedAt: number | null;
-  updatedAt: number;
-}
+export type CreationScreenMode = "LANDSCAPE";
+export type ReleaseTag = "Alpha" | "Beta" | "RC" | "Release";
+export type KBDLayout = "CUSTOM" | "TOUCH" | "DISABLED";
+export type SourceOpenLevel = "PRIVATE" | "SOURCE_READABLE" | "PUBLIC";
+export type CreationStatus = "PUBLISHED" | "BANNED" | "SUBMITTED" | "REJECTED";

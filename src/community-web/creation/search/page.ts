@@ -12,26 +12,27 @@ const dpa: PageArgs<SortField> = {
 };
 
 export type Req = {
-  tag: string;
+  oids?: string[];
+  tag?: string;
 };
 export type Res = PagesRes<CreationSimple>;
 
 /**
- * 按名称搜索作品
- * @param {string} tag 标签 例如:游戏 动画故事 角色扮演 kukeChat
- * @param {Partial<PageArgs<SortField>>} pageArgs_ 分页参数
+ * 搜索作品
+ * @param {string} req.tag 标签 例如:游戏 动画故事 角色扮演 kukeChat
+ * @param {string[]} req.oids 作品id列表
+ * @param {Partial<PageArgs<SortField | T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 作品分页结果
  */
-export async function searchCreationsByTag(
-  tag: string,
-  pageArgs_: Partial<PageArgs<SortField>> = {},
+export async function searchCreationsByTag<T extends string>(
+  req: Req,
+  pageArgs_: Partial<PageArgs<SortField | T>> = {},
 ): Promise<Res> {
   const pageArgs = {
     ...dpa,
     ...pageArgs_,
   };
   const queryUrl = queryPage(url, pageArgs);
-  const req: Req = { tag };
   return await ccwAxios
     .post<ApiResponse<Res>>(queryUrl, req)
     .then((res) => res.data.body);

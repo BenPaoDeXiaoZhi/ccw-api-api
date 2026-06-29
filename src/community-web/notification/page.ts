@@ -16,12 +16,14 @@ export type Res = PagesRes<Notification>;
 /**
  * 分页获取通知列表
  * @param {NotificationGroup} notifyGroup 通知分组
- * @param {Partial<PageArgs>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<"createdAt" | T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 分页通知数据
  */
-export async function getNotificationPage(
+export async function getNotificationPage<T extends string>(
   notifyGroup: NotificationGroup = NotificationGroup.CommentToMe,
-  pageArgs_: Partial<PageArgs> = {},
+  pageArgs_: Partial<PageArgs<"createdAt" | T>> = {
+    sortField: "createdAt",
+  },
 ): Promise<Res> {
   const pageArgs = { ...DEFAULT_PAGE_ARGS, ...pageArgs_ };
   const queryUrl = queryPage(url, pageArgs);

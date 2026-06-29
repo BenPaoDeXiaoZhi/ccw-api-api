@@ -19,12 +19,14 @@ export type EmojiStatus = "ENABLED" | "PUBLISHED";
 /**
  * 分页获取表情包
  * @param {string} status 表情包状态
- * @param {Partial<PageArgs>} pageArgs_ 分页参数
+ * @param {Partial<PageArgs<"createdAt" | T>>} pageArgs_ 分页参数
  * @returns {Promise<Res>} 分页表情包数据
  */
-export async function getEmojiPage(
+export async function getEmojiPage<T extends string>(
   status: EmojiStatus = "ENABLED",
-  pageArgs_: Partial<PageArgs> = {},
+  pageArgs_: Partial<PageArgs<"createdAt" | T>> = {
+    sortField: "createdAt",
+  },
 ): Promise<Res> {
   const pageArgs = { ...DEFAULT_PAGE_ARGS, ...pageArgs_ };
   const queryUrl = queryPage(url, pageArgs);
