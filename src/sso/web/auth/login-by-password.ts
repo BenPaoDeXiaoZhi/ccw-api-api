@@ -1,6 +1,6 @@
 import { ccwAxios } from "@ccw-api/axios";
-import { AccountTypes } from "src/types/account";
 import { ApiResponse, MongoDBId } from "src/types/api";
+import { LoginSession } from "src/types/session";
 export const url = "https://sso.ccw.site/web/auth/login-by-password";
 
 export type Req = {
@@ -9,23 +9,7 @@ export type Req = {
   loginKey: string;
   password: string;
 };
-export type Res<Extra = string> = {
-  accountId: -1;
-  accountObjectId: MongoDBId;
-  accountType: AccountTypes;
-  clientCode: "STUDY_COMMUNITY";
-  createdAt: number;
-  email: null;
-  expireTime: number;
-  extra: Extra;
-  id: number;
-  lastAccessTime: number;
-  orgId: "";
-  scene: null;
-  status: "ENABLED";
-  token: string;
-  urlEncodedFullName: null;
-};
+export type Res<Extra> = LoginSession<Extra>;
 
 export type Extra = {
   browser: string;
@@ -61,13 +45,14 @@ export async function loginByPassword(
     browser: "Node.js",
   },
 ): Promise<Res<Extra>> {
+  const req: Req = {
+    loginKey,
+    password,
+    clientCode: "STUDY_COMMUNITY",
+    extra: JSON.stringify({ ...reqExtra, scene: null }),
+  };
   const { extra, ...restBody } = await ccwAxios
-    .post<ApiResponse<Res>>(url, {
-      loginKey,
-      password,
-      clientCode: "STUDY_COMMUNITY",
-      extra: JSON.stringify({ ...reqExtra, scene: null }),
-    } satisfies Req)
+    .post<ApiResponse<Res<string>>>(url, req)
     .then((res) => res.data.body);
   const resExtra = JSON.parse(extra) as Extra;
   return {

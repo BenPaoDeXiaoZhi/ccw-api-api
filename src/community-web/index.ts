@@ -93,6 +93,10 @@ import { createComment } from "./comment/create";
 import { likeComment } from "./comment/like_record/create";
 import { getStudentFollowingPage } from "./student/following/page";
 import { donateTrade } from "./study-trade/trade/donate";
+import { getUserProductsPage } from "./user_package/user_product";
+import { setUserProductStatus } from "./user_package/status";
+import { updateGreatCreation } from "./great_creation/update";
+import { getSmartContractList } from "./smart_contract/list";
 
 export const communityWeb = {
   acceptAward,
@@ -154,6 +158,7 @@ export const communityWeb = {
   getRemixedCreationPage,
   getReputationScoreLogPage: getReputationScoreLog,
   getSearchHotWords,
+  getSmartContractList,
   getSplitRuleDetail,
   getSpreadFeedUnreadCount,
   getStudentBlockRecordDetail,
@@ -177,6 +182,7 @@ export const communityWeb = {
   getUserAssetStorageSize,
   getUserCardDetail,
   getUserLabelList,
+  getUserProductsPage,
   getCreationsByStudent,
   insertCheckInRecord,
   likeComment,
@@ -185,9 +191,11 @@ export const communityWeb = {
   searchCloudAssets,
   searchCreationsByTag,
   sendEvent,
+  setUserProductStatus,
   submitCreation,
   topComment,
   updateCreation,
+  updateGreatCreation,
   updateStudent,
   viewCreationStats,
 };

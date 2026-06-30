@@ -62,4 +62,4 @@ export type MinimalTopicInfo = {
 };
 
 export type SubjectType = "EXTENSION" | "POST" | "CREATION";
-export type SectionType = "REVIEW" | "COMMENT";
+export type SectionType = "REVIEW" | "COMMENT" | "PROFILE";
