@@ -16,6 +16,8 @@ src/
 │   └── index.ts
 ├── community-web-cloud-database/ # community-web-cloud-database.ccw.site 服务
 │   └── index.ts
+├── op-parent-api/                # op-parent-api.xiguacity.cn 服务
+│   └── index.ts
 ├── index.ts                      # 根导出
 └── types/                        # 公共类型定义
 ```
@@ -234,13 +236,21 @@ export const sso = {
 ```typescript
 import { sso } from "./sso";
 import { communityWeb } from "./community-web";
+import { gandiMain } from "./gandi-main";
+import { bfsWeb } from "./bfs-web";
+import { communityWebCloudDatabase } from "./community-web-cloud-database";
+import { opParentApi } from "./op-parent-api";
 export type * from "./types";
 
-export { sso, communityWeb };
+export { sso, communityWeb, gandiMain, bfsWeb, communityWebCloudDatabase, opParentApi };
 
 export default {
   sso,
   communityWeb,
+  gandiMain,
+  bfsWeb,
+  communityWebCloudDatabase,
+  opParentApi,
 };
 ```
 
