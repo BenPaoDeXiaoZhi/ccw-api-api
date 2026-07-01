@@ -38,7 +38,7 @@ export type Res = {
   oid: MongoDBId;
   pageView: number;
   publishedAt: number;
-  rank: string;
+  rank: "EXCELLENT" | "ORDINARY";
   rankUpdatedAt: null | number;
   reviewedAt: number;
   slug: string;
