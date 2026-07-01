@@ -96,12 +96,19 @@ import { donateTrade } from "./study-trade/trade/donate";
 import { getUserProductsPage } from "./user_package/user_product";
 import { setUserProductStatus } from "./user_package/status";
 import { updateGreatCreation } from "./great_creation/update";
+import { executeSmartContract } from "./smart_contract/execute";
+import { getSmartContractAccount } from "./smart_contract/account";
+import { getSmartContractDetail } from "./smart_contract/detail";
 import { getSmartContractList } from "./smart_contract/list";
+import { getExtensionFollowingStatus } from "./extensions/following/status";
+import { getCreationLikeInteractionStatus } from "./extensions/creation-like/detail";
+import { followCreator } from "./study-community/following/follow";
 
 export const communityWeb = {
   acceptAward,
   donateTrade,
   encodeShortCode,
+  executeSmartContract,
   createCloudVariable,
   createComment,
   createShortUrl,
@@ -109,6 +116,7 @@ export const communityWeb = {
   decompressShortUrl,
   deleteComment,
   foldComment,
+  followCreator,
   getApprovalTags,
   getCampaignResources,
   getCcwMainStatus: getCCWMainStatus,
@@ -122,6 +130,7 @@ export const communityWeb = {
   getCreationDetail,
   getCreationFavoriteDetail,
   getCreationIntroduction,
+  getCreationLikeInteractionStatus,
   getCreationRecommendPositionList,
   getCreationReleasePage,
   getCreationScreenshotPage,
@@ -130,6 +139,7 @@ export const communityWeb = {
   getCreatorScore,
   getDonatedRecordRanking,
   getExcellentCreations,
+  getExtensionFollowingStatus,
   getEmojiCategoryList,
   getEmojiPage,
   getAllEmojis,
@@ -158,6 +168,8 @@ export const communityWeb = {
   getRemixedCreationPage,
   getReputationScoreLogPage: getReputationScoreLog,
   getSearchHotWords,
+  getSmartContractAccount,
+  getSmartContractDetail,
   getSmartContractList,
   getSplitRuleDetail,
   getSpreadFeedUnreadCount,
