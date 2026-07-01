@@ -93,7 +93,7 @@ await createSmsCaptcha("10011451919");
 
 ## 模块二：Community-Web（community-web.ccw.site）
 
-覆盖作品 / 学生 / 星球 / 评论 / 通知 / 任务 / 表情 / 签到 / 云资产 / 学科专区 / 打赏 等业务领域，共 **99 个 API**。
+覆盖作品 / 学生 / 星球 / 评论 / 通知 / 任务 / 表情 / 签到 / 云资产 / 学科专区 / 打赏 等业务领域，共 **105 个 API**。
 下面是常用场景示例。
 
 ### 学生与作品
@@ -226,6 +226,55 @@ const locked = await communityWeb.getLockedUserDetail<true>(
 const muted = await communityWeb.getMutedUserDetail("244373873");
 ```
 
+### 智能金币合约
+
+```ts
+// 列出作品中的智能金币合约
+const contracts = await communityWeb.getSmartContractList(
+  "6a3fa1ed159ed52f170c34d2",
+);
+// contracts: SmartCoinContract[]
+
+// 查询合约账户余额
+const account = await communityWeb.getSmartContractAccount(2022277721908162);
+// account: { balance: 300 }
+
+// 获取合约详情
+const detail = await communityWeb.getSmartContractDetail(2022277721908162);
+// detail: { accountId, bizId, rules, status, title, type, ... }
+
+// 执行合约（领取试玩奖励 / 玩家投币）
+const result = await communityWeb.executeSmartContract(
+  "6a3fa1ed159ed52f170c34d2", // bizId
+  2022277721908162, // contract id
+  378074, // rule id（award）
+  1, // bucks
+);
+// result: { success: true }
+```
+
+### 连接社区扩展
+
+```ts
+// 查询是否关注了创作者
+const following = await communityWeb.getConnectCommunityFollowingStatus(
+  "6a3fa1ed159ed52f170c34d2", // 当前播放的作品 OID
+  "651e3f7310b0530e7f80fe7a", // 目标用户 OID
+);
+// following: { avatar, isFollowing: boolean, name, oid }
+
+// 查询用户对作品的点赞交互状态
+const like = await communityWeb.getConnectCommunityCreationLikeStatus(
+  "6a3fa1ed159ed52f170c34d2", // 当前播放的作品 OID
+  "6a3fa1ed159ed52f170c34d2", // 目标作品 OID
+);
+// like: { interactionStatus: boolean, oid, title }
+
+// 关注创作者（需要 token）
+await communityWeb.followCreator("651e3f7310b0530e7f80fe7a");
+// → "FOLLOWED"
+```
+
 ---
 
 ## 模块三：Gandi-Main（gandi-main.ccw.site）
@@ -303,10 +352,10 @@ await bfsWeb.donateExtension(
 
 ## 模块五：Community-Web-Cloud-Database（community-web-cloud-database.ccw.site）
 
-作品 / 用户的云变量（键值对存储）管理，共 **2 个 API**：
+作品 / 用户的云变量（键值对存储）管理，共 **3 个 API**：
 
 ```ts
-const { saveProjectCloudVariable, saveUserCloudVariable } =
+const { saveProjectCloudVariable, saveUserCloudVariable, getCloudVariableDetailV2 } =
   communityWebCloudDatabase;
 
 // 保存作品云变量（无需token，主键是作品id；value结构任意，泛型自动推导返回）
@@ -325,6 +374,15 @@ const saved2 = await communityWebCloudDatabase.saveUserCloudVariable(
   { key2: "0" },
 );
 // saved2: { key2: string }
+
+// 查询云变量详情 V2
+const detail = await communityWebCloudDatabase.getCloudVariableDetailV2(
+  "6a3fa1ed159ed52f170c34d2", // accessKey
+  "6a3fa1ed159ed52f170c34d2-u", // primaryKey
+  "244373873", // secondaryKey
+  ["4576y!!2"], // filterKeys
+);
+// detail: { ... } // 具体结构取决于存储的数据
 ```
 
 ---
@@ -441,7 +499,7 @@ const p: PagesRes<Creation.Creation> = {
 # 三产物构建（node / esm / .d.ts）
 npm run build
 
-# 跑测试（Jest 30 + ts-jest，105 suites / 112 tests）
+# 跑测试（Jest 30 + ts-jest，120 suites / 127 tests）
 npm test
 npm run test:dev       # watch 模式
 
