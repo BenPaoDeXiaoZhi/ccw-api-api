@@ -47,19 +47,27 @@ import {
   gandiMain,
   bfsWeb,
   communityWebCloudDatabase,
+  opParentApi,
 } from "@ccw-api/api"; // ✅ 推荐：具名导入
 // 或
-import api from "@ccw-api/api"; // ✅ default 导入：api.sso / api.communityWeb / api.gandiMain / api.bfsWeb / api.communityWebCloudDatabase
+import api from "@ccw-api/api";
+// ✅ default 导入：api.sso / api.communityWeb / api.gandiMain / api.bfsWeb / api.communityWebCloudDatabase / api.opParentApi
 ```
 
 ---
 
 ## 模块一：SSO（sso.ccw.site）
 
-账号认证相关，共 3 个 API：
+账号认证相关，共 **5 个 API**：
 
 ```ts
-const { loginByPassword, logout, logoutBySession } = sso;
+const {
+  loginByPassword,
+  logout,
+  logoutBySession,
+  loginByPhone,
+  createSmsCaptcha,
+} = sso;
 
 // 账号密码登录
 await loginByPassword("student_number", "xxxxx", {
@@ -71,14 +79,20 @@ await loginByPassword("student_number", "xxxxx", {
 await logout();
 
 // 强制某个 session 下线用于登陆设备管理
-await logoutBySession("64...session_oid");
+await logoutBySession(12345);
+
+// 手机号+短信验证码登录（V3）
+await loginByPhone("12345671145", "123456");
+
+// 发送短信验证码（图形验证码可选）
+await createSmsCaptcha("10011451919");
 ```
 
 ---
 
 ## 模块二：Community-Web（community-web.ccw.site）
 
-覆盖作品 / 学生 / 星球 / 评论 / 通知 / 任务 / 表情 / 签到 / 云资产 / 学科专区 / 打赏 等业务领域，共 **96 个 API**。
+覆盖作品 / 学生 / 星球 / 评论 / 通知 / 任务 / 表情 / 签到 / 云资产 / 学科专区 / 打赏 等业务领域，共 **99 个 API**。
 下面是常用场景示例。
 
 ### 学生与作品
@@ -314,6 +328,24 @@ const saved2 = await communityWebCloudDatabase.saveUserCloudVariable(
 
 ---
 
+## 模块六：OP-Parent-API（op-parent-api.xiguacity.cn）
+
+家长端图形验证码服务，共 **2 个 API**：
+
+```ts
+const { createCaptcha, checkCaptcha } = opParentApi;
+
+// 创建图形验证码（滑块拼图）
+const captcha = await opParentApi.createCaptcha("BLOCK_PUZZLE");
+// captcha: { data: { bgImg: string, jigsawImg: string }, token: string }
+
+// 校验图形验证码（拼图滑块坐标）
+const result = await opParentApi.checkCaptcha(captcha.token, 120, 5);
+// result: { captchaExpired: boolean, errorMsg: string | null, success: boolean }
+```
+
+---
+
 ### 通用工具型 API
 
 ```ts
@@ -425,7 +457,7 @@ npm run doc:dev
 
 所有 API 文件严格遵循 `AGENT.md` 规范：
 
-- **按域名分组**：`src/sso` / `src/community-web` / `src/gandi-main` / `src/bfs-web`，内部子目录对应 URL 路径
+- **按域名分组**：`src/sso` / `src/community-web` / `src/gandi-main` / `src/bfs-web` / `src/community-web-cloud-database` / `src/op-parent-api`，内部子目录对应 URL 路径
 - **单文件单接口**：文件名 `kebab-case`，对应 endpoint 最后一段
 - **7 段式模板**（每个 API 文件内部固定顺序）：
   1. `import`
