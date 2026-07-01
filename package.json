@@ -1,6 +1,6 @@
 {
   "name": "@ccw-api/api",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "ccw api collections",
   "license": "MIT",
   "author": "Meng Fuzi",
@@ -26,7 +26,7 @@
     "test:dev": "jest --watch",
     "doc": "typedoc",
     "doc:dev": "typedoc --watch",
-    "build": "tsc --project tsconfig.node.json && tsc --project tsconfig.esm.json && tsc --project tsconfig.types.json"
+    "build": "tsc --project tsconfig.node.json && resolve-tspaths --project tsconfig.node.json --src ./src --out ./dist/node && tsc --project tsconfig.esm.json && resolve-tspaths --project tsconfig.esm.json --src ./src --out ./dist/esm && tsc --project tsconfig.types.json && resolve-tspaths --project tsconfig.types.json --src ./src --out ./dist/types"
   },
   "dependencies": {
     "@ccw-api/axios": "^3.0.0"
@@ -36,6 +36,7 @@
     "@types/node": "^26.0.1",
     "jest": "^30.4.2",
     "prettier-plugin-sort-members": "^0.2.4",
+    "resolve-tspaths": "^0.8.23",
     "ts-jest": "^29.4.11",
     "typedoc": "^0.28.19"
   }
