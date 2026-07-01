@@ -1,8 +1,9 @@
 # @ccw-api/api
 
 CCW（创作社区）前后端接口 SDK，整合 `sso.ccw.site`、`community-web.ccw.site`、
-`gandi-main.ccw.site`、`bfs-web.ccw.site`、`community-web-cloud-database.ccw.site`
-五大服务的常用 API，提供完整的 TypeScript 类型与开箱即用的分页封装。
+`gandi-main.ccw.site`、`bfs-web.ccw.site`、`community-web-cloud-database.ccw.site`、
+`op-parent-api.xiguacity.cn`
+六大服务的常用 API，提供完整的 TypeScript 类型与开箱即用的分页封装。
 
 - 包格式：**ESM + CJS + .d.ts 三产物**同时产出
 - 类型：所有请求 / 响应字段**强类型**，后端 key 固定约束（如 `MongoDBId`、`CNameOssUrl`、`UUID`）
