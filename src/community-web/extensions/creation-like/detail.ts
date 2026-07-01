@@ -16,7 +16,7 @@ export type Res = {
 };
 
 /**
- * 查询用户对作品的点赞交互状态
+ * [连接社区扩展] 查询用户对作品的点赞交互状态
  * @param {MongoDBId} playingCreationOid 当前播放的作品 OID
  * @param {MongoDBId} creationOid 目标作品 OID
  * @returns {Promise<Res>} 点赞状态及作品信息

@@ -17,7 +17,7 @@ export type Res = {
 };
 
 /**
- * 查询用户是否关注了指定创作者的扩展
+ * [连接社区扩展] 查询是否关注了指定创作者
  * @param {MongoDBId} playingCreationOid 当前播放的作品 OID
  * @param {MongoDBId} userOid 目标用户 OID
  * @returns {Promise<Res>} 关注状态及用户信息
