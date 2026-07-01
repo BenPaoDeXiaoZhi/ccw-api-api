@@ -9,6 +9,7 @@ import { searchCloudAssets } from "./cloud_asset/search";
 import { getCommentReplies } from "./comment/page";
 import { getCommentsByTopic } from "./comment/page_by_topic";
 import { getConfigDetail } from "./config/detail";
+import { queryMallProducts } from "./ccw-mall/ccw/product/fe/query";
 import { getCreationDetail } from "./creation/detail";
 import { getExcellentCreations } from "./creation/excellent/list";
 import { getCreationIntroduction } from "./creation/introduction/detail";
@@ -195,6 +196,7 @@ export const communityWeb = {
   getUserCardDetail,
   getUserLabelList,
   getUserProductsPage,
+  queryMallProducts,
   getCreationsByStudent,
   insertCheckInRecord,
   likeComment,

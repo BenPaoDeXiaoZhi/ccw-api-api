@@ -93,7 +93,7 @@ await createSmsCaptcha("10011451919");
 
 ## 模块二：Community-Web（community-web.ccw.site）
 
-覆盖作品 / 学生 / 星球 / 评论 / 通知 / 任务 / 表情 / 签到 / 云资产 / 学科专区 / 打赏 等业务领域，共 **105 个 API**。
+覆盖作品 / 学生 / 星球 / 评论 / 通知 / 任务 / 表情 / 签到 / 云资产 / 学科专区 / 打赏 / 商城 / 商品 等业务领域，共 **106 个 API**。
 下面是常用场景示例。
 
 ### 学生与作品
@@ -275,6 +275,64 @@ await communityWeb.followCreator("651e3f7310b0530e7f80fe7a");
 // → "FOLLOWED"
 ```
 
+### 商城商品 & 用户商店（头像框 / 表情 / 周边）
+
+```ts
+// ====== CCW 官方商城（商品分页查询） ======
+// ProductCategory: 5=头像框, 7=周边商品, 10=表情
+// ProductSource: "CCW_OFFICIAL"
+
+// 查询周边商品分类的商城列表
+const mallPage1 = await communityWeb.queryMallProductPage(
+  7, // productCategory: 周边商品
+  "CCW_OFFICIAL", // source
+  { page: 1, perPage: 30, sortType: "DESC" },
+);
+// mallPage1: PagesRes<Product>
+console.log(mallPage1.totalNum); // 293
+console.log(mallPage1.data[0].name); // "运动好物|Star世达足球"
+console.log(mallPage1.data[0].pointPrice); // 13299（金币价格）
+console.log(mallPage1.data[0].stockNum); // 库存
+
+// 查询头像框分类
+const avatarFrames = await communityWeb.queryMallProductPage(
+  5, // productCategory: 头像框
+  "CCW_OFFICIAL",
+  { page: 1, perPage: 8, sortType: "DESC" },
+);
+// avatarFrames.data[0].virtualValue → 头像框图片 URL
+
+// 查询表情分类
+const emojis = await communityWeb.queryMallProductPage(
+  10, // productCategory: 表情
+  "CCW_OFFICIAL",
+);
+// emojis.data[0].virtualValue → 表情包 ID（如 "13"）
+
+// ====== 用户已拥有的商品（需要 token） ======
+// 拉取用户拥有的头像框列表
+const myProducts = await communityWeb.getUserProductsPage(
+  5, // productCategory=5 头像框
+  { page: 1, perPage: 8, sortType: "DESC", sortField: "" },
+);
+// myProducts: PagesRes<UserProduct>
+// myProducts.data[0].status → 1=已佩戴, 0=未佩戴
+
+// 切换商品佩戴状态（需要 token）
+// 卸下头像框
+await communityWeb.setUserProductStatus(false, 105847); // id, status=false
+// 佩戴头像框
+await communityWeb.setUserProductStatus(true, 105847);
+```
+
+### 更换代表作
+
+```ts
+// 将指定作品设为个人代表作（需要 token，creationOid 必须是自己的作品）
+await communityWeb.updateGreatCreation("68ce4849811b737483bf7027");
+// → true 表示成功
+```
+
 ---
 
 ## 模块三：Gandi-Main（gandi-main.ccw.site）
@@ -355,8 +413,11 @@ await bfsWeb.donateExtension(
 作品 / 用户的云变量（键值对存储）管理，共 **3 个 API**：
 
 ```ts
-const { saveProjectCloudVariable, saveUserCloudVariable, getCloudVariableDetailV2 } =
-  communityWebCloudDatabase;
+const {
+  saveProjectCloudVariable,
+  saveUserCloudVariable,
+  getCloudVariableDetailV2,
+} = communityWebCloudDatabase;
 
 // 保存作品云变量（无需token，主键是作品id；value结构任意，泛型自动推导返回）
 const saved1 = await communityWebCloudDatabase.saveProjectCloudVariable(
@@ -499,7 +560,7 @@ const p: PagesRes<Creation.Creation> = {
 # 三产物构建（node / esm / .d.ts）
 npm run build
 
-# 跑测试（Jest 30 + ts-jest，120 suites / 127 tests）
+# 跑测试（Jest 30 + ts-jest，121 suites / 128 tests）
 npm test
 npm run test:dev       # watch 模式
 

@@ -1,6 +1,6 @@
 {
   "name": "@ccw-api/api",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "ccw api collections",
   "license": "MIT",
   "author": "Meng Fuzi",
@@ -29,7 +29,7 @@
     "build": "tsc --project tsconfig.node.json && tsc --project tsconfig.esm.json && tsc --project tsconfig.types.json"
   },
   "dependencies": {
-    "@ccw-api/axios": "^2.1.0"
+    "@ccw-api/axios": "^3.0.0"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
