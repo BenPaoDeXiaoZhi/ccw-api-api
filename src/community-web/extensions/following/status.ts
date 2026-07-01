@@ -22,7 +22,7 @@ export type Res = {
  * @param {MongoDBId} userOid 目标用户 OID
  * @returns {Promise<Res>} 关注状态及用户信息
  */
-export async function getExtensionFollowingStatus(
+export async function getConnectCommunityFollowingStatus(
   playingCreationOid: MongoDBId,
   userOid: MongoDBId,
 ): Promise<Res> {

@@ -21,7 +21,7 @@ export type Res = {
  * @param {MongoDBId} creationOid 目标作品 OID
  * @returns {Promise<Res>} 点赞状态及作品信息
  */
-export async function getCreationLikeInteractionStatus(
+export async function getConnectCommunityCreationLikeStatus(
   playingCreationOid: MongoDBId,
   creationOid: MongoDBId,
 ): Promise<Res> {

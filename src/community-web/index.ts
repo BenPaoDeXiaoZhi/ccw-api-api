@@ -100,8 +100,8 @@ import { executeSmartContract } from "./smart_contract/execute";
 import { getSmartContractAccount } from "./smart_contract/account";
 import { getSmartContractDetail } from "./smart_contract/detail";
 import { getSmartContractList } from "./smart_contract/list";
-import { getExtensionFollowingStatus } from "./extensions/following/status";
-import { getCreationLikeInteractionStatus } from "./extensions/creation-like/detail";
+import { getConnectCommunityFollowingStatus } from "./extensions/following/status";
+import { getConnectCommunityCreationLikeStatus } from "./extensions/creation-like/detail";
 import { followCreator } from "./study-community/following/follow";
 
 export const communityWeb = {
@@ -130,7 +130,7 @@ export const communityWeb = {
   getCreationDetail,
   getCreationFavoriteDetail,
   getCreationIntroduction,
-  getCreationLikeInteractionStatus,
+  getCreationLikeInteractionStatus: getConnectCommunityCreationLikeStatus,
   getCreationRecommendPositionList,
   getCreationReleasePage,
   getCreationScreenshotPage,
@@ -139,7 +139,7 @@ export const communityWeb = {
   getCreatorScore,
   getDonatedRecordRanking,
   getExcellentCreations,
-  getExtensionFollowingStatus,
+  getExtensionFollowingStatus: getConnectCommunityFollowingStatus,
   getEmojiCategoryList,
   getEmojiPage,
   getAllEmojis,
