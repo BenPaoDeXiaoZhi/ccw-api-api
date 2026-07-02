@@ -103,6 +103,7 @@ import { getSmartContractList } from "./smart_contract/list";
 import { getConnectCommunityFollowingStatus } from "./extensions/following/status";
 import { getConnectCommunityCreationLikeStatus } from "./extensions/creation-like/detail";
 import { followCreator } from "./study-community/following/follow";
+import { unfollowCreator } from "./study-community/following/unfollow";
 
 export const communityWeb = {
   acceptAward,
@@ -117,6 +118,7 @@ export const communityWeb = {
   deleteComment,
   foldComment,
   followCreator,
+  unfollowCreator,
   getApprovalTags,
   getCampaignResources,
   getCcwMainStatus: getCCWMainStatus,
