@@ -18,6 +18,7 @@ import { getRemixedCreationPage } from "./creation/page";
 import { getCreationsByStudent } from "./creation/page_by_student";
 import { getPotentialCreations } from "./creation/potential/list";
 import { getRecommendCreations } from "./creation/recommend";
+import { getRecommendCreators } from "./recommend_creator/list";
 import { searchCreationsByTag } from "./creation/search/page";
 import { getCreationStudentDetail } from "./creation/student/detail";
 import { getCreationTags } from "./creation/tag/list";
@@ -166,6 +167,7 @@ export const communityWeb = {
   getPostDetail,
   getPotentialCreations,
   getRecommendCreations,
+  getRecommendCreators,
   getRecommendHashTags,
   getRemixedCreationPage,
   getReputationScoreLogPage: getReputationScoreLog,
