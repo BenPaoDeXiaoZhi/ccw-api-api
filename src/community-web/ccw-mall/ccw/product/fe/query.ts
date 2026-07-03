@@ -2,49 +2,13 @@ import { ccwAxios } from "@ccw-api/axios";
 import { ApiResponse, CNameOssUrl, MongoDBId } from "src/types/api";
 import { PagesRes, PageArgs, SortType } from "src/types/pages";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
+import { Product, ProductCategory, ProductSource } from "src/types/mall";
 
 export const url =
   "https://community-web.ccw.site/ccw-mall/ccw/product/fe/query";
 
-export enum ProductCategory {
-  Merchandise = 7,
-  AvatarFrame = 5,
-  EMOJI = 10,
-}
-export type ProductSource = "CCW_OFFICIAL";
-export type ProductType = 1 | 2 | 3;
-
 export type ProductSortField =
   "createdAt" | "updatedAt" | "pointPrice" | "priority" | "stockNum";
-
-export type Product = {
-  createdAt: number;
-  description: string;
-  elements: unknown[];
-  functionDescribe: string;
-  id: number;
-  name: string;
-  note: string;
-  offlineAt: null | number;
-  oid: MongoDBId;
-  onlineAt: number;
-  originPointPrice: number;
-  originPrice: number;
-  periodValidityDay: null | number;
-  periodValidityTime: null | number;
-  picUrl: null | CNameOssUrl | string;
-  pointPrice: number;
-  price: number;
-  priority: number;
-  productCategory: ProductCategory;
-  purchaseLimitationNum: number;
-  source: ProductSource;
-  status: number;
-  stockNum: number;
-  type: ProductType;
-  updatedAt: number;
-  virtualValue: null | CNameOssUrl | string;
-};
 
 export type Req = {
   page: number;

@@ -6,14 +6,14 @@
   "author": "Meng Fuzi",
   "homepage": "https://schale.qzz.io/ccw-api-api/",
   "type": "module",
-  "main": "dist/node/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
-      "import": "./dist/esm/index.js",
-      "require": "./dist/node/index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "files": [
@@ -26,7 +26,7 @@
     "test:dev": "jest --watch",
     "doc": "typedoc",
     "doc:dev": "typedoc --watch",
-    "build": "tsc --project tsconfig.node.json && resolve-tspaths --project tsconfig.node.json --src ./src --out ./dist/node && tsc --project tsconfig.esm.json && resolve-tspaths --project tsconfig.esm.json --src ./src --out ./dist/esm && tsc --project tsconfig.types.json && resolve-tspaths --project tsconfig.types.json --src ./src --out ./dist/types"
+    "build": "tsup"
   },
   "dependencies": {
     "@ccw-api/axios": "^3.0.0"
@@ -38,6 +38,7 @@
     "prettier-plugin-sort-members": "^0.2.4",
     "resolve-tspaths": "^0.8.23",
     "ts-jest": "^29.4.11",
+    "tsup": "^8.5.1",
     "typedoc": "^0.28.19"
   }
 }

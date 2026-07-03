@@ -9,3 +9,4 @@ export type * as NotificationContent from "./notificationContent";
 export type * as Pages from "./pages";
 export type * as Session from "./session";
 export type * as UserData from "./userData";
+export type * as Mall from "./mall";
