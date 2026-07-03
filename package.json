@@ -1,6 +1,6 @@
 {
   "name": "@ccw-api/api",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "ccw api collections",
   "license": "MIT",
   "author": "Meng Fuzi",
@@ -29,7 +29,7 @@
     "build": "tsup"
   },
   "dependencies": {
-    "@ccw-api/axios": "^3.0.0"
+    "@ccw-api/axios": "^4.0.0"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
