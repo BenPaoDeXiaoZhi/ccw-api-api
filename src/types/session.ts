@@ -22,7 +22,7 @@ export interface StudentSession {
   lastAccessTime: number;
 }
 
-export interface LoginSession<Extra = string> {
+export interface LoginSession<Extra = string, Token = string> {
   accountId: -1;
   accountObjectId: MongoDBId;
   accountType: AccountTypes;
@@ -36,6 +36,6 @@ export interface LoginSession<Extra = string> {
   orgId: "";
   scene: null;
   status: "ENABLED";
-  token: string;
+  token: Token;
   urlEncodedFullName: null;
 }

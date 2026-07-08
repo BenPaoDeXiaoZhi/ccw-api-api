@@ -1,5 +1,11 @@
 import { getCCWMainStatus } from "./status";
+import { testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get ccw main status should fail without token", async () => {
-  await expect(getCCWMainStatus()).rejects.toThrow("token为空");
+  await testAuthReadApi(() => getCCWMainStatus(), {
+    rejectMessage: "token为空",
+    validateShape: (res) => {
+      expectKeys(res, ["data", "datetime"]);
+    },
+  });
 });

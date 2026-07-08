@@ -1,5 +1,8 @@
 import { topComment } from "./top";
+import { testAuthWriteApi } from "src/testUtils";
 
-test("top comment should fail without token", async () => {
-  await expect(topComment(1)).rejects.toThrow("token为空");
+test("top comment", async () => {
+  await testAuthWriteApi(() => topComment(1), {
+    rejectMessage: "token为空",
+  });
 });

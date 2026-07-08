@@ -1,5 +1,8 @@
 import { foldComment } from "./fold";
+import { testAuthWriteApi } from "src/testUtils";
 
-test("fold comment should fail without token", async () => {
-  await expect(foldComment(1)).rejects.toThrow("token为空");
+test("fold comment", async () => {
+  await testAuthWriteApi(() => foldComment(1), {
+    rejectMessage: "token为空",
+  });
 });

@@ -10,5 +10,6 @@ const config: Config = {
     "^src/(.*)$": "<rootDir>/src/$1",
     "^types/(.*)$": "<rootDir>/src/types/$1",
   },
+  setupFiles: ["./env.ts"],
 };
 export default config;

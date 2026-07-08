@@ -1,7 +1,10 @@
 import { updateStudent } from "./update";
+import { testAuthWriteApi } from "src/testUtils";
 
-test("update student should reject without login", async () => {
-  await expect(
-    updateStudent("MALE", false, "测试用户", Date.now(), "", "", "", "", ""),
-  ).rejects.toThrow();
+test("update student", async () => {
+  await testAuthWriteApi(
+    () =>
+      updateStudent("MALE", false, "测试用户", Date.now(), "", "", "", "", ""),
+    {},
+  );
 });

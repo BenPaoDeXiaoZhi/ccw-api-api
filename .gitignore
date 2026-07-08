@@ -5,3 +5,4 @@ tsconfig.tsbuildinfo
 docs
 coverage
 .tmp
+.env

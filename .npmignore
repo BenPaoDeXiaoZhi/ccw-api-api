@@ -8,3 +8,4 @@ src
 types
 coverage
 .tmp
+.env

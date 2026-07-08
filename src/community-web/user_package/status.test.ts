@@ -1,5 +1,10 @@
 import { setUserProductStatus } from "./status";
+import { testAuthReadApi, expectType } from "src/testUtils";
 
 test("should fail without token when setting user product status", async () => {
-  await expect(setUserProductStatus(105847, false)).rejects.toThrow();
+  await testAuthReadApi(() => setUserProductStatus(105847, false), {
+    validateShape: (res) => {
+      expectType(res, "boolean");
+    },
+  });
 });

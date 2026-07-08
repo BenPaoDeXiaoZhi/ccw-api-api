@@ -18,7 +18,7 @@ export type Res = HealthCheckItem[];
  * health check接口
  * @returns {Promise<Res>}
  */
-export async function healthCheck(): Promise<Res> {
+export async function getHealthCheck(): Promise<Res> {
   return await ccwAxios
     .post<ApiResponse<Res>>(url)
     .then((res) => res.data.body);

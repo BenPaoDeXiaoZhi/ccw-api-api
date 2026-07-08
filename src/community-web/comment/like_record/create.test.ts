@@ -1,5 +1,8 @@
 import { likeComment } from "./create";
+import { testAuthWriteApi } from "src/testUtils";
 
-test("like comment should fail without token", async () => {
-  await expect(likeComment(1)).rejects.toThrow("token为空");
+test("like comment", async () => {
+  await testAuthWriteApi(() => likeComment(1), {
+    rejectMessage: "token为空",
+  });
 });

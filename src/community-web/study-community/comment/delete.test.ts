@@ -1,5 +1,8 @@
 import { deleteComment } from "./delete";
+import { testAuthWriteApi } from "src/testUtils";
 
-test("delete comment should fail without token", async () => {
-  await expect(deleteComment(1)).rejects.toThrow("token为空");
+test("delete comment", async () => {
+  await testAuthWriteApi(() => deleteComment(1), {
+    rejectMessage: "token为空",
+  });
 });

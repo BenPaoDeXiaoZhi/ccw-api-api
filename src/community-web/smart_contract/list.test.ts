@@ -1,7 +1,13 @@
 import { getSmartContractList } from "./list";
+import { testAuthReadApi } from "src/testUtils";
 
-test("should fail without token when listing smart contracts", async () => {
-  await expect(
-    getSmartContractList("679d79862de3ec4dde55d534"),
-  ).rejects.toThrow();
+test("list smart contracts", async () => {
+  await testAuthReadApi(
+    () => getSmartContractList("679d79862de3ec4dde55d534"),
+    {
+      validateShape: (res) => {
+        expect(Array.isArray(res)).toBe(true);
+      },
+    },
+  );
 });

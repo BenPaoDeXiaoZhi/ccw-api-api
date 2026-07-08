@@ -1,6 +1,6 @@
 {
   "name": "@ccw-api/api",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "ccw api collections",
   "license": "MIT",
   "author": "Meng Fuzi",
@@ -34,6 +34,7 @@
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^26.0.1",
+    "dotenv": "^17.4.2",
     "jest": "^30.4.2",
     "prettier-plugin-sort-members": "^0.2.4",
     "resolve-tspaths": "^0.8.23",

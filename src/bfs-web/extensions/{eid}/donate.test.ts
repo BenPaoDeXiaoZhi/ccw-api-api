@@ -1,7 +1,6 @@
 import { donateExtension } from "./donate";
+import { testAuthWriteApi } from "src/testUtils";
 
-test("donate extension should fail without token", async () => {
-  await expect(
-    donateExtension("spineAnimation", 1),
-  ).rejects.toThrow();
+test("donate extension", async () => {
+  await testAuthWriteApi(() => donateExtension("spineAnimation", -1), {});
 });

@@ -1,5 +1,8 @@
 import { resetCommentWeight } from "./reset_weight";
+import { testAuthWriteApi } from "src/testUtils";
 
-test("reset comment weight should fail without token", async () => {
-  await expect(resetCommentWeight(1)).rejects.toThrow("token为空");
+test("reset comment weight", async () => {
+  await testAuthWriteApi(() => resetCommentWeight(1), {
+    rejectMessage: "token为空",
+  });
 });

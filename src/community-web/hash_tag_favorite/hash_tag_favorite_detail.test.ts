@@ -1,5 +1,20 @@
 import { getHashTagFavoriteDetail } from "./detail";
+import { testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get hash tag favorite detail should reject without login", async () => {
-  await expect(getHashTagFavoriteDetail(29887)).rejects.toThrow("token为空");
+  await testAuthReadApi(() => getHashTagFavoriteDetail(29887), {
+    rejectMessage: "token为空",
+    validateShape: (res) => {
+      expectKeys(res, [
+        "createdAt",
+        "ext",
+        "hashTagId",
+        "id",
+        "lastFavoritedAt",
+        "studentOid",
+        "unfavoritedAt",
+        "updatedAt",
+      ]);
+    },
+  });
 });

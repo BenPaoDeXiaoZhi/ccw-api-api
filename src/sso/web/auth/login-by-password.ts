@@ -9,7 +9,7 @@ export type Req = {
   loginKey: string;
   password: string;
 };
-export type Res<Extra> = LoginSession<Extra>;
+export type Res<Extra> = LoginSession<Extra, null>;
 
 export type Extra = {
   browser: string;

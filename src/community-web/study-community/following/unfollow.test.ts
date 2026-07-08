@@ -1,7 +1,6 @@
 import { unfollowCreator } from "./unfollow";
+import { testAuthWriteApi } from "src/testUtils";
 
-test("should fail without token when unfollowing creator", async () => {
-  await expect(
-    unfollowCreator("62444bdd1dd43a0637b6a147"),
-  ).rejects.toThrow();
+test("unfollow creator", async () => {
+  await testAuthWriteApi(() => unfollowCreator("62444bdd1dd43a0637b6a147"));
 });

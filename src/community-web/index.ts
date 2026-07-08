@@ -62,7 +62,7 @@ import { getAllEmojis } from "./emoji/all";
 import { getEmojiCategoryList } from "./emoji/category/list";
 import { getEmojiPage } from "./emoji/page";
 import { sendEvent } from "./event";
-import { healthCheck } from "./health/check";
+import { getHealthCheck } from "./health/check";
 import { getLeafletsItemList } from "./leaflets/item/list";
 import { getLockedUserDetail } from "./locked_user/detail";
 import { getMutedUserDetail } from "./muted_user/detail";
@@ -77,6 +77,8 @@ import { getTeamworkLogPage } from "./creation/teamwork_log/page";
 import { updateCreation } from "./creation/update";
 import { submitCreation } from "./creation/submit";
 import { getSplitRuleDetail } from "./creation/smart_contract/split_rule/detail";
+import { changeStudentPassword } from "./students/password/change";
+import { createSmsCaptchaBySession } from "./captcha/v2/create-by-session";
 import { createSplitRule } from "./creation/smart_contract/split_rule/create";
 import { getCreationAttributeDetail } from "./creation_attribute/detail";
 import { getCreationActivityStatsList } from "./creation_activity_stats/list";
@@ -109,12 +111,14 @@ import { unfollowCreator } from "./study-community/following/unfollow";
 
 export const communityWeb = {
   acceptAward,
+  changeStudentPassword,
   donateTrade,
   encodeShortCode,
   executeSmartContract,
   createCloudVariable,
   createComment,
   createShortUrl,
+  createSmsCaptchaBySession,
   createSplitRule,
   decompressShortUrl,
   deleteComment,
@@ -151,7 +155,7 @@ export const communityWeb = {
   getHashTagFavoriteDetail,
   getHistoricalTeamMemberPage,
   getManagedHashTags,
-  getHealthCheck: healthCheck,
+  getHealthCheck,
   getLeafletsItemList,
   getLikeDetail,
   getLoadingTips,
