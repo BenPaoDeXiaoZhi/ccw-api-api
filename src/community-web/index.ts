@@ -77,6 +77,7 @@ import { getTeamworkLogPage } from "./creation/teamwork_log/page";
 import { updateCreation } from "./creation/update";
 import { submitCreation } from "./creation/submit";
 import { getSplitRuleDetail } from "./creation/smart_contract/split_rule/detail";
+import { bindStudentPhone } from "./students/bind-phone";
 import { changeStudentPassword } from "./students/password/change";
 import { createSmsCaptchaBySession } from "./captcha/v2/create-by-session";
 import { createSplitRule } from "./creation/smart_contract/split_rule/create";
@@ -111,6 +112,7 @@ import { unfollowCreator } from "./study-community/following/unfollow";
 
 export const communityWeb = {
   acceptAward,
+  bindStudentPhone,
   changeStudentPassword,
   donateTrade,
   encodeShortCode,
