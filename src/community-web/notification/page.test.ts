@@ -1,11 +1,12 @@
 import { getNotificationPage } from "./page";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("get notification page should reject without login", async () => {
   await testAuthReadApi(() => getNotificationPage(), {
     validateShape: (res) => {
       expectKeys(res, ["data", "offset", "page", "perPage", "totalNum", "totalPages"]);
-      expect(Array.isArray(res.data)).toBe(true);
+      assert.strictEqual(Array.isArray(res.data), (true), "expected values to be strictly equal");
     },
   });
 });

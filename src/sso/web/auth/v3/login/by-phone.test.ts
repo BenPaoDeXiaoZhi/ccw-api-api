@@ -1,5 +1,5 @@
 import { loginByPhone } from "./by-phone";
-import { testAuthWriteApi } from "src/testUtils";
+import { test, testAuthWriteApi } from "src/testUtils";
 
 test("expect wrong sms code to throw error", async () => {
   await testAuthWriteApi(

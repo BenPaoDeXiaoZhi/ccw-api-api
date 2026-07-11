@@ -1,11 +1,12 @@
 import { getMyTasks } from "./mine";
-import { testAuthReadApi } from "src/testUtils";
+import { test, testAuthReadApi } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("get my tasks", async () => {
   await testAuthReadApi(() => getMyTasks(), {
     rejectMessage: "token为空",
     validateShape: (res) => {
-      expect(Array.isArray(res)).toBe(true);
+      assert.strictEqual(Array.isArray(res), (true), "expected values to be strictly equal");
     },
   });
 });

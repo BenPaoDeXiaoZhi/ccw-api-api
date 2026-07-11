@@ -1,5 +1,6 @@
 import { getPersonalCurrencyAccount } from "./personal";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("get personal currency account", async () => {
   await testAuthReadApi(() => getPersonalCurrencyAccount(), {
@@ -9,7 +10,7 @@ test("get personal currency account", async () => {
         "topUpCurrencyBalance",
         "withdrawCurrencyBalance",
       ]);
-      expect(typeof res.internalCurrencyBalance).toBe("number");
+      assert.strictEqual(typeof res.internalCurrencyBalance, ("number"), "expected values to be strictly equal");
     },
   });
 });

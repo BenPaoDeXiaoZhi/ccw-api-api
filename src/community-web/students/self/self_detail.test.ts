@@ -1,5 +1,5 @@
 import { getStudentSelfDetail } from "./detail";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get student self detail", async () => {
   await testAuthReadApi(

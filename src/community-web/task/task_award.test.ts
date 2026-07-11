@@ -1,5 +1,5 @@
 import { acceptAward } from "./award";
-import { testAuthWriteApi } from "src/testUtils";
+import { test, testAuthWriteApi } from "src/testUtils";
 
 const TASK_OID = "61273ccf1730f4308e853f6a";
 

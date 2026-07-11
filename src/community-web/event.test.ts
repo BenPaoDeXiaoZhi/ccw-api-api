@@ -1,5 +1,5 @@
-import { testAuthWriteApi } from "src/testUtils";
 import { sendEvent } from "./event";
+import { test, testAuthWriteApi } from "src/testUtils";
 
 const ACTION_ID = "test-action-id";
 

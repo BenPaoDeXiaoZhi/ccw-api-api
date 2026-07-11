@@ -1,4 +1,6 @@
 import { encodeShortCode } from "./encode";
+import { test } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("test shortcode", async () => {
   const res = await encodeShortCode(
@@ -7,5 +9,5 @@ test("test shortcode", async () => {
     "孟夫子驾到",
     "6386e11cfc1ed14684de07f8",
   );
-  expect(res.code).toHaveLength("yZdXmD3PvwVPA30W".length);
+  assert.strictEqual(((res.code) as any).length, ("yZdXmD3PvwVPA30W".length), "expected length to be equal");
 });

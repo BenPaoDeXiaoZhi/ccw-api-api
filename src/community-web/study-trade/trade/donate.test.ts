@@ -1,5 +1,5 @@
 import { donateTrade } from "./donate";
-import { testAuthWriteApi } from "src/testUtils";
+import { test, testAuthWriteApi } from "src/testUtils";
 
 test("donate trade", async () => {
   await testAuthWriteApi(

@@ -1,5 +1,5 @@
-import { testAuthWriteApi } from "src/testUtils";
 import { updateGreatCreation } from "./update";
+import { test, testAuthWriteApi } from "src/testUtils";
 
 test("should fail without token when updating great creation", async () => {
   await testAuthWriteApi(

@@ -1,5 +1,5 @@
 import { getOwnCreationPage } from "./page";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get own creation page should fail without token", async () => {
   await testAuthReadApi(() => getOwnCreationPage(), {

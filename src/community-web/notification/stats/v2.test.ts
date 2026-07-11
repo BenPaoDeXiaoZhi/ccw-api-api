@@ -1,5 +1,5 @@
 import { getNotificationStats } from "./v2";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get notification stats should reject without login", async () => {
   await testAuthReadApi(() => getNotificationStats(), {

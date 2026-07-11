@@ -1,5 +1,5 @@
 import { getStudentSessions } from "./list_sessions";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get student sessions", async () => {
   await testAuthReadApi(() => getStudentSessions(), {

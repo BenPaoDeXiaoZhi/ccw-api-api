@@ -1,5 +1,6 @@
-import { testAuthReadApi, testAuthWriteApi } from "src/testUtils";
 import { getLeaderboardRecords, submitLeaderboardRecord } from "./records";
+import { test, testAuthReadApi, testAuthWriteApi } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("submit leaderboard record should fail without token", async () => {
   await testAuthWriteApi(
@@ -19,11 +20,11 @@ test("get leaderboard records should return data", async () => {
     () => getLeaderboardRecords("65a2314daa96bd09b5beae5a"),
     {
       validateShape: (res) => {
-        expect(typeof res).toBe("object");
-        expect(res.oid).toBe("65a2314daa96bd09b5beae5a");
-        expect(res.title).toBeDefined();
-        expect(res.leaderboardRecordTotalNum).toBeDefined();
-        expect(Array.isArray(res.leaderboardRecords)).toBe(true);
+        assert.strictEqual(typeof res, ("object"), "expected values to be strictly equal");
+        assert.strictEqual(res.oid, ("65a2314daa96bd09b5beae5a"), "expected values to be strictly equal");
+        assert.ok(((res.title) !== undefined), "expected value to be defined");
+        assert.ok(((res.leaderboardRecordTotalNum) !== undefined), "expected value to be defined");
+        assert.strictEqual(Array.isArray(res.leaderboardRecords), (true), "expected values to be strictly equal");
       },
     },
   );

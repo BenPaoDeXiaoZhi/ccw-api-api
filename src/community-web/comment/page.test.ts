@@ -1,4 +1,6 @@
 import { getCommentReplies } from "./page";
+import { test } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("get comment replies should return data", async () => {
   const topicId = 819086;
@@ -6,12 +8,12 @@ test("get comment replies should return data", async () => {
   const statuses: ("PUBLISHED" | "FOLDED")[] = ["PUBLISHED", "FOLDED"];
   const res = await getCommentReplies(topicId, parentId, statuses);
 
-  expect(Array.isArray(res.data)).toBe(true);
+  assert.strictEqual(Array.isArray(res.data), (true), "expected values to be strictly equal");
   res.data.forEach((comment) => {
-    expect(comment.id).toBeDefined();
-    expect(comment.topicId).toBe(topicId);
-    expect(comment.parentId).toBe(parentId);
-    expect(comment.content).toBeDefined();
-    expect(["PUBLISHED", "FOLDED"]).toContain(comment.status);
+    assert.ok(((comment.id) !== undefined), "expected value to be defined");
+    assert.strictEqual(comment.topicId, (topicId), "expected values to be strictly equal");
+    assert.strictEqual(comment.parentId, (parentId), "expected values to be strictly equal");
+    assert.ok(((comment.content) !== undefined), "expected value to be defined");
+    assert.ok(((["PUBLISHED", "FOLDED"]) as any).includes((comment.status)), "expected to contain");
   });
 });

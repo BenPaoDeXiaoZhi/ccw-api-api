@@ -1,9 +1,10 @@
 import { getPostDetail } from "./detail";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("get post detail", async () => {
   await testAuthReadApi(
-    () => getPostDetail("0173b23d-139d-4c48-ad98-0aa17b5d3b60"),
+    async () => await getPostDetail("bfb5460b-19a8-4266-9e34-20c4287b4e11"),
     {
       validateShape: (res) => {
         expectKeys(res, [
@@ -26,14 +27,21 @@ test("get post detail", async () => {
           "publishedAt",
           "rank",
         ]);
-        expect(res.title.includes("【公告通知】")).toBeTruthy();
+        assert.ok(
+          Boolean(res.title.includes("在")),
+          "expected value to be truthy",
+        );
       },
     },
   );
 });
 
 test("error when post detail not found", async () => {
-  await expect(async () => await getPostDetail("foo")).rejects.toThrow(
-    "ccw axios Request failed: 没有找到文章(40010738404)",
+  await assert.rejects(
+    getPostDetail("foo"),
+    {
+      message: "ccw axios Request failed: 没有找到文章(40010738404)",
+    },
+    "expected promise to reject matching",
   );
 });

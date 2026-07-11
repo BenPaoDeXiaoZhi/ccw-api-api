@@ -1,5 +1,6 @@
 import { getTeamMemberList } from "./list";
-import { testAuthReadApi } from "src/testUtils";
+import { test, testAuthReadApi } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("get team member list should fail without token", async () => {
   await testAuthReadApi(
@@ -7,7 +8,7 @@ test("get team member list should fail without token", async () => {
     {
       rejectMessage: "token为空",
       validateShape: (res) => {
-        expect(Array.isArray(res)).toBe(true);
+        assert.strictEqual(Array.isArray(res), (true), "expected values to be strictly equal");
       },
     },
   );

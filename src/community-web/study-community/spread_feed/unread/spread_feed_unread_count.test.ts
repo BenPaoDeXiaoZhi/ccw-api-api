@@ -1,5 +1,5 @@
 import { getSpreadFeedUnreadCount } from "./count";
-import { expectType, testAuthReadApi } from "src/testUtils";
+import { test, testAuthReadApi, expectType } from "src/testUtils";
 
 const STUDENT_OID = "63c2807d669fa967f17f5559";
 

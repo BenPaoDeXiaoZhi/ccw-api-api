@@ -1,5 +1,7 @@
 import { getCreationDetail } from "./detail";
 import { getExcellentCreations } from "./excellent/list";
+import { test, beforeAll } from "src/testUtils";
+import assert from "node:assert/strict";
 
 let sampleCreationOid: string;
 
@@ -15,7 +17,7 @@ test("get creation detail should return data", async () => {
     return;
   }
   const res = await getCreationDetail(sampleCreationOid, "");
-  expect(res.oid).toBe(sampleCreationOid);
-  expect(res.title).toBeDefined();
-  expect(res.student).toBeDefined();
+  assert.strictEqual(res.oid, (sampleCreationOid), "expected values to be strictly equal");
+  assert.ok(((res.title) !== undefined), "expected value to be defined");
+  assert.ok(((res.student) !== undefined), "expected value to be defined");
 });

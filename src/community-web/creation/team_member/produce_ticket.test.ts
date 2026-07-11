@@ -1,5 +1,5 @@
 import { produceTeamMemberTicket } from "./produce_ticket";
-import { testAuthWriteApi } from "src/testUtils";
+import { test, testAuthWriteApi } from "src/testUtils";
 
 test("produce team member ticket should fail without token", async () => {
   await testAuthWriteApi(

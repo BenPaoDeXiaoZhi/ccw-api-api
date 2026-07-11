@@ -1,5 +1,5 @@
 import { getCloudVariableDetailV2 } from "./v2";
-import { expectType, testAuthReadApi } from "src/testUtils";
+import { test, testAuthReadApi, expectType } from "src/testUtils";
 
 test("get cloud variable detail v2 should reject with invalid params", async () => {
   await testAuthReadApi(

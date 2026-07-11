@@ -1,5 +1,6 @@
 import { searchCloudAssets } from "./search";
-import { expectKeys, testAuthReadApi } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("search cloud assets should fail without token", async () => {
   const userId = "63c2807d669fa967f17f5559";
@@ -15,7 +16,7 @@ test("search cloud assets should fail without token", async () => {
         "totalNum",
         "totalPages",
       ]);
-      expect(Array.isArray(res.data)).toBe(true);
+      assert.strictEqual(Array.isArray(res.data), (true), "expected values to be strictly equal");
     },
   });
 });

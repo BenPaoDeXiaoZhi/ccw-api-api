@@ -1,10 +1,12 @@
 import { getEmojiCategoryList } from "./list";
+import { test } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("get emoji category list should return data", async () => {
   const res = await getEmojiCategoryList();
-  expect(Array.isArray(res)).toBe(true);
+  assert.strictEqual(Array.isArray(res), (true), "expected values to be strictly equal");
   if (res.length > 0) {
-    expect(res[0].id).toBeDefined();
-    expect(res[0].name).toBeDefined();
+    assert.ok(((res[0].id) !== undefined), "expected value to be defined");
+    assert.ok(((res[0].name) !== undefined), "expected value to be defined");
   }
 });

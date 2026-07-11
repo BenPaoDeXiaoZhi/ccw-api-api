@@ -1,5 +1,7 @@
 import { getBulletinsPage } from "./page";
 import { getBulletinDetail } from "./detail";
+import { test, beforeAll } from "src/testUtils";
+import assert from "node:assert/strict";
 
 let sampleBulletinId: number;
 
@@ -15,6 +17,6 @@ test("get bulletin detail should return data", async () => {
     return;
   }
   const res = await getBulletinDetail(sampleBulletinId);
-  expect(res.id).toBe(sampleBulletinId);
-  expect(res.title).toBeDefined();
+  assert.strictEqual(res.id, (sampleBulletinId), "expected values to be strictly equal");
+  assert.ok(((res.title) !== undefined), "expected value to be defined");
 });

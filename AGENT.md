@@ -185,9 +185,82 @@ export type ApprovalStatus<Tid extends number, Tn extends string> = {
 
 ## 测试规范
 
+### 测试框架
+
+- 使用 Node.js 内置 `node:test` + `tsx`（TypeScript execute）运行测试
+- 断言使用 Node.js 内置 `node:assert/strict`
+- 测试运行命令：`npm test`（`node --import tsx --import ./env.ts --test "src/**/*.test.ts"`）
+
 ### 测试文件位置
 
 测试文件与 API 文件放在同一目录下，命名为 `${功能}.test.ts`。
+
+### 测试导入规范
+
+从 `src/testUtils` 统一导入测试工具：
+
+```typescript
+import {
+  test,        // node:test 的 test 函数别名
+  beforeAll,   // node:test 的 before 函数别名
+  testAuthReadApi,   // 读操作鉴权测试辅助
+  testAuthWriteApi,  // 写操作鉴权测试辅助
+  expectKeys,        // 对象 key 断言
+  expectType,        // 类型断言
+  hasKeyPath,        // 嵌套 key 路径检测
+  getKeyPath,        // 获取嵌套属性值
+  hasRealToken,      // 是否存在真实 token
+} from "src/testUtils";
+import assert from "node:assert/strict";
+```
+
+### 测试辅助函数 `testAuthReadApi` / `testAuthWriteApi`
+
+**核心逻辑（先尝试运行 API，再判断错误原因）**：
+
+1. 始终先调用 `apiCall()` 发送真实请求
+2. 请求成功 → 执行 `validateShape` 验证返回值形状
+3. 请求失败 → 提取错误消息，按以下分支处理：
+   - **是 token 缺失错误**（`token为空` / `token不能为空` / `4001082401` / `User not logged in`）：
+     - 有真实 token（`hasRealToken() === true`）→ 断言失败（不该出现鉴权错误）
+     - 无真实 token → 如指定了 `rejectMessage` 则匹配错误消息，否则视为预期通过
+   - **不是 token 缺失错误**：
+     - 如指定了 `rejectMessage` → 用正则匹配错误消息，匹配通过，不匹配断言失败
+     - 未指定 `rejectMessage` 且有真实 token → 重新抛出错误（非预期失败）
+     - 未指定 `rejectMessage` 且无真实 token → 视为预期内异常，测试通过
+
+```typescript
+// 读操作示例：需要鉴权 + 返回值形状校验
+test("get student profile", async () => {
+  await testAuthReadApi(
+    () => getStudentProfile("63c2807d669fa967f17f5559"),
+    {
+      rejectMessage: "token为空", // 可选：无 token 时期望的错误消息
+      validateShape: (res) => {
+        expectKeys(res, ["oid", "nickname", "avatar"]);
+        expectType(res.oid, "string");
+      },
+    },
+  );
+});
+
+// 写操作示例：需要鉴权 + 返回值非空校验
+test("insert check in record", async () => {
+  await testAuthWriteApi(() => insertCheckInRecord(), {});
+});
+
+// 写操作示例：需要鉴权 + 自定义形状校验
+test("save user cloud variable", async () => {
+  await testAuthWriteApi(
+    () => saveUserCloudVariable("bizId", "secKey", { foo: "bar" }),
+    {
+      validateShape: (res) => {
+        assert.strictEqual(res.foo, "bar");
+      },
+    },
+  );
+});
+```
 
 ### 测试内容
 
@@ -201,15 +274,18 @@ export type ApprovalStatus<Tid extends number, Tn extends string> = {
 
 - 如果 API 不需要 token 也能使用，测试应验证返回值的形状/类型，而不是期望抛出 token 相关异常
 - 仅当 API 确实需要鉴权时，才使用 "should fail without token" 类测试
+- Logout API 测试在有真实 token 时应跳过，避免失效服务端 session
 
 ```typescript
 import { getApprovalTags } from "./list";
+import { test } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("test approval list", async () => {
   const tags = await getApprovalTags("63c2807d669fa967f17f5559");
-  expect(tags.find((v) => v.approvalTagId == 235).approvalTagName).toEqual(
-    "Gandi 开发者",
-  );
+  const tag = tags.find((v) => v.approvalTagId === 235);
+  assert.ok(tag !== undefined);
+  assert.strictEqual(tag.approvalTagName, "Gandi 开发者");
 });
 ```
 

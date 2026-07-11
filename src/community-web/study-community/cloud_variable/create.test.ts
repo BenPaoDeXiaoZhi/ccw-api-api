@@ -1,5 +1,5 @@
 import { createCloudVariable } from "./create";
-import { testAuthWriteApi } from "src/testUtils";
+import { test, testAuthWriteApi } from "src/testUtils";
 
 test("create cloud variable should fail without token", async () => {
   await testAuthWriteApi(

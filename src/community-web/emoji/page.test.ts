@@ -1,13 +1,15 @@
 import { getEmojiPage } from "./page";
+import { test } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("get emoji page should return data", async () => {
   const res = await getEmojiPage("PUBLISHED", { perPage: 5 });
-  expect(res.data).toBeDefined();
-  expect(Array.isArray(res.data)).toBe(true);
-  expect(res.totalNum).toBeDefined();
-  expect(res.totalPages).toBeDefined();
+  assert.ok(((res.data) !== undefined), "expected value to be defined");
+  assert.strictEqual(Array.isArray(res.data), (true), "expected values to be strictly equal");
+  assert.ok(((res.totalNum) !== undefined), "expected value to be defined");
+  assert.ok(((res.totalPages) !== undefined), "expected value to be defined");
   if (res.data.length > 0) {
-    expect(res.data[0].id).toBeDefined();
-    expect(res.data[0].name).toBeDefined();
+    assert.ok(((res.data[0].id) !== undefined), "expected value to be defined");
+    assert.ok(((res.data[0].name) !== undefined), "expected value to be defined");
   }
 });

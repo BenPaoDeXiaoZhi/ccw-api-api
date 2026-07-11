@@ -1,5 +1,5 @@
 import { getCreatorScore } from "./creator_score";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get creator score", async () => {
   await testAuthReadApi(() => getCreatorScore(), {

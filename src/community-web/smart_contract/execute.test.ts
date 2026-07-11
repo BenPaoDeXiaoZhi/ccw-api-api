@@ -1,5 +1,5 @@
 import { executeSmartContract } from "./execute";
-import { testAuthWriteApi } from "src/testUtils";
+import { test, testAuthWriteApi } from "src/testUtils";
 
 test("execute smart contract", async () => {
   await testAuthWriteApi(

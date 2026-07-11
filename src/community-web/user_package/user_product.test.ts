@@ -1,5 +1,5 @@
 import { getUserProductsPage, ProductCategory } from "./user_product";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("should fail without token for avatar frame products", async () => {
   await testAuthReadApi(

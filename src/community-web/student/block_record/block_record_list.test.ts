@@ -1,17 +1,18 @@
-import { testAuthReadApi } from "src/testUtils";
 import { getStudentBlockRecordList } from "./list";
+import { test, testAuthReadApi, hasKeyPath } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("get student block record list should reject without login", async () => {
   await testAuthReadApi(() => getStudentBlockRecordList(), {
     validateShape: (res) => {
-      expect(typeof res).toBe("object");
-      expect(res).toHaveProperty("data");
-      expect(Array.isArray(res.data)).toBe(true);
-      expect(res).toHaveProperty("offset");
-      expect(res).toHaveProperty("page");
-      expect(res).toHaveProperty("perPage");
-      expect(res).toHaveProperty("totalNum");
-      expect(res).toHaveProperty("totalPages");
+      assert.strictEqual(typeof res, ("object"), "expected values to be strictly equal");
+      assert.ok(hasKeyPath(res, "data"), "expected property to exist");
+      assert.strictEqual(Array.isArray(res.data), (true), "expected values to be strictly equal");
+      assert.ok(hasKeyPath(res, "offset"), "expected property to exist");
+      assert.ok(hasKeyPath(res, "page"), "expected property to exist");
+      assert.ok(hasKeyPath(res, "perPage"), "expected property to exist");
+      assert.ok(hasKeyPath(res, "totalNum"), "expected property to exist");
+      assert.ok(hasKeyPath(res, "totalPages"), "expected property to exist");
     },
   });
 });

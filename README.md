@@ -85,7 +85,7 @@ await logoutBySession(12345);
 // 手机号+短信验证码登录（V3）
 await loginByPhone("12345671145", "123456");
 
-// 发送短信验证码（图形验证码可选）
+// 发送短信验证码（图形验证码可选，用于登录/注册场景）
 await createSmsCaptcha("10011451919");
 ```
 
@@ -93,7 +93,7 @@ await createSmsCaptcha("10011451919");
 
 ## 模块二：Community-Web（community-web.ccw.site）
 
-覆盖作品 / 学生 / 星球 / 评论 / 通知 / 任务 / 表情 / 签到 / 云资产 / 学科专区 / 打赏 / 商城 / 商品 等业务领域，共 **106 个 API**。
+覆盖作品 / 学生 / 星球 / 评论 / 通知 / 任务 / 表情 / 签到 / 云资产 / 学科专区 / 打赏 / 商城 / 商品 / 协作成员 等业务领域，共 **114 个 API**。
 下面是常用场景示例。
 
 ### 学生与作品
@@ -116,6 +116,23 @@ const creations = await communityWeb.getCreationsByStudent(
 );
 // creations: PagesRes<CreationSimple>
 console.log(creations.totalNum, creations.data[0].title);
+```
+
+### 学生账号管理（绑定手机、修改密码）
+
+```ts
+// 绑定手机号（需要 token）
+await communityWeb.bindStudentPhone(
+  "13800138000", // 手机号
+  "123456", // 短信验证码
+  "86", // 国家代码
+);
+
+// 修改密码（需要 token + 短信验证码，无需旧密码）
+// Step 1：先通过 session 发送短信验证码（手机号从登录 session 获取）
+await communityWeb.createSmsCaptchaBySession("change_password");
+// Step 2：用收到的验证码设置新密码
+await communityWeb.changeStudentPassword("我的新密码123", "短信验证码");
 ```
 
 ### 星球（HashTag）与作品关联
@@ -325,6 +342,31 @@ await communityWeb.setUserProductStatus(false, 105847); // id, status=false
 await communityWeb.setUserProductStatus(true, 105847);
 ```
 
+### 协作成员邀请（作品团队协作）
+
+```ts
+const CREATION_OID = "68ce4849811b737483bf7027";
+
+// 获取普通成员（MEMBER）邀请 token（需要 token）
+const memberToken = await communityWeb.fetchMemberInviteToken(
+  CREATION_OID,
+  "MEMBER", // 或 "ADMIN"
+);
+// → 拼接成完整邀请链接：https://ccw.site/creation/.../join?token={memberToken}
+
+// 获取观察者（OBSERVER）邀请 token（需要 token）
+const observerToken = await communityWeb.fetchObserverInviteToken(CREATION_OID);
+
+// 查询当前作品的协作成员列表（需要 token）
+const members = await communityWeb.getTeamMemberList(CREATION_OID);
+
+// 生成成员加入凭证（配合邀请链接，需要 token）
+await communityWeb.produceTeamMemberTicket(CREATION_OID, memberToken);
+
+// 查询协作日志分页（需要 token）
+const logs = await communityWeb.getTeamworkLogPage(CREATION_OID, { page: 1 });
+```
+
 ### 更换代表作
 
 ```ts
@@ -472,14 +514,24 @@ const result = await opParentApi.checkCaptcha(captcha.token, 120, 5);
 // 生成短链
 await communityWeb.createShortUrl("https://ccw.site/detail/xxx");
 
+// 还原短链（需要 token）
+await communityWeb.decompressShortUrl("abc123");
+
 // 生成邀请码（api/v1/short_code/encode）
 await communityWeb.encodeShortCode("hello world", 1, 6);
 
 // 服务器时间
 await communityWeb.getTime();
 
+// CCW 主服务状态（需要 token，返回服务运行状态）
+await communityWeb.getCcwMainStatus();
+
 // 埋点事件上报
 await communityWeb.sendEvent("creation_detail_view_6880873d2211fa69e41c9d19");
+
+// 通过登录 session 发送短信验证码（需要 token，用于重置密码，手机号从 session 获取）
+await communityWeb.createSmsCaptchaBySession("change_password");
+// → { batchId: "xxx", sendResult: 1 }（sendResult=1 表示成功）
 
 // 广告横幅
 await communityWeb.getLeafletsItemList(1001);
@@ -487,6 +539,12 @@ await communityWeb.getLeafletsItemList(1001);
 // 学科专区（分页 / 按频道）
 await communityWeb.getSubjectAreaPage({ page: 1, perPage: 20 });
 await communityWeb.getSubjectAreaPageByChannel("PRIMARY");
+
+// 搜索热词
+await communityWeb.getSearchHotWords();
+
+// 创建作品（需要 token）
+await communityWeb.createCreation("我的作品标题", "作品描述");
 ```
 
 ---
@@ -557,12 +615,12 @@ const p: PagesRes<Creation.Creation> = {
 ## 开发 & 发布
 
 ```bash
-# 三产物构建（node / esm / .d.ts）
+# 三产物构建（dist/node CJS + dist/esm ESM + dist .d.ts）
 npm run build
 
-# 跑测试（Jest 30 + ts-jest，121 suites / 128 tests）
-npm test
-npm run test:dev       # watch 模式
+# 跑测试（node:test + tsx，132 tests）
+npm test                # 一次性全量
+npm run test:dev        # watch 模式（tsx watch）
 
 # 文档（TypeDoc，生成到 doc/ 或默认输出目录）
 npm run doc

@@ -1,5 +1,5 @@
 import { getConnectCommunityCreationLikeStatus } from "./detail";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get creation like status", async () => {
   await testAuthReadApi(

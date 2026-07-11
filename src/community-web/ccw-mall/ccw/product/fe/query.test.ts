@@ -1,5 +1,5 @@
 import { queryMallProducts } from "./query";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("query mall product page should fail without token", async () => {
   await testAuthReadApi(

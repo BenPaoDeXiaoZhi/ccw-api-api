@@ -1,5 +1,5 @@
 import { deleteComment } from "./delete";
-import { testAuthWriteApi } from "src/testUtils";
+import { test, testAuthWriteApi } from "src/testUtils";
 
 test("delete comment", async () => {
   await testAuthWriteApi(() => deleteComment(1), {

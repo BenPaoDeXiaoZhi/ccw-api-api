@@ -1,5 +1,5 @@
 import { getTeamworkLogPage } from "./page";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get teamwork log page should fail without token", async () => {
   await testAuthReadApi(

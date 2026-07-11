@@ -1,5 +1,5 @@
 import { getSmartContractDetail } from "./detail";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get smart contract detail", async () => {
   await testAuthReadApi(() => getSmartContractDetail(2022277721908162), {

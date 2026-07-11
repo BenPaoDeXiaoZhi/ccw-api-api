@@ -1,5 +1,5 @@
 import { getReputationScoreLog } from "./page";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get reputation score log page", async () => {
   await testAuthReadApi(() => getReputationScoreLog(), {

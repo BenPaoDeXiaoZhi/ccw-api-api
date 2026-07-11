@@ -1,5 +1,5 @@
 import { createSmsCaptchaBySession } from "./create-by-session";
-import { testAuthWriteApi } from "src/testUtils";
+import { test, testAuthWriteApi } from "src/testUtils";
 
 test("create sms captcha by session", async () => {
   await testAuthWriteApi(

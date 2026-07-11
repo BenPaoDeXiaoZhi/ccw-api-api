@@ -1,5 +1,5 @@
 import { getHashTagFavoriteDetail } from "./detail";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get hash tag favorite detail should reject without login", async () => {
   await testAuthReadApi(() => getHashTagFavoriteDetail(29887), {

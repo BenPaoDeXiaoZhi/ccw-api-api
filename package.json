@@ -1,6 +1,6 @@
 {
   "name": "@ccw-api/api",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "description": "ccw api collections",
   "license": "MIT",
   "author": "Meng Fuzi",
@@ -22,24 +22,26 @@
   ],
   "scripts": {
     "prepublishOnly": "npm run build && npm test",
-    "test": "jest",
-    "test:dev": "jest --watch",
+    "test": "node --import tsx --import ./env.ts --test \"src/**/*.test.ts\"",
+    "test:dev": "node --import tsx --import ./env.ts --test --watch \"src/**/*.test.ts\"",
+    "test:single": "node --import tsx --import ./env.ts --test",
     "doc": "typedoc",
     "doc:dev": "typedoc --watch",
     "build": "tsup"
   },
   "dependencies": {
-    "@ccw-api/axios": "^5.0.0"
+    "@ccw-api/axios": "^6.0.1"
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
     "@types/node": "^26.0.1",
     "dotenv": "^17.4.2",
-    "jest": "^30.4.2",
     "prettier-plugin-sort-members": "^0.2.4",
     "resolve-tspaths": "^0.8.23",
-    "ts-jest": "^29.4.11",
     "tsup": "^8.5.1",
+    "tsx": "^4.19.2",
     "typedoc": "^0.28.19"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }

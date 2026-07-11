@@ -3,7 +3,7 @@
     "declaration": true,
     "rootDir": "./",
     "outDir": "dist",
-    "types": ["jest", "node"],
+    "types": ["node"],
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",

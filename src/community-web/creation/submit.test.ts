@@ -1,5 +1,5 @@
 import { submitCreation } from "./submit";
-import { testAuthWriteApi } from "src/testUtils";
+import { test, testAuthWriteApi } from "src/testUtils";
 
 test("submit creation should fail without token", async () => {
   await testAuthWriteApi(

@@ -10,6 +10,7 @@ import { getCommentReplies } from "./comment/page";
 import { getCommentsByTopic } from "./comment/page_by_topic";
 import { getConfigDetail } from "./config/detail";
 import { queryMallProducts } from "./ccw-mall/ccw/product/fe/query";
+import { createCreation } from "./creation/create";
 import { getCreationDetail } from "./creation/detail";
 import { getExcellentCreations } from "./creation/excellent/list";
 import { getCreationIntroduction } from "./creation/introduction/detail";
@@ -71,6 +72,8 @@ import { getNotificationStats } from "./notification/stats/v2";
 import { getTypicalProjectPage } from "./typical_project/page";
 import { getTypicalProjectUnreadCount } from "./typical_project/student/unread_count";
 import { getOwnCreationPage } from "./creation/own/page";
+import { fetchObserverInviteToken } from "./creation/team_member/observer_invite_token/fetch";
+import { fetchMemberInviteToken } from "./creation/team_member/invite_token/fetch";
 import { produceTeamMemberTicket } from "./creation/team_member/produce_ticket";
 import { getTeamMemberList } from "./creation/team_member/list";
 import { getTeamworkLogPage } from "./creation/teamwork_log/page";
@@ -114,9 +117,12 @@ export const communityWeb = {
   acceptAward,
   bindStudentPhone,
   changeStudentPassword,
+  createCreation,
   donateTrade,
   encodeShortCode,
   executeSmartContract,
+  fetchMemberInviteToken,
+  fetchObserverInviteToken,
   createCloudVariable,
   createComment,
   createShortUrl,

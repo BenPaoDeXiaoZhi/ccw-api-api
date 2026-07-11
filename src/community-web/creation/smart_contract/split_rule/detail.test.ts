@@ -1,5 +1,6 @@
 import { getSplitRuleDetail } from "./detail";
-import { testAuthReadApi } from "src/testUtils";
+import { test, testAuthReadApi } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("get split rule detail should fail without token", async () => {
   await testAuthReadApi(
@@ -7,7 +8,7 @@ test("get split rule detail should fail without token", async () => {
     {
       rejectMessage: "token为空",
       validateShape: (res) => {
-        expect(typeof res).toBe("object");
+        assert.strictEqual(typeof res, ("object"), "expected values to be strictly equal");
       },
     },
   );

@@ -1,5 +1,5 @@
 import { updateStudent } from "./update";
-import { testAuthWriteApi } from "src/testUtils";
+import { test, testAuthWriteApi } from "src/testUtils";
 
 test("update student", async () => {
   await testAuthWriteApi(

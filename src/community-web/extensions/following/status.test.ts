@@ -1,5 +1,5 @@
 import { getConnectCommunityFollowingStatus } from "./status";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get following status", async () => {
   await testAuthReadApi(

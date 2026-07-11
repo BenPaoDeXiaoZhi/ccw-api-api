@@ -1,5 +1,7 @@
 import { getCreationIntroduction } from "./detail";
 import { getExcellentCreations } from "../excellent/list";
+import { test, beforeAll } from "src/testUtils";
+import assert from "node:assert/strict";
 
 let sampleStudentOid: string;
 
@@ -15,6 +17,6 @@ test("get creation introduction should return data", async () => {
     return;
   }
   const res = await getCreationIntroduction(sampleStudentOid);
-  expect(res.oid).toBeDefined();
-  expect(res.title).toBeDefined();
+  assert.ok(((res.oid) !== undefined), "expected value to be defined");
+  assert.ok(((res.title) !== undefined), "expected value to be defined");
 });

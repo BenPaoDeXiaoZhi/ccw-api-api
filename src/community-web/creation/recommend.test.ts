@@ -1,11 +1,13 @@
 import { getRecommendCreations } from "./recommend";
+import { test } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("get recommend creations should return data", async () => {
   const res = await getRecommendCreations(5);
-  expect(Array.isArray(res.data)).toBe(true);
+  assert.strictEqual(Array.isArray(res.data), (true), "expected values to be strictly equal");
   res.data.forEach((c) => {
-    expect(c.oid).toBeDefined();
-    expect(c.title).toBeDefined();
+    assert.ok(((c.oid) !== undefined), "expected value to be defined");
+    assert.ok(((c.title) !== undefined), "expected value to be defined");
   });
-  expect(res.data.length).toBeGreaterThanOrEqual(0);
+  assert.ok(((res.data.length) >= (0)), "expected greater/equal");
 });

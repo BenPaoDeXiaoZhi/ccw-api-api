@@ -1,6 +1,6 @@
 import { createComment } from "./create";
 import { getPostDetail } from "../post/detail";
-import { testAuthWriteApi } from "src/testUtils";
+import { test, beforeAll, testAuthWriteApi } from "src/testUtils";
 
 let samplePost: Awaited<ReturnType<typeof getPostDetail>>;
 

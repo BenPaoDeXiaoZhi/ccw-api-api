@@ -1,5 +1,5 @@
 import { getCCWMainStatus } from "./status";
-import { testAuthReadApi, expectKeys } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get ccw main status should fail without token", async () => {
   await testAuthReadApi(() => getCCWMainStatus(), {

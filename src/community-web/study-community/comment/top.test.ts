@@ -1,5 +1,5 @@
 import { topComment } from "./top";
-import { testAuthWriteApi } from "src/testUtils";
+import { test, testAuthWriteApi } from "src/testUtils";
 
 test("top comment", async () => {
   await testAuthWriteApi(() => topComment(1), {

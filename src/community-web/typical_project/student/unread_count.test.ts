@@ -1,5 +1,6 @@
-import { testAuthReadApi } from "src/testUtils";
 import { getTypicalProjectUnreadCount } from "./unread_count";
+import { test, testAuthReadApi } from "src/testUtils";
+import assert from "node:assert/strict";
 
 test("get typical project unread count should fail without token", async () => {
   await testAuthReadApi(
@@ -7,7 +8,7 @@ test("get typical project unread count should fail without token", async () => {
     {
       rejectMessage: "token为空",
       validateShape: (res) => {
-        expect(typeof res).toBe("number");
+        assert.strictEqual(typeof res, ("number"), "expected values to be strictly equal");
       },
     },
   );

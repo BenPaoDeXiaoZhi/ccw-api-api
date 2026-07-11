@@ -1,5 +1,5 @@
 import { getUserAssetStorageSize } from "./privacy";
-import { expectKeys, testAuthReadApi } from "src/testUtils";
+import { test, testAuthReadApi, expectKeys } from "src/testUtils";
 
 test("get user asset storage size should fail without token", async () => {
   await testAuthReadApi(() => getUserAssetStorageSize(), {

@@ -1,5 +1,7 @@
 import { getCreationsByStudent } from "./page_by_student";
 import { getExcellentCreations } from "./excellent/list";
+import { test, beforeAll } from "src/testUtils";
+import assert from "node:assert/strict";
 
 let sampleStudentOid: string;
 
@@ -15,9 +17,9 @@ test("get creations by student should return data", async () => {
     return;
   }
   const res = await getCreationsByStudent([sampleStudentOid]);
-  expect(Array.isArray(res.data)).toBe(true);
+  assert.strictEqual(Array.isArray(res.data), (true), "expected values to be strictly equal");
   res.data.forEach((c) => {
-    expect(c.oid).toBeDefined();
-    expect(c.studentOid).toBeDefined();
+    assert.ok(((c.oid) !== undefined), "expected value to be defined");
+    assert.ok(((c.studentOid) !== undefined), "expected value to be defined");
   });
 });
