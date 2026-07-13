@@ -1,6 +1,6 @@
 {
   "name": "@ccw-api/api",
-  "version": "0.10.3",
+  "version": "0.11.0",
   "description": "ccw api collections",
   "license": "MIT",
   "author": "Meng Fuzi",
@@ -14,6 +14,41 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./community-web": {
+      "types": "./dist/community-web/index.d.ts",
+      "import": "./dist/community-web/index.js",
+      "require": "./dist/community-web/index.cjs"
+    },
+    "./community-web-cloud-database": {
+      "types": "./dist/community-web-cloud-database/index.d.ts",
+      "import": "./dist/community-web-cloud-database/index.js",
+      "require": "./dist/community-web-cloud-database/index.cjs"
+    },
+    "./gandi-main": {
+      "types": "./dist/gandi-main/index.d.ts",
+      "import": "./dist/gandi-main/index.js",
+      "require": "./dist/gandi-main/index.cjs"
+    },
+    "./op-parent-api": {
+      "types": "./dist/op-parent-api/index.d.ts",
+      "import": "./dist/op-parent-api/index.js",
+      "require": "./dist/op-parent-api/index.cjs"
+    },
+    "./sso": {
+      "types": "./dist/sso/index.d.ts",
+      "import": "./dist/sso/index.js",
+      "require": "./dist/sso/index.cjs"
+    },
+    "./setToken": {
+      "types": "./dist/setToken.d.ts",
+      "import": "./dist/setToken.js",
+      "require": "./dist/setToken.cjs"
+    },
+    "./bfs-web": {
+      "types": "./dist/bfs-web/index.d.ts",
+      "import": "./dist/bfs-web/index.js",
+      "require": "./dist/bfs-web/index.cjs"
     }
   },
   "files": [
