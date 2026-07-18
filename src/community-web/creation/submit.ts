@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, CNameOssUrl, MongoDBId } from "src/types/api";
 import { KBDLayout, ReleaseTag, SourceOpenLevel } from "src/types/creation";
 
@@ -42,7 +42,7 @@ export type Res = boolean;
  * @returns {Promise<Res>} 提交是否成功
  */
 export async function submitCreation(req: Req): Promise<Res> {
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

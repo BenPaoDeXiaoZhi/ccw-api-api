@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
 import { ApiResponse, CNameOssUrl, MongoDBId } from "src/types/api";
 import { PagesRes, PageArgs } from "src/types/pages";
@@ -62,7 +62,7 @@ export async function searchCloudAssets<T extends string>(
   };
   const queryUrl = queryPage(url, pageArgs);
   const req: Req = { creatorOid, path };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(queryUrl, req)
     .then((res) => res.data.body);
 }

@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url = "https://op-parent-api.xiguacity.cn/captcha/check";
@@ -30,7 +30,7 @@ export async function checkCaptcha(
   y: number = 5,
 ): Promise<Res> {
   const req: Req = { data: { x, y }, token };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

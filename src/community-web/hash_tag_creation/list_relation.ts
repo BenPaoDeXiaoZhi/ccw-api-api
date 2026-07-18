@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId } from "src/types/api";
 import { HashTagCreationRelation } from "src/types/hashTag";
 
@@ -20,7 +20,7 @@ export async function getPlanetsOfCreation(
   creationOid: MongoDBId,
 ): Promise<Res> {
   const req: Req = { creationOid };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

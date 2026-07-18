@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 import { LoadingTip } from "src/types/creation";
 
@@ -12,7 +12,7 @@ export type Res = LoadingTip;
  * @returns {Promise<LoadingTip>} 加载提示语
  */
 export async function getLoadingTips(): Promise<Res> {
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, {})
     .then((res) => res.data.body);
 }

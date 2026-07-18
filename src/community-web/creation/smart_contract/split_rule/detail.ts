@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId } from "src/types/api";
 import { TeamMemberAuthority } from "src/types/teamwork";
 
@@ -37,7 +37,7 @@ export type Res = SplitRuleItem[];
  */
 export async function getSplitRuleDetail(creationOid: MongoDBId): Promise<Res> {
   const req: Req = { creationOid };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

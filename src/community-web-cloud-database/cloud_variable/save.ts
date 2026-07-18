@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId } from "src/types/api";
 
 export const url =
@@ -18,7 +18,7 @@ async function saveCloudVariableBase<T extends Record<string, unknown>>(
   value: T,
 ): Promise<SaveCloudVariableRes<T>> {
   const req: SaveCloudVariableReq<T> = { primaryKey, secondaryKey, value };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<SaveCloudVariableRes<T>>>(url, req)
     .then((res) => res.data.body);
 }

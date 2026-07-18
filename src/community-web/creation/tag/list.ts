@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 import { CreationTag } from "src/types/creation";
 
@@ -15,7 +15,7 @@ export type Res = CreationTag[];
  */
 export async function getCreationTags(): Promise<Res> {
   const req: Req = { visibility: "PUBLIC" };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

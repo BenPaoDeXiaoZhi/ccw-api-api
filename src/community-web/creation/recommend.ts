@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 import { PagesRes, PageArgs } from "src/types/pages";
 import { CreationSimple } from "src/types/creation";
@@ -32,7 +32,7 @@ export async function getRecommendCreations<T extends string>(
   };
   const queryUrl = queryPage(url, pageArgs);
   const req: Req = { num, subjectType: "POTENTIAL" };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(queryUrl, req)
     .then((res) => res.data.body);
 }

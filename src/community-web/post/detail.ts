@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId, CNameOssUrl } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/post/detail";
@@ -57,7 +57,7 @@ export type Res = {
  */
 export async function getPostDetail(slug: string): Promise<Res> {
   const req: Req = { slug };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/check_in_record/insert";
@@ -15,7 +15,7 @@ export type Res = boolean;
  */
 export async function insertCheckInRecord(): Promise<Res> {
   const req: Req = { scene: "HOMEPAGE" };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

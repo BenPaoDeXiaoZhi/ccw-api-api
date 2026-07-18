@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 import { PagesRes, PageArgs } from "src/types/pages";
 import { queryPage, DEFAULT_PAGE_ARGS } from "src/queryPages";
@@ -31,7 +31,7 @@ export async function getNotificationPage<T extends string>(
     notifyGroup,
     page: pageArgs.page,
   };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(queryUrl, req)
     .then((res) => res.data.body);
 }

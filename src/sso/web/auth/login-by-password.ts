@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId } from "src/types/api";
 import { LoginSession } from "src/types/session";
 export const url = "https://sso.ccw.site/web/auth/login-by-password";
@@ -51,7 +51,7 @@ export async function loginByPassword(
     clientCode: "STUDY_COMMUNITY",
     extra: JSON.stringify({ ...reqExtra, scene: null }),
   };
-  const { extra, ...restBody } = await ccwAxios
+  const { extra, ...restBody } = await request
     .post<ApiResponse<Res<string>>>(url, req)
     .then((res) => res.data.body);
   const resExtra = JSON.parse(extra) as Extra;

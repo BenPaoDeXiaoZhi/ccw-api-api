@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/comment/like_record/create";
@@ -16,7 +16,7 @@ export type Res = boolean;
  */
 export async function likeComment(commentId: number): Promise<Res> {
   const req: Req = { commentId };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

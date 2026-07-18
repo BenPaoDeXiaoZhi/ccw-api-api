@@ -1,20 +1,17 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, CNameOssUrl, MongoDBId } from "src/types/api";
-import {
-  CreationScreenMode,
-  SourceOpenLevel,
-} from "src/types/creation";
+import { CreationScreenMode, SourceOpenLevel } from "src/types/creation";
 
 export const url = "https://community-web.ccw.site/creation/create";
 
 export type Req = {
-  type: "ORIGINAL" | "REMIXED";
-  title: string;
+  artifactType: "STANDARD";
+  latestCoverLink: CNameOssUrl;
   latestProjectLink: CNameOssUrl;
   screenMode: CreationScreenMode;
-  artifactType: "STANDARD";
   sourceOpenLevel: SourceOpenLevel;
-  latestCoverLink: CNameOssUrl;
+  title: string;
+  type: "ORIGINAL" | "REMIXED";
 };
 
 export type Res = {
@@ -84,7 +81,7 @@ export async function createCreation(
     sourceOpenLevel,
     latestCoverLink,
   };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

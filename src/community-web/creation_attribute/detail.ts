@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/creation_attribute/detail";
@@ -42,7 +42,7 @@ export async function getCreationAttributeDetail(
   creationOid: MongoDBId,
 ): Promise<Res<KeypadConfig[]> | null> {
   const req: Req = { creationOid };
-  const dat = await ccwAxios
+  const dat = await request
     .post<ApiResponse<Res<string> | null>>(url, req)
     .then((res) => res.data.body);
   if (dat === null) {

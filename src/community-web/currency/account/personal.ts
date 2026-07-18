@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/currency/account/personal";
@@ -16,7 +16,5 @@ export type Res = {
  * @returns {Promise<Res>} 账户金币余额信息
  */
 export async function getPersonalCurrencyAccount(): Promise<Res> {
-  return await ccwAxios
-    .post<ApiResponse<Res>>(url)
-    .then((res) => res.data.body);
+  return await request.post<ApiResponse<Res>>(url).then((res) => res.data.body);
 }

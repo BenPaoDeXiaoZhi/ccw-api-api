@@ -34,7 +34,7 @@ src/
 
 ```typescript
 // 1. 导入依赖
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId } from "src/types/api";
 
 // 2. 导出 URL（用于调试和测试）
@@ -70,7 +70,7 @@ export async function apiFunctionName(
   param2: number,
 ): Promise<Res> {
   const req: Req = { field1: param1, field2: param2 };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }
@@ -109,7 +109,7 @@ export async function apiFunctionName(
 
 ### 请求封装
 
-- 使用 `ccwAxios` 发送请求，不要直接使用 `axios`
+- 使用 `request` 发送请求（来自 `src/request`）
 - 将请求体封装为 `Req` 类型变量后再发送
 - 使用 `satisfies Req` 确保请求体类型正确
 
@@ -124,18 +124,18 @@ export async function apiFunctionName(
 ### 统一导入方式
 
 ```typescript
-// 正确 - 使用命名导入
-import { ccwAxios } from "@ccw-api/axios";
+// 正确 - 使用项目路径导入
+import { request } from "src/request";
 
-// 错误 - 默认导入方式不一致
-import ccwAxios from "@ccw-api/axios";
+// 错误 - 相对路径不一致或太长
+import { request } from "../../../request";
 ```
 
 ### 类型导入
 
 ```typescript
 // 正确 - 使用项目路径别名
-import { ApiResponse, MongoDBId } from "types/api";
+import { ApiResponse, MongoDBId } from "src/types/api";
 import { queryPage } from "src/queryPages";
 
 // 错误 - 相对路径不一致或太长
@@ -189,7 +189,8 @@ export type ApprovalStatus<Tid extends number, Tn extends string> = {
 
 - 使用 Node.js 内置 `node:test` + `tsx`（TypeScript execute）运行测试
 - 断言使用 Node.js 内置 `node:assert/strict`
-- 测试运行命令：`npm test`（`node --import tsx --import ./env.ts --test "src/**/*.test.ts"`）
+- 测试运行命令：`npm test`（`tsx --import ./src/before_test.ts --test`）
+- `before_test.ts` 在测试前执行，可用于动态修改 `request` 的行为
 
 ### 测试文件位置
 
@@ -201,15 +202,15 @@ export type ApprovalStatus<Tid extends number, Tn extends string> = {
 
 ```typescript
 import {
-  test,        // node:test 的 test 函数别名
-  beforeAll,   // node:test 的 before 函数别名
-  testAuthReadApi,   // 读操作鉴权测试辅助
-  testAuthWriteApi,  // 写操作鉴权测试辅助
-  expectKeys,        // 对象 key 断言
-  expectType,        // 类型断言
-  hasKeyPath,        // 嵌套 key 路径检测
-  getKeyPath,        // 获取嵌套属性值
-  hasRealToken,      // 是否存在真实 token
+  test, // node:test 的 test 函数别名
+  beforeAll, // node:test 的 before 函数别名
+  testAuthReadApi, // 读操作鉴权测试辅助
+  testAuthWriteApi, // 写操作鉴权测试辅助
+  expectKeys, // 对象 key 断言
+  expectType, // 类型断言
+  hasKeyPath, // 嵌套 key 路径检测
+  getKeyPath, // 获取嵌套属性值
+  hasRealToken, // 是否存在真实 token
 } from "src/testUtils";
 import assert from "node:assert/strict";
 ```
@@ -232,16 +233,13 @@ import assert from "node:assert/strict";
 ```typescript
 // 读操作示例：需要鉴权 + 返回值形状校验
 test("get student profile", async () => {
-  await testAuthReadApi(
-    () => getStudentProfile("63c2807d669fa967f17f5559"),
-    {
-      rejectMessage: "token为空", // 可选：无 token 时期望的错误消息
-      validateShape: (res) => {
-        expectKeys(res, ["oid", "nickname", "avatar"]);
-        expectType(res.oid, "string");
-      },
+  await testAuthReadApi(() => getStudentProfile("63c2807d669fa967f17f5559"), {
+    rejectMessage: "token为空", // 可选：无 token 时期望的错误消息
+    validateShape: (res) => {
+      expectKeys(res, ["oid", "nickname", "avatar"]);
+      expectType(res.oid, "string");
     },
-  );
+  });
 });
 
 // 写操作示例：需要鉴权 + 返回值非空校验
@@ -307,7 +305,7 @@ export const sso = {
 
 ### 根导出
 
-`src/index.ts` 导出所有服务：
+`src/index.ts` 导出所有服务和 `setRequestUtils`：
 
 ```typescript
 import { sso } from "./sso";
@@ -316,9 +314,17 @@ import { gandiMain } from "./gandi-main";
 import { bfsWeb } from "./bfs-web";
 import { communityWebCloudDatabase } from "./community-web-cloud-database";
 import { opParentApi } from "./op-parent-api";
-export type * from "./types";
 
-export { sso, communityWeb, gandiMain, bfsWeb, communityWebCloudDatabase, opParentApi };
+export {
+  sso,
+  communityWeb,
+  gandiMain,
+  bfsWeb,
+  communityWebCloudDatabase,
+  opParentApi,
+};
+
+export { setRequestUtils } from "./request";
 
 export default {
   sso,
@@ -328,13 +334,66 @@ export default {
   communityWebCloudDatabase,
   opParentApi,
 };
+
+export type * from "./types";
 ```
 
 ## 错误处理
 
-- 使用 `@ccw-api/axios` 的拦截器自动处理错误
+- 使用 `request` 模块（由用户通过 `setRequestUtils` 注入）发送请求
 - 测试时验证错误信息是否符合预期
 - 不要在 API 函数中捕获错误，让调用方处理
+
+## Request 模块
+
+本包不内置 HTTP 请求库，采用依赖注入模式，由用户提供 request 实现以缩小体积。
+
+### RequestUtils 接口
+
+```typescript
+interface RequestUtils {
+  get<Res = any>(url: string | URL): Promise<{ data: Res }>;
+  post<Res>(url: string | URL, args?: any): Promise<{ data: Res }>;
+}
+```
+
+### 初始化方式
+
+在应用入口处调用 `setRequestUtils` 注入 request 实现：
+
+```typescript
+import { setRequestUtils } from "@ccw-api/api";
+import axios from "axios";
+
+const apiAxios = axios.create({
+  headers: { "Content-Type": "application/json" },
+});
+
+// 可选：添加 token 拦截器
+apiAxios.interceptors.request.use((config) => {
+  // ...
+});
+
+setRequestUtils({
+  async get(url) {
+    const res = await apiAxios.get(String(url));
+    return { data: res.data };
+  },
+  async post(url, args) {
+    const res = await apiAxios.post(String(url), args);
+    return { data: res.data };
+  },
+});
+```
+
+### 测试环境
+
+测试时通过 `before_test.ts` 在测试前注入 mock request：
+
+```typescript
+// src/before_test.ts
+// 无需你来修改
+```
 
 ## 最佳实践
 
@@ -347,6 +406,7 @@ export default {
 ### 分页请求
 
 ```typescript
+import { request } from "src/request";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
 
 // 其他一般请求配置
@@ -361,7 +421,7 @@ export async function getDonatedRecordRanking(
   };
   const queryUrl = queryPage(url, pageArgs);
   const req: Req = { ... }; // 构造请求
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(queryUrl, req)
     .then((res) => res.data.body);
 }

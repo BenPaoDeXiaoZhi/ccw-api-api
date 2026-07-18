@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/study-trade/trade/donate";
@@ -26,7 +26,7 @@ export async function donateTrade(
   objectType: DonateObjectType = "CREATION",
 ): Promise<Res> {
   const req: Req = { bucks, objectId, objectType };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

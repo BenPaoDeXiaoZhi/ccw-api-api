@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId } from "src/types/api";
 
 export const url =
@@ -15,11 +15,9 @@ export type Res = "UNFOLLOWED";
  * @param {MongoDBId} followingOid 要取消关注的用户 OID
  * @returns {Promise<Res>} "UNFOLLOWED" 表示取消关注成功
  */
-export async function unfollowCreator(
-  followingOid: MongoDBId,
-): Promise<Res> {
+export async function unfollowCreator(followingOid: MongoDBId): Promise<Res> {
   const req: Req = { followingOid };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

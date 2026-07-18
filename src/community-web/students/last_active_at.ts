@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/students/last_active_at";
@@ -20,7 +20,7 @@ export async function getStudentLastActiveAt(
   studentOid: MongoDBId,
 ): Promise<Res> {
   const req: Req = { studentOid };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

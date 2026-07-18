@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
 import { ApiResponse, CNameOssUrl, MongoDBId } from "src/types/api";
 import { PagesRes, PageArgs } from "src/types/pages";
@@ -76,7 +76,7 @@ export async function getTeamworkLogPage<T extends string>(
     creationId,
     operateTargets,
   };
-  const res = await ccwAxios
+  const res = await request
     .post<ApiResponse<Res<string>>>(queryUrl, req)
     .then((res) => res.data.body);
   const { data: logs } = res;

@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
 import { ApiResponse } from "src/types/api";
 import { PagesRes, PageArgs } from "src/types/pages";
@@ -38,7 +38,7 @@ export async function getBulletinsPage<T extends string, S extends string>(
     ...pageArgs,
     status,
   } as PageArgs<SortField>);
-  return await ccwAxios
+  return await request
     .get<ApiResponse<Res>>(queryUrl)
     .then((res) => res.data.body);
 }

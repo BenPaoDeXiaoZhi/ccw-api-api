@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/short_url/create";
@@ -14,7 +14,7 @@ export async function createShortUrl(originUrl: string): Promise<Res> {
   const req: Req = {
     originUrl,
   };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

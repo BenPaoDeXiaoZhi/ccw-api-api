@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/cloud_asset/user/privacy";
@@ -18,7 +18,7 @@ export type Res = {
  * @returns {Promise<Res>} 存储空间信息
  */
 export async function getUserAssetStorageSize(): Promise<Res> {
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, {})
     .then((res) => res.data.body);
 }

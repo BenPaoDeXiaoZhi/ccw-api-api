@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url = "https://bfs-web.ccw.site/extensions";
@@ -21,7 +21,7 @@ export async function donateExtension(
   bucks: number,
 ): Promise<Res> {
   const req: Req = { eid, bucks };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(`${url}/${eid}/donate`, req)
     .then((res) => res.data.body);
 }

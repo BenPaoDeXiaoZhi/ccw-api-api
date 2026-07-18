@@ -1,7 +1,8 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
-export const url = "https://community-web.ccw.site/captcha/v2/create_by_session";
+export const url =
+  "https://community-web.ccw.site/captcha/v2/create_by_session";
 
 export type CaptchaType = "SMS";
 
@@ -39,7 +40,7 @@ export async function createSmsCaptchaBySession(
   type: CaptchaType = "SMS",
 ): Promise<Res> {
   const req: Req = { type, countryCode, scene, ruleCode };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

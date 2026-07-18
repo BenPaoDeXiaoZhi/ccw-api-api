@@ -1,11 +1,11 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/user_package/status";
 
 export type Req = {
-  status: boolean;
   id: number;
+  status: boolean;
 };
 
 export type Res = boolean;
@@ -21,7 +21,7 @@ export async function setUserProductStatus(
   status: boolean,
 ): Promise<Res> {
   const req: Req = { status, id };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

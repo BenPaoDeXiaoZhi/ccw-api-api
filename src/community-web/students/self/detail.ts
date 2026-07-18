@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 import {
   ProfileExtraInfo,
@@ -34,7 +34,7 @@ export async function getStudentSelfDetail(
   fields: StudentSelfDetailFields[],
 ): Promise<Res> {
   const req: Req = { needGrade, needExtraInfo, fields };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

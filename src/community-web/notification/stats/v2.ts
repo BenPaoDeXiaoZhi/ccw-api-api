@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 import { NotificationStats } from "src/types/notification";
 
@@ -19,7 +19,7 @@ export async function getNotificationStats(
   countAll: boolean = true,
 ): Promise<Res> {
   const req: Req = { countAll };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

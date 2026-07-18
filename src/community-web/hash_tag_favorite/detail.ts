@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 import { HashTagFavorite } from "src/types/hashTag";
 
@@ -19,7 +19,7 @@ export async function getHashTagFavoriteDetail(
   hashTagId: number,
 ): Promise<Res> {
   const req: Req = { hashTagId };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

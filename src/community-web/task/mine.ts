@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import {
   ApiResponse,
   CNameOssUrl,
@@ -41,7 +41,7 @@ export type Res = TaskItem[];
  */
 export async function getMyTasks(): Promise<Res> {
   const req: Req = { scene: "checkIn" };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url = "https://sso.ccw.site/web/auth/assistant/captcha/v2/create";
@@ -48,7 +48,7 @@ export async function createSmsCaptcha(
   captcha?: CaptchaPayload,
 ): Promise<Res> {
   const req: Req = { recipient, countryCode, scene, ruleCode, captcha };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

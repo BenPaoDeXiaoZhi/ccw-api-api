@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 import { StudentUpdateReq } from "src/types/userData";
 
@@ -43,7 +43,7 @@ export async function updateStudent(
     hobbies,
     learnedProgrammingLanguages,
   };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

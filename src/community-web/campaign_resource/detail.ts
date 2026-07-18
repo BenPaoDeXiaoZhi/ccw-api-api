@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/campaign_resource/detail";
@@ -22,7 +22,7 @@ export type Res<K extends string> = {
 export async function getCampaignResources<K extends CampaignKeywords>(
   keyword: K,
 ): Promise<Res<K>> {
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res<K>>>(url, { keyword })
     .then((res) => res.data.body);
 }

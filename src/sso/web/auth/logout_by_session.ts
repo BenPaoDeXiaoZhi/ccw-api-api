@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url = "https://sso.ccw.site/web/auth/logout_by_session";
@@ -9,7 +9,7 @@ export const url = "https://sso.ccw.site/web/auth/logout_by_session";
  * @returns {Promise<boolean>} 是否成功
  */
 export async function logoutBySession(sessionId: number): Promise<boolean> {
-  return await ccwAxios
+  return await request
     .post<ApiResponse<boolean>>(url, { id: sessionId })
     .then((res) => res.data.body);
 }

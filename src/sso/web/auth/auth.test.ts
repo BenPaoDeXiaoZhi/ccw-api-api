@@ -13,7 +13,10 @@ test("expect wrong password to be error", async () => {
       });
       return r;
     },
-    /ccw axios Request failed: 账号或密码错误\(4001092401\)/,
+    (e_) => {
+      const e = e_ as Error;
+      return e.message.includes("密码错误");
+    },
     "expected promise to reject matching",
   );
 });
@@ -27,7 +30,10 @@ test("expect logout to be error when no token", async () => {
       const r = logout();
       return r;
     },
-    /ccw axios Request failed: token不能为空\(4001092X01\)/,
+    (e_) => {
+      const e = e_ as Error;
+      return e.message.includes("token不能为空");
+    },
     "expected promise to reject matching",
   );
 });
@@ -41,7 +47,10 @@ test("expect logout-by-session to be error when not logged in", async () => {
       const r = logoutBySession(1145);
       return r;
     },
-    /ccw axios Request failed: 用户未登录\(4001092401\)/,
+    (e_) => {
+      const e = e_ as Error;
+      return e.message.includes("用户未登录");
+    },
     "expected promise to reject matching",
   );
 });

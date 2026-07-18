@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId } from "src/types/api";
 import { UserLikeDetail } from "src/types/creation";
 
@@ -16,7 +16,7 @@ export type Res = UserLikeDetail;
  */
 export async function getLikeDetail(creationOid: MongoDBId): Promise<Res> {
   const req: Req = { creationOid };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

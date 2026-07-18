@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, CNameOssUrl, MongoDBId } from "src/types/api";
 import { SortType } from "src/types/pages";
 
@@ -70,7 +70,7 @@ export async function submitLeaderboardRecord(
 ): Promise<SubmitRes> {
   const req: SubmitReq = { score, oid: userOid, ext };
   const requestUrl = `${url}/${leaderboardOid}/records`;
-  return await ccwAxios
+  return await request
     .post<ApiResponse<SubmitRes>>(requestUrl, req)
     .then((res) => res.data.body);
 }
@@ -84,7 +84,7 @@ export async function getLeaderboardRecords(
   leaderboardOid: MongoDBId,
 ): Promise<LeaderboardRecordsRes> {
   const requestUrl = `${url}/${leaderboardOid}/records`;
-  return await ccwAxios
+  return await request
     .get<ApiResponse<LeaderboardRecordsRes>>(requestUrl)
     .then((res) => res.data.body);
 }

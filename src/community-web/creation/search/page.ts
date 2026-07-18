@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 import { PagesRes, PageArgs } from "src/types/pages";
 import { CreationSimple } from "src/types/creation";
@@ -33,7 +33,7 @@ export async function searchCreationsByTag<T extends string>(
     ...pageArgs_,
   };
   const queryUrl = queryPage(url, pageArgs);
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(queryUrl, req)
     .then((res) => res.data.body);
 }

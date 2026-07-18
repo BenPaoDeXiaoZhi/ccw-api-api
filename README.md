@@ -21,23 +21,72 @@ pnpm add @ccw-api/api
 yarn add @ccw-api/api
 ```
 
-> 唯一运行时依赖：`@ccw-api/axios`（内置鉴权 header 注入的 axios 封装）。
-> `@ccw-api/api` 已将常用的 token 设置方法 **`setToken` 重新导出**，无需再单独依赖 axios 包。
+> **零运行时依赖**：本包不内置 HTTP 请求库，需由用户通过 `setRequestUtils` 提供 request 实现以缩小体积。
 
 ---
 
 ## 快速开始
 
-### 1. 初始化 Token（前置条件）
+### 1. 初始化 Request（前置条件）
+
+本包不内置 HTTP 请求库，需由用户提供 request 实现：
 
 ```ts
-import { setToken } from "@ccw-api/api";
+import { setRequestUtils } from "@ccw-api/api";
 
-// 直接传入后端下发的 session token
-setToken("abcdefgfoo");
+// 使用 axios 作为底层请求库
+import axios from "axios";
+
+setRequestUtils({
+  async get(url) {
+    const res = await axios.get(url);
+    return { data: res.data };
+  },
+  async post(url, args) {
+    const res = await axios.post(url, args);
+    return { data: res.data };
+  },
+});
 ```
 
-所有 `@ccw-api/api` 的方法都会复用同一个 axios 单例，**调用 API 时无需再传入鉴权参数**。
+**RequestUtils 接口**：
+
+```ts
+interface RequestUtils {
+  get<Res = any>(url: string | URL): Promise<{ data: Res }>;
+  post<Res>(url: string | URL, args?: any): Promise<{ data: Res }>;
+}
+```
+
+**完整示例（含 token 注入）**：
+
+```ts
+import { setRequestUtils } from "@ccw-api/api";
+import axios from "axios";
+
+const apiAxios = axios.create({
+  baseURL: "",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// 注入 token（推荐使用拦截器）
+apiAxios.interceptors.request.use((config) => {
+  // ....
+});
+
+setRequestUtils({
+  async get(url) {
+    const res = await apiAxios.get(String(url));
+    return { data: res.data };
+  },
+  async post(url, args) {
+    const res = await apiAxios.post(String(url), args);
+    return { data: res.data };
+  },
+});
+```
 
 ### 2. 调用方式
 
@@ -615,12 +664,11 @@ const p: PagesRes<Creation.Creation> = {
 ## 开发 & 发布
 
 ```bash
-# 三产物构建（dist/node CJS + dist/esm ESM + dist .d.ts）
+# 三产物构建（dist/ ESM + CJS + .d.ts）
 npm run build
 
-# 跑测试（node:test + tsx，132 tests）
+# 跑测试（node:test + tsx）
 npm test                # 一次性全量
-npm run test:dev        # watch 模式（tsx watch）
 
 # 文档（TypeDoc，生成到 doc/ 或默认输出目录）
 npm run doc

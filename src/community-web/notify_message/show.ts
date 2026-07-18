@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/notify_message/show";
@@ -24,7 +24,7 @@ export type Res = NotifyMessage[];
  */
 export async function getNotifyDeleteReasons(): Promise<Res> {
   const req: Req = { type: "COMMENT_AUDIT" };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

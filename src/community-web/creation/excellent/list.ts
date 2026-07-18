@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 import { CreationSimple } from "src/types/creation";
 
@@ -16,7 +16,7 @@ export type Res = CreationSimple[];
  */
 export async function getExcellentCreations(num: number): Promise<Res> {
   const req: Req = { num };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

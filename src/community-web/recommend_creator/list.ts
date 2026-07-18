@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId, CNameOssUrl } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/recommend_creator/list";
@@ -36,7 +36,7 @@ export async function getRecommendCreators(
   potentialCount: number = 8,
 ): Promise<Res> {
   const req: Req = { excellentCount, potentialCount };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

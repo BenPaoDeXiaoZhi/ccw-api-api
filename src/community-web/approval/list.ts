@@ -1,4 +1,4 @@
-import ccwAxios from "@ccw-api/axios";
+import { request } from "src/request";
 import { AccountTypes } from "src/types/account";
 import { ApiResponse, CNameOssUrl, MongoDBId } from "src/types/api";
 import { ApprovalTag } from "src/types/approval";
@@ -39,7 +39,7 @@ export async function getApprovalTags<
     objectId: studentOid,
     objectType: "STUDENT",
   };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res<Tid, Tn>>>(url, req)
     .then((res) => res.data.body);
 }

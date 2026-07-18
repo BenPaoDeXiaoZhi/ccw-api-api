@@ -1,6 +1,6 @@
 {
   "name": "@ccw-api/api",
-  "version": "0.11.0",
+  "version": "1.0.1",
   "description": "ccw api collections",
   "license": "MIT",
   "author": "Meng Fuzi",
@@ -16,63 +16,58 @@
       "require": "./dist/index.cjs"
     },
     "./community-web": {
-      "types": "./dist/community-web/index.d.ts",
-      "import": "./dist/community-web/index.js",
-      "require": "./dist/community-web/index.cjs"
+      "types": "./dist/communityWeb.d.ts",
+      "import": "./dist/communityWeb.js",
+      "require": "./dist/communityWeb.cjs"
     },
     "./community-web-cloud-database": {
-      "types": "./dist/community-web-cloud-database/index.d.ts",
-      "import": "./dist/community-web-cloud-database/index.js",
-      "require": "./dist/community-web-cloud-database/index.cjs"
+      "types": "./dist/communityWebDB.d.ts",
+      "import": "./dist/communityWebDB.js",
+      "require": "./dist/communityWebDB.cjs"
     },
     "./gandi-main": {
-      "types": "./dist/gandi-main/index.d.ts",
-      "import": "./dist/gandi-main/index.js",
-      "require": "./dist/gandi-main/index.cjs"
+      "types": "./dist/gandiMain.d.ts",
+      "import": "./dist/gandiMain.js",
+      "require": "./dist/gandiMain.cjs"
     },
     "./op-parent-api": {
-      "types": "./dist/op-parent-api/index.d.ts",
-      "import": "./dist/op-parent-api/index.js",
-      "require": "./dist/op-parent-api/index.cjs"
+      "types": "./dist/opParent.d.ts",
+      "import": "./dist/opParent.js",
+      "require": "./dist/opParent.cjs"
     },
     "./sso": {
-      "types": "./dist/sso/index.d.ts",
-      "import": "./dist/sso/index.js",
-      "require": "./dist/sso/index.cjs"
-    },
-    "./setToken": {
-      "types": "./dist/setToken.d.ts",
-      "import": "./dist/setToken.js",
-      "require": "./dist/setToken.cjs"
+      "types": "./dist/sso.d.ts",
+      "import": "./dist/sso.js",
+      "require": "./dist/sso.cjs"
     },
     "./bfs-web": {
-      "types": "./dist/bfs-web/index.d.ts",
-      "import": "./dist/bfs-web/index.js",
-      "require": "./dist/bfs-web/index.cjs"
+      "types": "./dist/bfs.d.ts",
+      "import": "./dist/bfs.js",
+      "require": "./dist/bfs.cjs"
     }
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "prepublishOnly": "npm run build && npm test",
-    "test": "node --import tsx --import ./env.ts --test \"src/**/*.test.ts\"",
-    "test:dev": "node --import tsx --import ./env.ts --test --watch \"src/**/*.test.ts\"",
-    "test:single": "node --import tsx --import ./env.ts --test",
+    "test": "tsx --import ./src/before.test.ts --test",
     "doc": "typedoc",
     "doc:dev": "typedoc --watch",
-    "build": "tsup"
+    "build": "tsdown"
   },
   "dependencies": {
-    "@ccw-api/axios": "^6.0.1"
+    "blueimp-md5": "^2.19.0"
   },
   "devDependencies": {
+    "@ccw-api/request": "^1.2.1",
+    "@types/blueimp-md5": "^2.18.2",
     "@types/node": "^26.0.1",
     "dotenv": "^17.4.2",
     "prettier-plugin-sort-members": "^0.2.4",
-    "resolve-tspaths": "^0.8.23",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.22.9",
     "tsx": "^4.19.2",
     "typedoc": "^0.28.19"
   },

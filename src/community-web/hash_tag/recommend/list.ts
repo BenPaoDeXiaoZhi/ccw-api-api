@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { HashTag } from "src/types/hashTag";
 import { ApiResponse } from "src/types/api";
 
@@ -11,7 +11,5 @@ export type Res = HashTag[];
  * @returns {Promise<Res>} 推荐星球列表
  */
 export async function getRecommendHashTags(): Promise<Res> {
-  return await ccwAxios
-    .post<ApiResponse<Res>>(url)
-    .then((res) => res.data.body);
+  return await request.post<ApiResponse<Res>>(url).then((res) => res.data.body);
 }

@@ -1,14 +1,14 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url = "https://community-web.ccw.site/students/bind_phone";
 
 export type Req = {
-  phone: string;
   code: string;
+  countryCode: string;
+  phone: string;
   ruleCode: "ccw_sms";
   scene: "bindPhone";
-  countryCode: string;
 };
 
 export type Res = boolean;
@@ -32,7 +32,7 @@ export async function bindStudentPhone(
     scene: "bindPhone",
     countryCode,
   };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

@@ -39,9 +39,7 @@ test("get post detail", async () => {
 test("error when post detail not found", async () => {
   await assert.rejects(
     getPostDetail("foo"),
-    {
-      message: "ccw axios Request failed: 没有找到文章(40010738404)",
-    },
+    (e: Error) => e.message.includes("没有找到文章(40010738404)"),
     "expected promise to reject matching",
   );
 });

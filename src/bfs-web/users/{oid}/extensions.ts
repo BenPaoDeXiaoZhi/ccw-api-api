@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { DEFAULT_PAGE_ARGS, queryPage } from "src/queryPages";
 import { ApiResponse, MongoDBId } from "src/types/api";
 import { Extension } from "src/types/extensions";
@@ -25,7 +25,7 @@ export async function getUserExtensions<T extends string>(
     ...pageArgs_,
   };
   const queryUrl = queryPage(`${url}/${userOid}/extensions`, pageArgs);
-  return await ccwAxios
+  return await request
     .get<ApiResponse<Res>>(queryUrl)
     .then((res) => res.data.body);
 }

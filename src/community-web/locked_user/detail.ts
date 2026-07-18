@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { AccountTypes } from "src/types/account";
 import { ApiResponse, MongoDBId } from "src/types/api";
 
@@ -31,7 +31,7 @@ export async function getLockedUserDetail<IsLocked extends boolean = false>(
   accountOid: MongoDBId,
 ): Promise<Res<IsLocked>> {
   const req: Req = { accountOid };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res<IsLocked>>>(url, req)
     .then((res) => res.data.body);
 }

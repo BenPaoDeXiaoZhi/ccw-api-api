@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import {
   ApiResponse,
   CNameOssUrl,
@@ -39,7 +39,7 @@ export async function updateCreation(
   }
   const latestProjectLink = latestProjectLink_ as LatestCNameOssUrl;
   const req: Req = { oid, latestProjectLink, screenMode, latestCoverLink };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

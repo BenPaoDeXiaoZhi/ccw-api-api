@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId } from "src/types/api";
 import { LoginSession } from "src/types/session";
 
@@ -56,7 +56,7 @@ export async function loginByPhone(
   ruleCode: LoginRuleCode = "ccw_sms",
   scene: LoginScene = "loginbyPhone",
 ): Promise<Res<Extra>> {
-  const { extra, ...restBody } = await ccwAxios
+  const { extra, ...restBody } = await request
     .post<ApiResponse<Res<string>>>(url, {
       phone,
       code,

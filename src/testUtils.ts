@@ -6,7 +6,6 @@ import {
   type TestFn,
 } from "node:test";
 import assert from "node:assert/strict";
-import "../env";
 
 export function hasRealToken(): boolean {
   const token = process.env.TOKEN;

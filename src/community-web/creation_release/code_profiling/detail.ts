@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId } from "src/types/api";
 
 export const url =
@@ -74,7 +74,7 @@ export async function getCodeProfilingDetail(
   creationReleaseOid: MongoDBId,
 ): Promise<Res> {
   const req: Req = { creationOid, creationReleaseOid };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

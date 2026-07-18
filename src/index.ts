@@ -13,7 +13,9 @@ export {
   communityWebCloudDatabase,
   opParentApi,
 };
-export { setToken } from "@ccw-api/axios";
+
+export { setRequestUtils } from "./request";
+
 export default {
   sso,
   communityWeb,

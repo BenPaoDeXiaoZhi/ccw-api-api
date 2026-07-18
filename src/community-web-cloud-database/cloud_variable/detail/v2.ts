@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse } from "src/types/api";
 
 export const url =
@@ -6,9 +6,9 @@ export const url =
 
 export type Req = {
   accessKey: string;
+  filterKeys: string[];
   primaryKey: string;
   secondaryKey: string;
-  filterKeys: string[];
 };
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -29,7 +29,7 @@ export async function getCloudVariableDetailV2(
   filterKeys: string[],
 ): Promise<Res> {
   const req: Req = { accessKey, primaryKey, secondaryKey, filterKeys };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }

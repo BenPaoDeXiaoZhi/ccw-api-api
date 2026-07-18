@@ -1,4 +1,4 @@
-import { ccwAxios } from "@ccw-api/axios";
+import { request } from "src/request";
 import { ApiResponse, MongoDBId } from "src/types/api";
 import { StudentFollowerStats } from "src/types/userData";
 
@@ -17,7 +17,7 @@ export type Res = StudentFollowerStats;
  */
 export async function getStudentStats(studentOid: MongoDBId): Promise<Res> {
   const req: Req = { studentOid };
-  return await ccwAxios
+  return await request
     .post<ApiResponse<Res>>(url, req)
     .then((res) => res.data.body);
 }
