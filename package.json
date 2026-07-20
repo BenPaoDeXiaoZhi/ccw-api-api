@@ -1,6 +1,6 @@
 {
   "name": "@ccw-api/api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "ccw api collections",
   "license": "MIT",
   "author": "Meng Fuzi",
@@ -51,6 +51,7 @@
     "README.md",
     "LICENSE"
   ],
+  "unpkg": "./dist/index.iife.js",
   "scripts": {
     "prepublishOnly": "npm run build && npm test",
     "test": "tsx --import ./src/before.test.ts --test",
