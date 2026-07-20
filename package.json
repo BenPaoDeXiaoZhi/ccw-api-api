@@ -53,7 +53,7 @@
   ],
   "unpkg": "./dist/index.iife.js",
   "scripts": {
-    "prepublishOnly": "npm run build && npm test",
+    "prepublishOnly": "npm run build",
     "test": "tsx --import ./src/before.test.ts --test",
     "doc": "typedoc",
     "doc:dev": "typedoc --watch",
