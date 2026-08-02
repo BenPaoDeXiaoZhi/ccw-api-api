@@ -406,7 +406,8 @@ export interface StudentFollowerStats {
   followingCount: number;
 }
 
-export interface StudentUpdateReq {
+export type StudentUpdateReq = Partial<{
+  avatar: string;
   birthday: number;
   fullName: string;
   gender: string;
@@ -416,4 +417,4 @@ export interface StudentUpdateReq {
   programmingCapability: string;
   qq: string;
   school: string;
-}
+}>;

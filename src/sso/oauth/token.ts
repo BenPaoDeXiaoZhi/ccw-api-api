@@ -18,7 +18,7 @@ export type Extra = {
  * 获取oauth token, 此接口存在盗号漏洞, 近期被报告, 可能被修改
  * @returns {Promise<string>}
  */
-export async function getToken(code: string): Promise<Res<Extra>> {
+export async function getOauthToken(code: string): Promise<Res<Extra>> {
   const { extra: extra_, ...rest } = await request
     .post<ApiResponse<Res>>("https://sso.ccw.site/oauth/token", { code })
     .then((res) => res.data.body);

@@ -3,6 +3,8 @@ import { logout } from "./web/auth/logout";
 import { logoutBySession } from "./web/auth/logout_by_session";
 import { createSmsCaptcha } from "./web/auth/assistant/captcha/v2/create";
 import { loginByPhone } from "./web/auth/v3/login/by-phone";
+import { oauthAuthorize } from "./oauth/authorize";
+import { getOauthToken } from "./oauth/token";
 
 export const sso = {
   loginByPassword,
@@ -10,4 +12,6 @@ export const sso = {
   logoutBySession,
   createSmsCaptcha,
   loginByPhone,
+  oauthAuthorize,
+  getOauthToken,
 };
