@@ -1,6 +1,6 @@
 {
   "name": "@ccw-api/api",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "ccw api collections",
   "license": "MIT",
   "author": "Meng Fuzi",
@@ -58,9 +58,6 @@
     "doc": "typedoc",
     "doc:dev": "typedoc --watch",
     "build": "tsdown"
-  },
-  "dependencies": {
-    "blueimp-md5": "^2.19.0"
   },
   "devDependencies": {
     "@ccw-api/request": "^1.2.1",
